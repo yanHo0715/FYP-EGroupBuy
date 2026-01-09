@@ -1,0 +1,259 @@
+<!--<p>profile works!</p>-->
+
+<div class="page-content" style="margin-top: 10px">
+
+  <div class="card card-info card-outline mb-4">
+    <div class="card-header" style="padding-top: 8px; padding-bottom: 8px;">
+      <div class="card-title" style="font-size: 25px;"><span>User Profile</span></div>
+      <mat-progress-bar *ngIf="queryMode" mode="indeterminate" class="mat-progress-bar"></mat-progress-bar>
+    </div>
+    <div class="needs-validation" novalidate="">
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-xxl-12">
+            <div class="row">
+              <div class="col-xxl-4">
+                <div class="row">
+                  <div class="col-md-6 col-xxl-12">
+                    <label class="form-label" for="firstname">First name</label>
+                    <div class="input-group mb-3">
+                    <input class="form-control form-control" type="text" id="firstname" required="" [(ngModel)]="firstname" style="border-top-right-radius: 6px; border-bottom-right-radius: 6px;">
+                    <div class="valid-feedback"><span>Looks good!</span></div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xxl-12">
+                    <label class="form-label" for="lastname">Last name</label>
+                    <div class="input-group mb-3">
+                    <input type="text" class="form-control ng-untouched ng-pristine ng-valid" id="lastname" required="" [(ngModel)]="lastname" style="border-top-right-radius: 6px; border-bottom-right-radius: 6px;">
+                    <div class="invalid-feedback"><span>Please provide a last name.</span></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" >
+                  <div class="col-md-6 col-xxl-12">
+                    <label class="form-label" for="username">Username</label>
+                    <div class="input-group mb-3">
+                    <div class="input-group has-validation"><span class="input-group-text input-group-text" id="inputGroupPrepend">&#64;</span>
+                      <input class="form-control form-control" type="text" aria-describedby="inputGroupPrepend" id="username" required="" [(ngModel)]="username">
+                      <div class="input-group-text invalid-feedback"><span>Please choose a username.</span></div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xxl-4">
+<!--
+                <div class="row" >
+                  <div class="col-md-6 col-xxl-12"><label class="form-label" for="lastname">Last name</label>
+                    <input class="form-control form-control" type="text" id="lastname" required="" [(ngModel)]="lastname">
+                    <div class="invalid-feedback"><span>Please provide a last name.</span></div>
+                  </div>
+                </div>
+-->
+                <div class="row">
+                  <div class="col-md-6 col-xxl-12">
+                    <label class="form-label" for="lastname">Balance</label>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">{{curSymbol}}</span>
+                      <input type="text" class="form-control ng-untouched ng-pristine ng-valid" id="balance" [(ngModel)]="balance" disabled readonly
+                             data-bs-toggle="tooltip" data-bs-placement="bottom" title="Amount can be withdrawn according to the policy.">
+<!--                    <div class="invalid-feedback"><span>Please provide a last name.</span></div>-->
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xxl-12">
+                    <label class="form-label" for="lastname">Hold Fund</label>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">{{curSymbol}}</span>
+                      <input type="text" class="form-control ng-untouched ng-pristine ng-valid" id="holdFund" [(ngModel)]="holdFund" disabled readonly
+                             data-bs-toggle="tooltip" data-bs-placement="bottom" title="Amount will be credited to the balance after the related &#xA;group buying events ended successfully with the selling &#xA;quantity reached the minimum threshold.">
+                    </div>
+                  </div>
+                </div>
+                <div class="row" >
+                  <div class="col-md-6 col-xxl-12">
+                    <label class="form-label" for="phone">Phone</label>
+                    <div class="input-group mb-3">
+                    <input class="form-control form-control" type="text" id="phone" required="" [(ngModel)]="phone" style="border-top-right-radius: 6px; border-bottom-right-radius: 6px;">
+                    <div class="invalid-feedback"><span>Please provide a phone number.</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col">
+                <div class="row">
+                  <div class="col-xxl-1"></div>
+                  <div class="col-xxl-4 border p-2" style="width:180px; border-style:solid; border-width: 1px; border-radius: 4px; --bs-border-opacity: .5; margin-top: 5px; margin-left: 12px;">
+<!--                    <div style="height:100px; width:100px; padding:9px; background:url(https://www.gravatar.com/avatar/1234566?size=200&d=mm) no-repeat; background-size: cover">-->
+                      <div class="gb-avatar-bg ">
+<!--                        <img [src]="imageUrl" width="100" height="80" style="height: 100px;text-align: center; margin-top: 6px; margin-bottom: 8px; margin-left: 30px; ">-->
+                        <img [src]="imageUrl" width="100" height="80" style="height: 100px;">
+                      </div>
+                    <button class="btn btn-warning" type="button" style="text-align: center; margin-bottom: 6px; margin-left: 30px" (click)="filePicker.click()"> Pick Image </button>
+                  </div>
+                  <div class="col-xxl-1">
+                    <input type="file" class="form-control form-control" id="icon" #filePicker (change)="onSelectFile($event)" style="visibility: hidden">
+<!--                    <div class="text-center d-xxl-flex avatar-bg center" style="height:100px;width:100px;">-->
+<!--                    </div>-->
+                  </div>
+                </div>
+              </div>
+
+
+              <!--
+                            <div class="col">
+                              <div class="row">
+                                <div class="col">
+                                  <div class="avatar">
+                                    <div class="avatar-bg center" style="height:100px;width:100px">
+                                      <img [src]="imageUrl" width="100" height="80" style="height: 100px;">
+                                    </div>
+                                    <button class="btn btn-warning" type="button" (click)="filePicker.click()">
+                                      Pick Image
+                                    </button>
+                                      <input class="form-control form-control" #filePicker type="file" id="icon" (change)="onSelectFile($event)" >
+              &lt;!&ndash;                      <input class="form-control form-control" #filePicker type="file" id="icon" (change)="onSelectFile($event)" style="visibility: hidden">&ndash;&gt;
+              &lt;!&ndash;                      <button class="btn btn-warning" type="button" (click)="filePicker.click()">&ndash;&gt;
+              &lt;!&ndash;                        Pick Image&ndash;&gt;
+              &lt;!&ndash;                      </button>&ndash;&gt;
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+              -->
+            </div>
+          </div>
+
+<!--          <div class="col-md-6 col-xxl-12"><label class="form-label" for="email">Email</label>
+            <div class="input-group has-validation"><span class="input-group-text input-group-text" id="inputGroupPrepend-1">&#64;</span>
+              <input class="form-control form-control" type="text" aria-describedby="inputGroupPrepend" id="email" required="" [(ngModel)]="email">
+              <div class="input-group-text invalid-feedback"><span>Please choose a valid email.</span></div>
+            </div>
+          </div>-->
+
+          <div class="col-md-6" style="margin-top: -10px">
+            <label class="form-label" for="email">Email</label>
+            <div class="input-group has-validation">
+              <span class="input-group-text input-group-text input-group-text" id="inputGroupPrepend-2">&#64;</span>
+              <input class="form-control form-control ng-untouched ng-pristine ng-invalid" type="text" aria-describedby="inputGroupPrepend" id="email" required="" [(ngModel)]="email" disabled readonly>
+              <div class="input-group-text input-group-text invalid-feedback"><span>Please choose a valid email.</span></div>
+            </div>
+            <div class="input-group has-validation">
+              <div class="input-group-text input-group-text invalid-feedback"><span></span></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="invalid-feedback"><span>Please provide a valid password.</span></div>
+          </div>
+
+<!--          <mat-divider></mat-divider>-->
+
+          <div class="col-md-6"><label class="form-label" for="password">Password</label>
+            <div class="input-group has-validation">
+              <input class="form-control form-control" type="password" aria-describedby="inputGroupPrepend" id="password" required="" [(ngModel)]="password" (change)="onChangePassword()">
+              <div class="input-group-text invalid-feedback"><span>Please choose a valid password.</span></div>
+            </div>
+          </div>
+          <div class="col-md-6"><label class="form-label" for="confirmPassword">Confirm Password</label>
+            <input class="form-control form-control" type=password id="confirmPassword" required="" [(ngModel)]="confirmPassword" (change)="onChangePassword()">
+            <div class="invalid-feedback"><span>Please provide a valid password.</span></div>
+          </div>
+          <div class="col-md-6"><label class="form-label" for="address">Address</label>
+            <input class="form-control form-control" type="text" id="address" required="" [(ngModel)]="address">
+            <div class="invalid-feedback"><span>Please select a valid address.</span></div>
+          </div>
+          <div class="col-md-6"><label class="form-label" for="city">City</label>
+            <input class="form-control form-control" type="text" id="city" required="" [(ngModel)]="city">
+            <div class="invalid-feedback"><span>Please provide a valid zip.</span></div>
+          </div>
+          <div class="col-md-6"><label class="form-label" for="country">Country</label>
+            <input class="form-control form-control" type="text" id="country" required="" [(ngModel)]="country">
+            <div class="invalid-feedback"><span>Please provide a valid country.</span></div>
+          </div>
+          <div class="col-md-6"><label class="form-label" for="postcode">Post Code</label>
+            <input class="form-control form-control" type="text" id="postcode" required="" [(ngModel)]="post_code">
+            <div class="invalid-feedback"><span>Please provide a valid post code.</span></div>
+          </div>
+          <div class="col-12">
+<!--            <div class="form-check"><input type="checkbox" class="form-check-input" id="invalidCheck" required="" value="">
+              <label class="form-check-label" for="invalidCheck"> Agree to terms and conditions </label>
+              <div class="invalid-feedback"><span>You must agree before submitting.</span></div>
+            </div>-->
+          </div>
+        </div>
+
+        <mat-accordion>
+          <!--        <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title> This is the expansion title </mat-panel-title>
+                      <mat-panel-description> This is a summary of the content </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <p>This is the primary content of the panel.</p>
+                  </mat-expansion-panel>-->
+          <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)" >
+            <mat-expansion-panel-header>
+              <mat-panel-title ><span style="font-family: sans-serif;"> Bank Account Details </span></mat-panel-title>
+              <mat-panel-description >
+                <span style="font-family: sans-serif;">{{panelOpenState() ? 'Section Visible' : 'Section Hidden'}}</span>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="row g-3" style="font-family: Arial, 'PT Sans', Ubuntu, Helvetica, sans-serif, sans-serif;font-size: 15px">
+              <div class="col-md-6"><label class="form-label" for="address">A/C Holder Name</label>
+                <input class="form-control form-control" type="text" id="holderName" [(ngModel)]="holderName">
+    <!--              <div class="invalid-feedback"><span>Please select a valid address.</span></div>-->
+              </div>
+              <div class="col-md-6"><label class="form-label" for="country">Bank Name/Code</label>
+                <input class="form-control form-control" type="text" id="bankName"  [(ngModel)]="bankName">
+    <!--              <div class="invalid-feedback"><span>Please provide a valid country.</span></div>-->
+              </div>
+              <div class="col-md-6"><label class="form-label" for="postcode">Branch/Sort Code</label>
+                <input class="form-control form-control" type="text" id="branchName"  [(ngModel)]="branchName">
+    <!--              <div class="invalid-feedback"><span>Please provide a valid post code.</span></div>-->
+              </div>
+              <div class="col-md-6"><label class="form-label" for="city">Account Number</label>
+                <input class="form-control form-control" type="text" id="accountNumber"  [(ngModel)]="accountNumber">
+    <!--              <div class="invalid-feedback"><span>Please provide a valid zip.</span></div>-->
+              </div>
+            </div>
+<!--            <p>I'm visible because I am open</p>-->
+          </mat-expansion-panel>
+        </mat-accordion>
+
+      </div>
+
+
+
+      <div class="card-footer" >
+        <button class="btn btn-primary" type="button" style="width:100px; margin-right: 10px" (click)="onUpdateUserProfile()">Save</button>
+        <button class="btn btn-primary" type="button" style="width:100px" (click)="onReset()">Reset</button>
+      </div>
+    </div>
+
+    <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+      'use strict';
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      const forms = document.querySelectorAll('.needs-validation');
+
+      // Loop over them and prevent submission
+      Array.from(forms).forEach((form) => {
+        form.addEventListener(
+          'submit',
+          (event) => {
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+
+            form.classList.add('was-validated');
+          },
+          false,
+        );
+      });
+    })();
+  </script>
+  </div>
+
+</div>

@@ -1,0 +1,351 @@
+
+<!--<p>dashboard works!</p>-->
+<div class="card card-primary card-outline" style="margin: 7px">
+  <div class="card-header" style="padding-top: 5px; padding-bottom: 7px">
+    <div class="card-title" style="font-size: 25px"><span>Dashboard</span></div>
+    <mat-progress-bar *ngIf="queryMode" mode="indeterminate" class="mat-progress-bar"></mat-progress-bar>
+  </div>
+
+  <!--begin::App Content Header-->
+  <div class="app-content-header" style="padding-top: 0;">
+    <!--begin::Container-->
+    <div class="container-fluid">
+      <!--begin::Row-->
+      <div class="row">
+        <!--      <div class="col-sm-6">
+                <h3 class="mb-0">Dashboard</h3>
+              </div>
+
+                <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-end">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                  </ol>
+                </div>-->
+      </div>
+      <!--end::Row-->
+    </div>
+    <!--end::Container-->
+  </div>
+  <!--end::App Content Header-->
+
+
+  <!--begin::App Content-->
+  <div class="app-content">
+    <!--begin::Container-->
+    <div class="container-fluid">
+
+
+      <div class="row">
+
+        <div class="col-xl-3 col-lg-4 col-sm-6">
+          <div class="small-box">
+            <div class="inner">
+              <div class="icon-card">
+                <div class="icon purple">
+                  <i class="lni lni-cart-full"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Sell Orders (30 days)</h6>
+                  <h3 class="text-bold mb-10" style="font-size: 1.75rem; font-weight: 500; line-height: 1.2; color: var(--bs-heading-color);">{{userDashboard.newSellOrders}}</h3>
+                </div>
+              </div>
+            </div>
+            <a
+              href="customer/home/sellorders" target="_blank"
+              class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover" style="color:black !important;">More info
+              <i class="bi bi-link-45deg"></i>
+            </a>
+          </div>
+          <!-- End Icon Cart -->
+        </div>
+        <!-- End Col -->
+
+        <div class="col-xl-3 col-lg-4 col-sm-6">
+          <div class="small-box">
+            <div class="inner">
+              <div class="icon-card">
+                <div class="icon success">
+                  <i class="lni lni-dollar"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Total Sales (30 days)</h6>
+                  <h3 class="text-bold mb-10" style="font-size: 1.75rem; font-weight: 500; line-height: 1.2; color: var(--bs-heading-color);">{{this.curSymbol}}{{userDashboard.salesVolume | number: '1.2-2'}}</h3>
+  <!--                <p class="text-sm text-success">-->
+  <!--                  <i class="lni lni-arrow-up"></i> +5.45%-->
+  <!--                  <span class="text-gray">Increased</span>-->
+  <!--                </p>-->
+                </div>
+              </div>
+            </div>
+            <a
+              href="customer/home/salesreport" target="_blank"
+              class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover" style="color:black !important;">More info
+              <i class="bi bi-link-45deg"></i>
+            </a>
+          </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+
+      <div class="col-xl-3 col-lg-4 col-sm-6">
+        <div class="small-box">
+          <div class="inner">
+            <div class="icon-card">
+              <div class="icon orange">
+                <i class="lni lni-user"></i>
+              </div>
+              <div class="content">
+                <h6 class="mb-10">Buy Orders (30 days)</h6>
+                <h3 class="text-bold mb-10" style="font-size: 1.75rem; font-weight: 500; line-height: 1.2; color: var(--bs-heading-color);">{{userDashboard.newBuyOrders}}</h3>
+  <!--              <p class="text-sm text-danger">-->
+  <!--                <i class="lni lni-arrow-down"></i> -25.00%-->
+  <!--                <span class="text-gray"> Earning</span>-->
+  <!--              </p>-->
+              </div>
+            </div>
+          </div>
+          <a
+            href="customer/home/buyorders" target="_blank"
+            class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover" style="color:black !important;">More info
+            <i class="bi bi-link-45deg"></i>
+          </a>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+
+      <div class="col-xl-3 col-lg-4 col-sm-6">
+        <div class="small-box">
+          <div class="inner">
+            <div class="icon-card">
+              <div class="icon primary">
+                <i class="lni lni-credit-cards"></i>
+              </div>
+              <div class="content">
+                <h6 class="mb-10">Total Expense (30 days)</h6>
+                <h3 class="text-bold mb-10" style="font-size: 1.75rem; font-weight: 500; line-height: 1.2; color: var(--bs-heading-color);">{{this.curSymbol}}{{userDashboard.expense | number: '1.2-2'}}</h3>
+    <!--            <p class="text-sm text-danger">-->
+    <!--              <i class="lni lni-arrow-down"></i> -2.00%-->
+    <!--              <span class="text-gray">Expense</span>-->
+    <!--            </p>-->
+              </div>
+            </div>
+          </div>
+          <a
+            href="customer/home/buyorders" target="_blank"
+            class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover" style="color:black !important;">More info
+            <i class="bi bi-link-45deg"></i>
+          </a>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+
+      </div>
+      <!-- End Row -->
+
+
+      <!--begin::Row-->
+      <div class="row">
+        <!-- Start col -->
+        <div class="col-lg-6 connectedSortable">
+          <div class="card mb-4">
+            <div class="card-header"><h3 class="card-title">Sales Volume in last 14 days</h3></div>
+            <div class="card-body">
+              <!--            <div id="revenue-chart"></div>-->
+              <div id="salesVolumeChart">
+                <apx-chart
+                  [series]="salesVolumeChartOptions.series!"
+                  [chart]="salesVolumeChartOptions.chart!"
+                  [xaxis]="salesVolumeChartOptions.xaxis!"
+                  [yaxis]="salesVolumeChartOptions.yaxis!"
+                  [stroke]="salesVolumeChartOptions.stroke!"
+                  [tooltip]="salesVolumeChartOptions.tooltip!"
+                  [dataLabels]="salesVolumeChartOptions.dataLabels!"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.Start col -->
+
+        <!-- Start col -->
+        <div class="col-lg-6 connectedSortable">
+          <!--        <div class="card text-white bg-primary bg-gradient border-primary mb-4">-->
+          <div class="card mb-4">
+            <!--          <div class="card-header border-0">-->
+            <div class="card-header">
+              <h3 class="card-title">Monthly Sales Quantity in Product Sell Types</h3>
+
+
+              <!--            <div class="card-tools">-->
+              <!--              <button-->
+              <!--                type="button"-->
+              <!--                class="btn btn-primary btn-sm"-->
+              <!--                data-lte-toggle="card-collapse"-->
+              <!--              >-->
+              <!--                <i data-lte-icon="expand" class="bi bi-plus-lg"></i>-->
+              <!--                <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>-->
+              <!--              </button>-->
+              <!--            </div>-->
+            </div>
+            <div class="card-body">
+              <!--            <div id="world-map" style="height: 220px"></div>-->
+
+
+<!--              <div id="salesTypeQtyChart">
+                <apx-chart
+                  [series]="salesTypeChartOptions.series!"
+                  [chart]="salesTypeChartOptions.chart!"
+                  [dataLabels]="salesTypeChartOptions.dataLabels!"
+                  [plotOptions]="salesTypeChartOptions.plotOptions!"
+                  [yaxis]="salesTypeChartOptions.yaxis!"
+                  [legend]="salesTypeChartOptions.legend!"
+                  [fill]="salesTypeChartOptions.fill!"
+                  [stroke]="salesTypeChartOptions.stroke!"
+                  [tooltip]="salesTypeChartOptions.tooltip!"
+                  [xaxis]="salesTypeChartOptions.xaxis!"
+                ></apx-chart>
+              </div>-->
+
+              <div id="salesStackChart">
+                <apx-chart
+                  [series]="salesStackChartOptions.series!"
+                  [chart]="salesStackChartOptions.chart!"
+                  [dataLabels]="salesStackChartOptions.dataLabels!"
+                  [plotOptions]="salesStackChartOptions.plotOptions!"
+                  [responsive]="salesStackChartOptions.responsive!"
+                  [xaxis]="salesStackChartOptions.xaxis!"
+                  [legend]="salesStackChartOptions.legend!"
+                  [fill]="salesStackChartOptions.fill!"
+                  [tooltip]="salesStackChartOptions.tooltip!"
+                ></apx-chart>
+              </div>
+
+
+            </div>
+            <!--          <div class="card-footer border-0">
+                        &lt;!&ndash;begin::Row&ndash;&gt;
+                        <div class="row">
+                          <div class="col-4 text-center">
+                            <div id="sparkline-1" class="text-dark"></div>
+                            <div class="text-white">Visitors</div>
+                          </div>
+                          <div class="col-4 text-center">
+                            <div id="sparkline-2" class="text-dark"></div>
+                            <div class="text-white">Online</div>
+                          </div>
+                          <div class="col-4 text-center">
+                            <div id="sparkline-3" class="text-dark"></div>
+                            <div class="text-white">Sales</div>
+                          </div>
+                        </div>
+                        &lt;!&ndash;end::Row&ndash;&gt;
+                      </div>-->
+          </div>
+        </div>
+        <!-- /.Start col -->
+
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-header"><h3 class="card-title">Status of Sell Orders in last 30 days</h3></div>
+            <div class="card-body" style="height: 315px;">
+              <div id="orderStatusPieChart">
+                <apx-chart
+                  [series]="orderItemStatusPieChartOptions.series!"
+                  [chart]="orderItemStatusPieChartOptions.chart!"
+                  [labels]="orderItemStatusPieChartOptions.labels!"
+                  [fill]="orderItemStatusPieChartOptions.fill!"
+                  [dataLabels]="orderItemStatusPieChartOptions.dataLabels!"
+                  [responsive]="orderItemStatusPieChartOptions.responsive!"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DIRECT CHAT -->
+        <div class="col-lg-8">
+
+
+          <div class="card mb-4">
+            <div class="card-header border-0" style="padding-bottom: 10px;">
+              <h3 class="card-title">Latest Sell Order Items</h3>
+              <div class="card-tools">
+                <!--              <a href="#" class="btn btn-tool btn-sm"> <i class="bi bi-download"></i> </a>-->
+                <!--              <a href="#" class="btn btn-tool btn-sm"> <i class="bi bi-list"></i> </a>-->
+                <a href="customer/home/sellorders" target="_blank" class="btn btn-sm btn-primary float-end" style="margin-right: 15px; margin-bottom: -10px; margin-top: -8px;">
+                  View All Sell Orders
+                </a>
+              </div>
+            </div>
+            <div class="card-body table-responsive p-0" style="max-height: 330px; height: 330px; margin-top: -10px;">
+              <table class="table table-striped align-middle">
+                <thead>
+                <tr>
+                  <th style="padding-bottom: 2px;">Item</th>
+                  <th style="padding-bottom: 2px;">OrderID</th>
+                  <th style="padding-bottom: 2px;">Image</th>
+                  <th style="min-width: 200px;max-width: 300px; padding-bottom: 2px;">Product Name</th>
+                  <th style="padding-bottom: 2px;">Type</th>
+                  <th style="padding-bottom: 2px;">Date</th>
+                  <th style="min-width: 80px; padding-bottom: 2px;">SoldQty</th>
+                  <th style="padding-bottom: 2px;">TotalAmt</th>
+                  <th style="padding-bottom: 2px;">More</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let p of latestOrderItemList; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>#{{p.order_id}}</td>
+                  <td>
+                    <img
+                      src="{{p.product_image_url}}"
+                      alt="Product 1"
+                      class="rounded-circle img-size-32 me-2"
+                    />
+                  </td>
+                  <td style="min-width: 200px;max-width: 300px;">{{p.product_title}}</td>
+                  <td>
+                    <img *ngIf="p.sell_type=='S'" src="assets/smartgroup/img/price-tag-01.5-rm-bg.png" alt="" height=30px width=30px style="margin-right: 10px" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Single Product">
+                    <img *ngIf="p.sell_type=='G'" src="assets/smartgroup/img/group-buy-01-rm-bg.png" alt="" height=30px width=30px style="margin-right: 10px" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Group Buying offers on single product">
+                    <img *ngIf="p.sell_type=='P'" src="assets/smartgroup/img/groupbuy-packages-02-rm-bg.png" alt="" height=30px width=30px style="margin-right:10px" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Group Buying offers on sub-packages">
+                  </td>
+                  <td>{{formatDate(p.order_date!, 'dd/MM/yyyy', 'en-US')}}</td>
+                  <td style="min-width: 100px;">
+                    <!--
+                                      <small class="text-success me-1">
+                                        <i class="bi bi-arrow-up"></i>
+                                        12%
+                                      </small>
+                    -->
+                    {{p.quantity}}
+                  </td>
+                  <td>{{curSymbol}}{{p.sub_total | number: '1.2-2'}}</td>
+                  <td>
+                    <a href="customer/home/sellorder/{{p.order_id}}" target="_blank" class="text-secondary"> <i class="bi bi-search"></i> </a>
+<!--                    <a *ngIf="p.sell_type=='S'" href="smartgroup/productdetail/{{p.product_id}}/S" target="_blank" class="text-secondary"> <i class="bi bi-search"></i> </a>-->
+<!--                    <a *ngIf="p.sell_type=='G'" href="smartgroup/productdetail/{{p.product_id}}/G" target="_blank" class="text-secondary"> <i class="bi bi-search"></i> </a>-->
+<!--                    <a *ngIf="p.sell_type=='P'" href="smartgroup/packagegrid/{{p.package_grp_id}}" target="_blank" class="text-secondary"> <i class="bi bi-search"></i> </a>-->
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- /.card -->
+          <!-- /.direct-chat -->
+        </div>
+
+
+
+      </div>
+      <!-- /.row (main row) -->
+    </div>
+    <!--end::Container-->
+  </div>
+  <!--end::App Content-->
+</div>
+

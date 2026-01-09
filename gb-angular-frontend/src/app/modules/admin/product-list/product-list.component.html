@@ -1,0 +1,87 @@
+<!--<p>product-list works!</p>-->
+<div class="page-content">
+<!--  <h3>Products</h3>-->
+  <div class="card card-info card-outline" style="margin-top: 7px">
+    <div class="card-header" style="padding-top: 5px; padding-bottom: 7px">
+      <div class="card-title" style="font-size: 25px"><span>Product List</span></div>
+
+      <div class="d-lg-flex align-items-center mb-4 gap-3" style="padding-left: 25px; padding-top: 3px; margin-bottom: 5px !important;" >
+        <div class="position-relative">
+          <input type="text" class="form-control ps-5 radius-30" placeholder="Search Product" style="width: 400px" id="search" name="search" (keydown.enter)="onSearch($event)"> <span
+          class="position-absolute top-50 product-show translate-middle-y"><i
+          class="bx bx-search" style="padding-left: 12px;padding-top: 10px"></i></span>
+        </div>
+<!--        <div class="ms-auto"><a routerLink="../productadd" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i
+          class="bx bxs-plus-square"></i>Add New Product</a></div>-->
+      </div>
+      <mat-progress-bar *ngIf="queryMode" mode="indeterminate" class="mat-progress-bar"></mat-progress-bar>
+    </div>
+
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table mb-0">
+          <thead class="table-light">
+          <tr>
+            <th>Prod Id#</th>
+            <th>Image</th>
+            <th>Product Name</th>
+            <th style="min-width: 145px;">Enabled Sell Type</th>
+            <th>Seller Username</th>
+            <th>Product Status</th>
+            <th>GroupBuy Status</th>
+            <th>Pack. Group Count</th>
+            <th>Regular Price</th>
+            <th>Sale Price</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let p of products; let i = index">
+            <td>
+              <h6 class="mb-0 font-14">#{{p.product_id}}</h6>
+            </td>
+            <td>
+              <img src="{{p.main_image}}" alt="" style="height:40px; max-width:50px; margin-right: 5px">
+            </td>
+            <td>{{p.title}}</td>
+            <td>
+              <img *ngIf="p.sell_style.indexOf('S') != -1" src="assets/smartgroup/img/price-tag-01.5.png" alt="" height=30px width=30px style="margin-right: 10px" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Single Product">
+              <img *ngIf="p.sell_style.indexOf('S') == -1" src="assets/smartgroup/img/price-tag-01.5-BW.png" alt="" height=30px width=30px style="margin-right: 10px; opacity: 0.5" data-bs-toggle="tooltip" data-bs-placement="bottom" title="No Single Product Offer">
+              <img *ngIf="p.sell_style.indexOf('G') != -1" src="assets/smartgroup/img/group-buy-01.png" alt="" height=30px width=30px style="margin-right: 10px" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Group Buying offers on single product">
+              <img *ngIf="p.sell_style.indexOf('G') == -1" src="assets/smartgroup/img/group-buy-01-BW.png" alt="" height=30px width=30px style="margin-right: 10px; opacity: 0.5" data-bs-toggle="tooltip" data-bs-placement="bottom" title="No Group Buying offer on single product">
+              <img *ngIf="p.sell_style.indexOf('P') != -1" src="assets/smartgroup/img/groupbuy-packages-02.png" alt="" height=30px width=30px style="margin-right:10px" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Group Buying offers on sub-packages">
+              <img *ngIf="p.sell_style.indexOf('P') == -1" src="assets/smartgroup/img/groupbuy-packages-02-BW.png" alt="" height=30px width=30px style="margin-right: 10px; opacity: 0.5" data-bs-toggle="tooltip" data-bs-placement="bottom" title="No Group Buying offer on sub-packages">
+            </td>
+            <td>{{p.seller_username}}</td>
+            <td>
+              <div [class]="p.status=='Inactive' ? 'text-danger bg-light-danger' : p.status=='Pending' ? 'text-warning bg-light-warning' : 'text-success bg-light-success'" style="margin-left: -15px;"
+                   class="badge rounded-pill p-2 text-uppercase px-3">
+                <i class='bx bxs-circle me-1'></i>{{p.status}}
+              </div>
+            </td>
+            <td>
+              <div [class]="p.grpbuy_status=='Inactive' ? 'text-danger bg-light-danger' : p.grpbuy_status=='Pending' ? 'text-warning bg-light-warning' : 'text-success bg-light-success'" style="margin-left: -15px;"
+                   class="badge rounded-pill p-2 text-uppercase px-3">
+                <i class='bx bxs-circle me-1'></i>{{p.grpbuy_status}}
+              </div>
+            </td>
+            <td>
+              <a routerLink="../packagegrouplist/{{p.product_id}}" >{{p.package_grp_count}}</a>
+            </td>
+            <td>{{curSymbol}}{{p.regular_price | number: '1.2-2'}}</td>
+            <td>{{curSymbol}}{{p.sale_price | number: '1.2-2'}}</td>
+
+            <td>
+              <select #_status class="form-select" name="actions" id="actions" (change)="updateProduct(p, _status.value)" style="width: 105px;">
+                <option [selected]="p.status=='Pending'" value="Pending">Pending</option>
+                <option [selected]="p.status=='Active'" value="Active">Active</option>
+                <option [selected]="p.status=='Inactive'" value="Inactive">Inactive</option>
+              </select>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

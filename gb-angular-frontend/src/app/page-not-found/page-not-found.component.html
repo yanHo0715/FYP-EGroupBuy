@@ -1,0 +1,79 @@
+
+
+<!--
+<div class="error-404 d-flex align-items-center justify-content-center">
+  <div class="container">
+    <div class="card py-5">
+      <div class="row g-0">
+        <div class="col col-xl-5">
+          <div class="card-body p-4">
+            <h1 class="display-1"><span class="text-primary">4</span><span class="text-danger">0</span><span
+              class="text-success">4</span></h1>
+            <h2 class="font-weight-bold display-4">Lost in Space</h2>
+            <p>You have reached the edge of the universe.
+              <br>The page you requested could not be found.
+              <br>Dont'worry and return to the previous page.
+            </p>
+            <div class="mt-5"> <a routerLink="/" class="btn btn-primary btn-lg px-md-5 radius-30">Go
+              Home</a>
+              <a routerLink=".." class="btn btn-outline-dark btn-lg ms-3 px-md-5 radius-30">Back</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-7">
+          <img src="https://cdn.searchenginejournal.com/wp-content/uploads/2019/03/shutterstock_1338315902.png"
+               class="img-fluid" alt="">
+        </div>
+      </div>
+      &lt;!&ndash;end row&ndash;&gt;
+    </div>
+  </div>
+</div>
+-->
+
+
+
+
+
+
+<div class="preloader" style="opacity: 0; display: none;">
+  <div class="preloader-inner">
+    <div class="preloader-icon">
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- /End Preloader -->
+
+<!-- Start Error Area -->
+<div class="error-area">
+  <div class="d-table">
+    <div class="d-table-cell">
+      <div class="container">
+        <div class="error-content">
+          <h1>404</h1>
+          <h2>Oops! Page Not Found!</h2>
+          <p>The page you are looking for does not exist. It might have been moved or deleted.</p>
+          <div class="button">
+            <a href="smartgroup" class="btn">Back to Home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Error Area -->
+
+<!-- ========================= JS here ========================= -->
+<script src="./404 Error - ShopGrids Bootstrap 5 eCommerce HTML Template._files/bootstrap.min.js.download"></script>
+<script>
+  window.onload = function () {
+    window.setTimeout(fadeout, 500);
+  }
+
+  function fadeout() {
+    document.querySelector('.preloader').style.opacity = '0';
+    document.querySelector('.preloader').style.display = 'none';
+  }
+</script>

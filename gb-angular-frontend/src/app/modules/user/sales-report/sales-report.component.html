@@ -1,0 +1,103 @@
+<!--<p>sales-report works!</p>-->
+<div class="page-content">
+
+  <!--  <div class="d-flex align-items-end gap-3 mb-3">
+      <h3 class="m-0">Sales Report</h3>
+      <div class="ms-auto">
+        <label>From</label>
+        <input class="form-control" type="date" name="startDate" [(ngModel)]="startDate">
+      </div>
+      <div>
+        <label>To</label>
+        <input class="form-control" type="date" name="endDate" [(ngModel)]="endDate">
+      </div>
+      <button class="btn btn-primary" (click)="getReport()">Search</button>
+      &lt;!&ndash;<button class="btn btn-danger" (click)="generatePdf()">Print</button>&ndash;&gt;
+    </div>-->
+
+
+  <div class="card card-success card-outline" style="margin-top: 7px">
+    <div class="card-header" style="padding-top: 5px; padding-bottom: 7px">
+      <!--      <div class="card-title" style="font-size: 25px"><span>Sales Report</span></div>-->
+
+      <!--
+            <div class="d-lg-flex align-items-center mb-4 gap-3" style="padding-left: 25px; padding-top: 3px; margin-bottom: 5px !important;" >
+              <div class="position-relative">
+                <input type="text" class="form-control ps-5 radius-30" placeholder="Search Product" style="width: 400px"> <span
+                class="position-absolute top-50 product-show translate-middle-y"><i
+                class="bx bx-search" style="padding-left: 12px;padding-top: 10px"></i></span>
+              </div>
+              <div class="ms-auto"><a routerLink="../productadd" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i
+                class="bx bxs-plus-square"></i>Add New Product</a></div>
+            </div>
+      -->
+      <div class="d-flex align-items-end gap-3 mb-3" style="margin-bottom: 5px !important;">
+        <!--        <h3 class="m-0">Sales Report</h3>-->
+        <div class="card-title" style="font-size: 25px"><span>Sales Report</span></div>
+        <div class="ms-auto">
+          <label>From</label>
+          <input class="form-control" type="date" name="startDate" [(ngModel)]="startDate">
+        </div>
+        <div>
+          <label>To</label>
+          <input class="form-control" type="date" name="endDate" [(ngModel)]="endDate">
+        </div>
+        <button class="btn btn-primary" (click)="getSalesReport()" style="min-width: 110px;">Search</button>
+      </div>
+      <mat-progress-bar *ngIf="queryMode" mode="indeterminate" class="mat-progress-bar"></mat-progress-bar>
+    </div>
+
+
+
+    <div class="card-body">
+      <table class="table table-bordered" id="dataTable">
+        <thead class="table-warning">
+        <tr>
+          <th>Date</th>
+          <th>No. of <br />Orders</th>
+          <th>No. of <br />Order Items</th>
+          <th>Sales Volume</th>
+          <th>GroupBuy Single <br />Product Quantity</th>
+          <th>GroupBuy Package <br />Quantity</th>
+          <th>Single Product <br />Quantity</th>
+
+          <th>GroupBuy Single <br />Product Total Amount</th>
+          <th>GroupBuy Package <br />Total Amount</th>
+          <th>Single Product <br />Total Amount</th>
+        </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        <tr *ngFor="let s of salesReport">
+          <td>{{s.date}}</td>
+          <td>{{s.no_of_orders}}</td>
+          <td>{{s.no_of_items}}</td>
+          <td>{{curSymbol}}{{s.sales_volume | number: '1.2-2'}}</td>
+          <td>{{s.single_grpbuy_qty_count}}</td>
+          <td>{{s.package_grpbuy_qty_count}}</td>
+          <td>{{s.single_product_qty_count}}</td>
+          <td>{{curSymbol}}{{s.single_grpbuy_sub_total | number: '1.2-2'}}</td>
+          <td>{{curSymbol}}{{s.package_grpbuy_sub_total | number: '1.2-2'}}</td>
+          <td>{{curSymbol}}{{s.single_product_sub_total | number: '1.2-2'}}</td>
+        </tr>
+
+        </tbody>
+        <tbody class="table-group-divider">
+        <tr>
+          <th class="text-end">Total</th>
+          <th class="text-end">{{totalNoOfOrders}}</th>
+          <th class="text-end">{{totalNoOfOrderItems}}</th>
+          <!--          <th colspan="2" class="text-end">Total</th>-->
+          <th class="text-end">{{curSymbol}}{{ totalSalesVolume | number: '1.2-2' }}</th>
+          <!--          <th class="text-end">{{ totalProfit | number: '1.2-2' }}</th>-->
+          <th class="text-end">{{totalGQty}}</th>
+          <th class="text-end">{{totalPQty}}</th>
+          <th class="text-end">{{totalSQty}}</th>
+          <th class="text-end">{{curSymbol}}{{ totalGAmt | number: '1.2-2' }}</th>
+          <th class="text-end">{{curSymbol}}{{ totalPAmt | number: '1.2-2' }}</th>
+          <th class="text-end">{{curSymbol}}{{ totalSAmt | number: '1.2-2' }}</th>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<!--<p>refund works!</p>-->
+<div class="page-content">
+<!--  <h3>Refund History</h3>-->
+
+  <div class="card card-danger card-outline" style="margin-top: 7px">
+    <div class="card-header" style="padding-top: 5px; padding-bottom: 7px">
+      <div class="card-title" style="font-size: 25px"><span>Refund History</span></div>
+      <mat-progress-bar *ngIf="queryMode" mode="indeterminate" class="mat-progress-bar"></mat-progress-bar>
+    </div>
+
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table mb-0">
+          <thead class="table-light">
+          <tr>
+            <th>Refund ID</th>
+            <th style="max-width: 300px;">Refund Reason</th>
+            <th>Order Item ID</th>
+            <th>Seller ID</th>
+            <th>Requester ID</th>
+            <th>Bank Name/Code</th>
+            <th>Bank Account Number</th>
+            <th>Refund Amount</th>
+            <th>Org. Amount</th>
+            <th>Refund Qty</th>
+            <th>Org. Qty</th>
+            <th>Status</th>
+            <th style="min-width: 150px;">Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let p of refund; let i = index">
+            <td>
+              <h6 class="mb-0 font-14">#{{p.refund_id}}</h6>
+            </td>
+            <td style="max-width: 300px;">{{p.reason}}</td>
+            <td>#{{p.order_details_id}}</td>
+            <td>{{p.seller_id}}</td>
+            <td>{{p.requester_id ? p.requester_id: 'System'}}</td>
+            <td>{{p.bank_name}}</td>
+            <td>{{p.bank_number}}</td>
+            <td>{{curSymbol}}{{p.refund_amount | number: '1.2-2'}}</td>
+            <td>{{curSymbol}}{{p.org_amount | number: '1.2-2'}}</td>
+            <td>{{p.refund_qty}}</td>
+            <td>{{p.org_qty}}</td>
+            <td>
+              <div [class]="p.progress_status=='Declined' ? 'text-danger bg-light-danger' : p.progress_status=='Refunded' ? 'text-success bg-light-success' : 'text-primary bg-light-primary'"
+                   class="badge rounded-pill p-2 text-uppercase px-3" style="margin-left: -15px;">
+                <i class='bx bxs-circle me-1'></i>{{p.progress_status}}
+              </div>
+            </td>
+            <td style="min-width: 150px;">
+              <select #refundStatus class="form-select" name="actions" id="actions"
+                      (change)="onStatusChange(i, refundStatus.value)" [disabled]="p.progress_status == 'Refunded'" style="min-width: 150px !important; font-size: 15px;">
+                <option *ngIf="p.progress_status=='Refund Requested'"
+                        [selected]="p.progress_status=='Refund Requested'" value="Refund Requested">Refund Requested</option>
+                <option [selected]="p.progress_status=='Refund Declined'" value="Refund Declined">Refund Declined</option>
+                <option [selected]="p.progress_status=='Refund Processing'" value="Refund Processing">Refund Processing</option>
+                <option [selected]="p.progress_status=='Refunded'" value="Refunded">Refunded</option>
+              </select>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

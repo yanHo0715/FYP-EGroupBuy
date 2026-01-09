@@ -1,0 +1,16 @@
+mat-progress-bar.mat-mdc-progress-bar {
+  --mdc-linear-progress-active-indicator-color: #1ec5dc;
+  --mdc-linear-progress-track-color: white;
+}
+
+/*
+#chart {
+  max-width: 650px;
+  margin: 35px auto;
+}
+*/
+#orderStatusPieChart {
+  max-width: 380px;
+  margin: 35px auto;
+  padding: 0;
+}

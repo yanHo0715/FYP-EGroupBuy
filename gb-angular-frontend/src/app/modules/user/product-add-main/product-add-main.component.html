@@ -1,0 +1,654 @@
+<div class="page-content" style="padding-left: 0px;padding-right: 0px;">
+  <div class="card">
+    <div class="card-body p-4">
+      <h5 class="card-title">Add New Product</h5>
+      <hr />
+      <div class="form-body mt-4">
+<!--        <form #_form="ngForm" (submit)="saveProduct(_form.value)">-->
+          <form [formGroup]="productForm">
+          <div class="row">
+            <div class="col-lg-8">
+<!--              <div class="border border-3 p-4 rounded">-->
+              <div class="border gb-border rounded-1" style="min-height: 868px;">
+
+
+                <div class="mb-3">
+                  <label class="form-label" for="inputProductTitle">Product Title</label>
+
+<!--
+                  <input class="border rounded-1 form-control form-control ng-untouched ng-pristine ng-valid" type="text" id="inputProductTitle"
+                         name="title" placeholder="Enter product title" ngModel>
+-->
+
+                  <input class="border rounded-1 form-control form-control ng-untouched ng-pristine ng-valid" type="text" id="inputProductTitle"
+                         [formControl]="productForm.controls.title" name="title" placeholder="Enter product title">
+                </div>
+
+
+                <div class="container" style="padding: 0;max-width: 120%">
+                  <div class="row">
+                    <div class="col-md-12"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="row">
+<!--                        <div class="col"><label class="col-form-label" >Product Main Image</label></div>-->
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <div class="row">
+                            <div class="col">
+<!--                              <button class="btn btn-primary border rounded-1 btn-primary" type="button">Add Main Image</button>-->
+                              <label class="mat-raised-button mr-4">
+<!--                                <input type="file" (change)="onSelectMainImage($event)" />-->
+                                <input type="file" (change)="onSelectMainImage($event)" />
+                              <span class="mat-button-wrapper">
+                                <mat-icon class="mat-icon material-icons">add</mat-icon>
+                                <mat-icon class="mat-icon material-icons">imagesmode</mat-icon>
+                                Main Image
+                              </span>
+                              </label>
+<!--                              <input class="border rounded-1 form-control form-control" type="file" id="inputProductThumbnail" name="thumbnailUrl" placeholder="Enter thumbnail url">-->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col" style="padding: 0px 24px">
+                          <div class="row text-start border rounded-1" style="height: 212px ; max-width:120%; overflow-x: auto; overflow-y: hidden">
+                            <div class="col-xxl-2" style="width: 92px;padding: 6px 12px;">
+<!--                              <img src="assets/img/01.png" width="80" height="80">-->
+<!--                              <img [src]="imageFile" height="200px" alt="">-->
+                              <img class="img-main-prod" [src]="mainProdImageFile.image_file" alt="">
+                            </div>
+<!--                            <div class="col-xxl-2" style="padding: 6px 12px;width: 92px;"><img src="assets/img/05.png" width="80" height="80"></div>-->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col">
+<!--                          <label class="col-form-label" >Product Other Images</label>-->
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <div class="row">
+                            <div class="col">
+<!--                              <button class="btn btn-primary border rounded-1 btn-primary" type="button">Add Other Images</button>-->
+                              <label class="mat-raised-button mr-4" >
+                                <input type="file" (change)="onSelectOtherImages($event)" multiple/>
+                              <span class="mat-button-wrapper">
+                                <mat-icon class="mat-icon material-icons">add</mat-icon>
+                                <mat-icon class="mat-icon material-icons">photo_library</mat-icon>
+                                Other Images
+                              </span>
+                              </label>
+<!--                              <input class="border rounded-1 form-control form-control" type="file" id="inputProductThumbnail-1" name="thumbnailUrl" placeholder="Enter thumbnail url">-->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col" style="padding: 0px 24px">
+                          <div class="row text-start border rounded-1" style="height: 212px; overflow-y: auto">
+<!--                            <div class="col-xxl-2" style="width: 92px;padding: 6px 12px;">-->
+
+                            <div class="col-xxl-2" *ngFor="let imgFile of otherProdImageFiles; let i = index;" style="width: 92px;padding: 0px 12px;">
+<!--                              <img src="assets/img/01.png" width="80" height="80">-->
+<!--                              <span class="btn-remove-image" (click)="removeImages(i)">x</span>-->
+
+<!--                              <img [src]="imgFile" width="80px" height="80px" alt="">-->
+<!--                              <span class="btn-remove-image" (click)="removeImages(i)">x</span>-->
+
+                              <div style="position: relative">
+<!--                                <span class="btn-remove-image" (click)="removeImages(i)">x</span>-->
+                                <span class="mat-button-wrapper" (click)="removeImage(i)">
+                                  <mat-icon class="mat-icon material-icons btn-remove-prod-image">delete_forever</mat-icon></span>
+<!--                                <img [src]="imgFile" width="80px" height="80px">-->
+                                <img [src]="imgFile.image_file" style="display: block;max-width:80px;max-height:80px;width: auto;height: auto;">
+                              </div>
+                            </div>
+<!--                            </div>-->
+
+<!--
+                            <div class="col-xxl-2" style="padding: 6px 12px;width: 92px;">
+                              <img src="assets/img/05.png" width="80" height="80">
+                            </div>
+-->
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <!--  +++++++++++++++++++++++++++++++++ -->
+<!--                <div class="container" style="padding: 0;">
+                  <div class="row">
+                    <div class="col-md-12"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col"><label class="col-form-label" for="inputProductThumbnailz">Product Main Image</label></div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <div class="row">
+                            <div class="col">
+&lt;!&ndash;                              <input class="border rounded-1 form-control form-control" type="file" id="inputProductThumbnailx" name="thumbnailUrl" placeholder="Enter thumbnail url">&ndash;&gt;
+                              <input class="border rounded-1 form-control form-control" type="file" id="inputProductThumbnailz" name="thumbnailUrl"
+                                     placeholder="Enter thumbnail url" (change)="onSelectedImage($event)">
+                              &lt;!&ndash;                  <span class="text-body-tertiary d-block mt-1"> Uploaded url: {{ thumbnailUrl }}</span>&ndash;&gt;
+                              <img [src]="imageFile" height="200">
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row"></div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col"><label class="col-form-label" for="inputProductThumbnail-1">Product Other Images</label>
+                          <input class="border rounded-1 form-control form-control" type="file" id="inputProductThumbnail-1"
+                                 name="thumbnailUrl" placeholder="Enter thumbnail url" (change)="onSelectedOtherImages($event)" multiple></div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <div class="row">
+                            <div class="col">
+&lt;!&ndash;                              <input class="border rounded-1 form-control form-control" type="file" id="inputProductThumbnail-1y" name="thumbnailUrl" placeholder="Enter thumbnail url">&ndash;&gt;
+&lt;!&ndash;                              <input class="border rounded-1 form-control form-control" type="file" id="inputProductThumbnail-1"&ndash;&gt;
+&lt;!&ndash;                                     name="thumbnailUrl" placeholder="Enter thumbnail url" (change)="onSelectedOtherImages($event)" multiple>&ndash;&gt;
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <div class="row text-start">
+                            <div class="col-xxl-2"><img src="assets/img/01.png" width="80" height="80"></div>
+                            <div class="col-xxl-2"><img src="assets/img/05.png" width="80" height="80"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                -->
+                <!--  +++++++++++++++++++++++++++++++++ -->
+
+
+
+
+
+
+
+
+<!--
+
+                <div class="mb-3"><label class="form-label" for="inputProductThumbnail">Product Main Image</label>
+                  <input class="border rounded-1 form-control form-control" type="file" id="inputProductThumbnail" name="thumbnailUrl"
+                         placeholder="Enter thumbnail url" (change)="onSelectedImage($event)">
+&lt;!&ndash;                  <span class="text-body-tertiary d-block mt-1"> Uploaded url: {{ thumbnailUrl }}</span>&ndash;&gt;
+                  <img [src]="imageFile" height="200">
+                </div>
+-->
+
+
+<!--
+
+                <div class="mb-3">
+                  <label for="inputProductTitle" class="form-label">Product Title</label>
+                  <input type="text" class="form-control" id="inputProductTitle"
+                         placeholder="Enter product title" name="title" ngModel>
+                </div>
+                <div class="mb-3">
+                  <label for="inputProductThumbnail" class="form-label">Product Main Image</label>
+                  <input type="file" class="form-control" id="inputProductThumbnail"
+                         placeholder="Enter thumbnail url" name="thumbnailUrl"
+                         (change)="onSelected($event)">
+                  <span class="d-block mt-1 text-body-tertiary">
+                                        Uploaded url: {{ thumbnailUrl }}</span>
+                </div>
+
+-->
+
+
+<!--
+
+                <div class="mb-3">
+                  <label for="uploadMoreImages" class="form-label">Upload More Images</label>
+                  <input type="file" class="form-control" id="uploadMoreImages"
+                         placeholder="Enter thumbnail url" name="uploadMoreImages"
+                  >
+                  <span class="d-block mt-1 text-body-tertiary">
+                                        Uploaded url: xxxxx</span>
+
+                  <div class="others-images-container">
+                    <div id="image-container-0" class="other-img"><img src="HP03.png" style="width: 100px;height: 100px;" /><a><span class="glyphicon glyphicon-remove"></span></a></div>
+                    <div id="image-container-1" class="other-img"><img src="HP04.png" style="width: 100px;height: 100px;" /><a><span class="glyphicon glyphicon-remove"></span></a></div>
+                    <div id="image-container-3" class="other-img"><img src="HP02.png" style="width: 100px;height: 100px;" /><a><span class="glyphicon glyphicon-remove"></span></a></div>
+                  </div><a class="btn btn-default" role="button" data-toggle="modal" data-target="#modalMoreImages">Upload more images</a>
+                </div>
+-->
+
+
+<!--
+                <div class="mb-3">
+                  <label class="form-label" for="inputProductThumbnail-1">Product Other Images</label>
+                  <input class="border rounded-1 form-control form-control" type="file" id="inputProductThumbnail-1"
+                         name="thumbnailUrl" placeholder="Enter thumbnail url" (change)="onSelectedOtherImages($event)" multiple>
+                </div>
+-->
+
+
+<!--
+
+                <div class="container text-start border rounded-1 flex-row" style="padding-top: 10px;padding-bottom: 12px;">
+                  <div class="row text-start">
+                    <div class="col-xxl-2"><img src="assets/img/01.png" width="80" height="80"></div>
+                    <div class="col-xxl-2"><img src="assets/img/05.png" width="80" height="80"></div>
+                  </div>
+                </div>
+
+-->
+
+
+
+<!--                <div class="mt-5">
+                  <div class="row">
+                    <mat-grid-list cols="8" rowHeight="120px" gutterSize="1">
+                      <mat-grid-tile *ngFor="let imgFile of imageFiles; let i = index;">
+                        <div style="position: relative">
+                          <span class="btn-remove-image" (click)="removeImages(i)">x</span>
+                          <img [src]="imgFile" width="80px" height="80px">
+                        </div>
+                      </mat-grid-tile>
+
+&lt;!&ndash;
+                      <mat-grid-tile>
+                        <div style="position: relative">
+                          <span class="btn-remove-image">x</span>
+                          <img src="assets/images/02.png" width="80px" height="80px">
+                        </div>
+                      </mat-grid-tile>
+&ndash;&gt;
+
+                    </mat-grid-list>
+
+
+                  </div>
+
+                </div>-->
+
+
+                <!--                <div class="mb-3">-->
+                <!--                  <div class="others-images-container">-->
+                <!--                    <div id="image-container-0" class="other-img"><img src="HP03.png" style="width: 100px;height: 100px;" /><a><span class="glyphicon glyphicon-remove"></span></a></div>-->
+                <!--                    <div id="image-container-1" class="other-img"><img src="HP04.png" style="width: 100px;height: 100px;" /><a><span class="glyphicon glyphicon-remove"></span></a></div>-->
+                <!--                    <div id="image-container-3" class="other-img"><img src="HP02.png" style="width: 100px;height: 100px;" /><a><span class="glyphicon glyphicon-remove"></span></a></div>-->
+                <!--                  </div><a class="btn btn-default" role="button" data-toggle="modal" data-target="#modalMoreImages">Upload more images</a>-->
+                <!--                </div>-->
+
+
+                <div class="mb-3">
+                  <!--                                    <label for="inputProductDescription" class="form-label">Description</label>-->
+                  <!--                                    <textarea class="form-control" id="inputProductDescription" rows="3"-->
+                  <!--                                        name="description" ngModel></textarea>-->
+
+                  <label for="inputProductDescription" class="form-label" style="padding-top: 10px">Description</label>
+
+<!--                  [(ngModel)]="ckeditorContent" name="description" id="inputProductDescription"-->
+
+                  <ckeditor
+                    #editor
+                    [formControl]="productForm.controls.description" id="inputProductDescription"
+                    [config]="{}"
+                    [readonly]="false"
+                    (change)="onChange($event)"
+                    (editorChange)="onEditorChange($event)"
+                    (ready)="onReady($event)"
+                    (focus)="onFocus($event)"
+                    (blur)="onBlur($event)"
+                    (contentDom)="onContentDom($event)"
+                    (fileUploadRequest)="onFileUploadRequest($event)"
+                    (fileUploadResponse)="onFileUploadResponse($event)"
+                    (paste)="onPaste($event)"
+                    (drop)="onDrop($event)"
+                    debounce="500"
+                  >
+<!--                    <ckbutton
+                      [name]="'openModal'"
+                      [command]="'openModal'"
+                      (click)="openModal($event)"
+                      [icon]="'save.png'"
+                      [label]="'Custom Button'"
+                    >
+                    </ckbutton>-->
+                  </ckeditor>
+
+
+                </div>
+
+<!--
+                <div class="mb-3">
+                <label for="inputProductDescription" class="form-label">Product Images</label>
+                <input id="image-uploadify" type="file"
+                    accept=".xlsx,.xls,image/*,.doc,audio/*,.docx,video/*,.ppt,.pptx,.txt,.pdf"
+                    multiple>
+                </div>
+-->
+
+              </div>
+            </div>
+            <div class="col-lg-4">
+<!--              <div class="border border-3 p-4 rounded">-->
+              <div class="border gb-border rounded-1">
+
+<!--                ===============      -->
+
+                <div class="row g-3">
+                  <div class="col-12" style="margin-top: 5px">
+                    <label class="form-label" style="margin-bottom: 2px;" for="inputProductCategory">Product Category</label>
+<!--
+
+                    <select class="border rounded-1 form-select form-select ng-untouched ng-pristine ng-valid"
+                    id="inputProductCategory" name="category" ngModel>
+                    </select>
+-->
+
+<!--
+                    <select class="border rounded-1 form-select ng-untouched ng-pristine ng-valid"
+                            id="inputProductCategory" name="category_id" ngModel>
+                      <option *ngFor="let c of categories" value="{{c.category_id}}">{{c.category_name}}</option>
+                    </select>
+-->
+
+                    <select class="border rounded-1 form-select ng-untouched ng-pristine ng-valid"
+                            [formControl]="productForm.controls.category_id" id="inputProductCategory" name="category_id">
+                      <option *ngFor="let c of categories" value="{{c.category_id}}">{{c.category_name}}</option>
+                    </select>
+
+
+<!--
+                    <select class="border rounded-1 form-select ng-untouched ng-pristine ng-valid"
+                            id="inputProductCategory" name="category_id" ngModel>
+                      <option *ngFor="let c of categories" value="{{c.category_id}}">{{c.category_name}}</option>
+                    </select>
+-->
+
+                  </div>
+                  <div class="col-12" style="margin-top: 5px">
+<!--
+                    <label class="form-label" for="inputProductCategory-1">Product Brand</label>
+                    <select class="border rounded-1 form-select form-select ng-untouched ng-pristine ng-valid"
+                    id="inputProductCategory-1" name="brand_id" ngModel>
+                    </select>
+-->
+                    <label class="form-label" style="margin-bottom: 2px;" for="inputProductCategory-1">Product Brand</label>
+                    <select class="border rounded-1 form-select form-select ng-untouched ng-pristine ng-valid"
+                            [formControl]="productForm.controls.brand_id" id="inputProductCategory-1" name="brand_id">
+                      <option *ngFor="let b of brands" value="{{b.brand_id}}">{{b.brand_name}}</option>
+                    </select>
+
+                  </div>
+<!--
+                  <div class="col-12"><label class="form-label" for="inputStockStatus">Stock Status</label><select
+                    class="border rounded-1 form-select form-select ng-untouched ng-pristine ng-valid"
+                    id="inputStockStatus" name="stock_status" ngModel>
+                    <option value="In Stock">In Stock</option>
+                    <option value="Out of Stock">Out of Stock</option>
+                  </select></div>
+-->
+
+                  <div class="col-12 col-xxl-6" style="margin-top: 5px">
+                    <label class="form-label" style="margin-bottom: 2px;" for="inputStockStatus">Stock Status</label>
+                    <select class="border rounded-1 form-select form-select ng-untouched ng-pristine ng-valid"
+                      [formControl]="productForm.controls.stock_status" id="inputStockStatus" name="stock_status">
+                      <option value="In Stock">In Stock</option>
+                      <option value="Out of Stock">Out of Stock</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-xxl-6" style="margin-top:5px;">
+                    <label class="form-label" for="productStatus" style="margin-bottom:2px;">Product Status</label>
+                    <select class="form-select border rounded-1 form-select ng-untouched ng-pristine ng-valid"
+                      [formControl]="productForm.controls.status" id="productStatus" name="product_status">
+                      <option value="Active">Active</option>
+                      <option value="Inactive">Inactive</option>
+                      <option value="Pending">Pending</option>
+                    </select>
+                  </div>
+<!--
+                  <div class="col-md-6"><label class="form-label" for="inputRegularPrice">Regular Price</label><input
+                    class="border rounded-1 form-control form-control ng-untouched ng-pristine ng-valid" type="number"
+                    id="inputRegularPrice" name="regular_price" placeholder="00.00" ngModel></div>
+                  <div class="col-md-6"><label class="form-label" for="inputSalePrice">Sale Price</label><input
+                    class="border rounded-1 form-control form-control ng-untouched ng-pristine ng-valid" type="number"
+                    id="inputSalePrice" name="sale_price" placeholder="00.00" ngModel></div>
+
+                  <div class="col-md-6"><label class="form-label" for="inputStockCount">Stock Quantity</label><input
+                    class="border rounded-1 form-control form-control ng-untouched ng-pristine ng-valid" type="number"
+                    id="inputStockCount" name="stock_quantity" placeholder="0" ngModel></div>
+                  <div class="col-md-6"><label class="form-label" for="inputStockCount-1">Display Position</label><input
+                    class="border rounded-1 form-control form-control ng-untouched ng-pristine ng-valid" type="number"
+                    id="inputStockCount-1" name="display_position" placeholder="0" ngModel></div>
+                  <div class="col-12">
+                    <div class="d-grid">
+                      <button class="btn btn-primary border rounded-1" type="submit">Save Product</button>
+                    </div>
+                  </div>
+-->
+
+                  <div class="col-md-6" style="margin-top: 5px">
+                    <label class="form-label" style="margin-bottom: 2px;" for="inputRegularPrice">Regular Price</label>
+                    <input class="border rounded-1 form-control form-control ng-untouched ng-pristine ng-valid" type="number"
+                    [formControl]="productForm.controls.regular_price" id="inputRegularPrice" name="regular_price" placeholder="00.00">
+                  </div>
+
+                  <div class="col-md-6" style="margin-top: 5px">
+                    <label class="form-label" style="margin-bottom: 2px;" for="inputSalePrice">Sale Price</label>
+                    <input class="border rounded-1 form-control form-control ng-untouched ng-pristine ng-valid" type="number"
+                    [formControl]="productForm.controls.sale_price" id="inputSalePrice" name="sale_price" placeholder="00.00">
+                  </div>
+
+                  <div class="col-md-6" style="margin-top: 5px">
+                    <label class="form-label" style="margin-bottom: 2px;" for="inputStockCount">Stock Quantity</label>
+                    <input class="border rounded-1 form-control form-control ng-untouched ng-pristine ng-valid" type="number"
+                    [formControl]="productForm.controls.stock_quantity" id="inputStockCount" name="stock_quantity" placeholder="0">
+                  </div>
+
+                  <div class="col-md-6" style="margin-top: 5px">
+                    <label class="form-label" style="margin-bottom: 2px;" for="inputLikes">Display Position</label>
+                    <input class="border rounded-1 form-control form-control ng-untouched ng-pristine ng-valid" type="number"
+                    [formControl]="productForm.controls.display_position" id="inputLikes" name="display_position" placeholder="0">
+                  </div>
+                  <div class="col-12" style="margin-top: 5px">
+                    <div class="d-grid">
+<!--                      <button class="btn btn-primary border rounded-1" type="submit">Save Product</button>-->
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+<!--
+
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="inputRegularPrice" class="form-label">Regular Price</label>
+                    <input type="number" class="form-control" id="inputRegularPrice"
+                           placeholder="00.00" name="regularPrice" ngModel>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="inputSalePrice" class="form-label">Sale Price</label>
+                    <input type="number" class="form-control" id="inputSalePrice"
+                           placeholder="00.00" name="salePrice" ngModel>
+                  </div>
+                  <div class="col-12">
+                    <label for="inputProductCategory" class="form-label">Product Category</label>
+                    <select class="form-select" id="inputProductCategory" name="category" ngModel>
+                      <option *ngFor="let c of categories" value="{{c.id}}">{{c.title}}</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label for="inputStockStatus" class="form-label">Stock Status</label>
+                    <select class="form-select" id="inputStockStatus" name="stockStatus" ngModel>
+                      <option value="In Stock">In Stock</option>
+                      <option value="Out of Stock">Out of Stock</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label for="inputStockCount" class="form-label">Stock Count</label>
+                    <input type="number" class="form-control" id="inputStockCount" placeholder="0"
+                           name="stockCount" ngModel>
+                  </div>
+                  &lt;!&ndash; <div class="col-12">
+                  <label for="inputStatus" class="form-label">Status</label>
+                  <select class="form-select" id="inputStatus" name="status" ngModel>
+                      <option></option>
+                      <option value="Pending">Pending</option>
+                      <option value="Published">Published</option>
+                      <option value="Rejected">Rejected</option>
+                  </select>
+                  </div> &ndash;&gt;
+                  <div class="col-12">
+                    <div class="d-grid">
+                      <button type="submit" class="btn btn-primary">Save Product</button>
+                    </div>
+                  </div>
+                </div>
+-->
+
+<!--                ===========-->
+
+
+              </div>
+
+
+<!--              <div class="border-3 border p-4 rounded" style="margin-top: 10px">-->
+              <div class="border gb-border rounded-1" style="margin-top: 10px">
+
+                <div class="row g-3">
+                  <div class="col-12" style="margin-top: 5px">
+
+                    <div class="checkout-payment-option">
+                      <h6 class="heading-6 font-weight-400 payment-title">Selling Style Option</h6>
+
+                      <div class="payment-option-wrapper" style="margin-top: -18px;">
+                        <div class="single-payment-option" style="min-width:120px;" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Allows to sell this single &#xA;product individually">
+                          <input type="checkbox" name="sellStyle" id="single" value="S"
+                                 [formControl]="productForm.controls.sell_style_single" (click)="onSelectSellStyle($event, 'Single')">
+<!--                          <label for="shipping-1" style="border-color: blue; background-color: white; text-align: center; padding: 12px; -webkit-border-radius: 5px; margin-bottom: 0; width: 100%; transition: all 0.3s linear; cursor: pointer; border: 1px solid #eee;">-->
+                            <label for="single" >
+
+                            <img src="assets/smartgroup/img/price-tag-01.5.png" alt=Single style="height: 60px">
+                            <p style="font-size: 14px; font-weight: 400; color: #444; margin-bottom: 8px;">Single Product</p>
+<!--                            <span class="price" style="font-weight: 500; font-size: 15px; line-height: 22px; color: #444; margin-top: 4px;">$10.50</span>-->
+                          </label>
+                        </div>
+
+
+                        <div class="single-payment-option" style="min-width:120px;" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Allows group buying for &#xA;this single product">
+                          <input type="checkbox" name="sellStyle" id="groupbuy" value="G"
+                                 [formControl]="productForm.controls.sell_style_group_single" (click)="onSelectSellStyle($event, 'GroupBuy')">
+                          <label for="groupbuy" >
+                            <img src="assets/smartgroup/img/group-buy-01.png" alt="Group" style="height: 60px">
+                            <p style="font-size: 14px; font-weight: 400; color: #444; margin-bottom: 8px;">Group Buy</p>
+<!--                            <span class="price" style="font-weight: 500; font-size: 15px; line-height: 22px; color: #444; margin-top: 4px;">$10.50</span>-->
+                          </label>
+                        </div>
+
+                        <div class="single-payment-option" style="min-width:120px;" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Allows group buying for dividing &#xA;this product to sub-packages">
+                          <input type="checkbox" name="sellStyle" id="package-groupbuy" value="P"
+                                 [formControl]="productForm.controls.sell_style_group_package" (click)="onSelectSellStyle($event, 'PackageGroupBuy')">
+                          <label for="package-groupbuy" >
+                            <img src="assets/smartgroup/img/groupbuy-packages-02.png" alt="Group & Package" style="height: 60px">
+                            <p style="font-size: 14px; font-weight: 400; color: #444; margin-bottom: 8px; margin-left: -4px; margin-right: -4px">Group Package</p>
+<!--                            <span class="price" style="font-weight: 500; font-size: 15px; line-height: 22px; color: #444; margin-top: 4px;">$10.50</span>-->
+                          </label>
+                        </div>
+
+                      </div>
+                    </div>
+
+<!--                    <label class="form-label" style="margin-bottom: 2px;" for="sell_style">Product Selling Style</label>
+                    <select class="form-select border rounded-1 form-select ng-untouched ng-pristine ng-valid" [formControl]="productForm.controls.sell_style" id="sell_style" name="sell_style">
+                      <option value="S" selected>Single Product Only</option>
+                      <option value="G">Group Buying Only</option>
+                      <option value="B">Single and Group Buying</option>
+                    </select>-->
+
+
+
+                  </div>
+
+<!--                  <div class="col-12">
+                    <label class="form-label" for="inputStockStatus">Group Buying Quantity</label>
+                    <select class="form-select border rounded-1 form-select ng-untouched ng-pristine ng-valid" id="grpBuyingQyt" name="grpBuyQyt">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                    </select>
+                  </div>-->
+                </div>
+              </div>
+
+              <div *ngIf="isShowGroupDetailSection" class="border gb-border rounded-1" style="margin-top: 10px">
+                <div class="row g-3">
+
+                  <div class="col-12 col-xxl-6" style="margin-top: 10px">
+                    <label class="form-label" style="margin-bottom: 2px;" for="grpbuy_quantity">Group Buying Quantity</label>
+                    <input class="border rounded-1 form-control form-control ng-untouched ng-pristine ng-valid" type="number" [formControl]="productForm.controls.grpbuy_quantity" id="grpbuy_quantity" name="grpbuy_quantity" placeholder="0">
+                  </div>
+                  <div class="col-12 col-xxl-6" style="margin-top:10px;">
+                    <label class="form-label" for="grpbuy_min_threshold" style="margin-bottom:2px;">Min. Threshold</label>
+                    <input class="form-control border rounded-1 form-control ng-untouched ng-pristine ng-valid" type="number" [formControl]="productForm.controls.min_threshold" id="grpbuy_min_threshold" name="grpbuy_min_threshold" placeholder="0">
+                  </div>
+                  <div class="col-12 col-xxl-6" style="margin-top: 10px">
+                    <label class="form-label" style="margin-bottom: 2px;" for="grpbuy_regular_price">Group Buying Reg. Price</label>
+                    <input class="form-control border rounded-1 form-control ng-untouched ng-pristine ng-valid" type="number" [formControl]="productForm.controls.grpbuy_regular_price" id="grpbuy_regular_price" name="grpbuy_regular_price" placeholder="00.00" value="">
+                  </div>
+                  <div class="col-12 col-xxl-6" style="margin-top: 10px">
+                    <label class="form-label" style="margin-bottom: 2px;" for="grpbuy_sale_price">Group Buying Sale Price</label>
+                    <input class="form-control border rounded-1 form-control ng-untouched ng-pristine ng-valid" type="number" [formControl]="productForm.controls.grpbuy_sale_price" id="grpbuy_sale_price" name="grpbuy_sale_price" placeholder="00.00" value="">
+                  </div>
+                  <div class="col-12 col-xxl-12" style="margin-top:10px;">
+                    <label class="form-label" for="grpbuy_status" style="margin-bottom:2px;">Group Buying Status</label>
+                    <select class="form-select border rounded-1 form-select ng-untouched ng-pristine ng-valid"
+                      [formControl]="productForm.controls.grpbuy_status" id="grpbuy_status" name="grpbuy_status">
+                      <option value="Active">Active</option>
+                      <option value="Inactive">Inactive</option>
+                      <option value="Pending">Pending</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 col-xxl-6" style="margin-top: 10px">
+                    <label class="form-label" style="margin-bottom: 2px;" for="grpbuy_start">Group Buying Start</label>
+                    <input class="form-control" type="datetime-local" id="grpbuy_start" [formControl]="productForm.controls.grpbuy_start" style="border-radius: 3px; font-size: 15px; padding-left: 3px; padding-right: 3px; letter-spacing: -1.5px;">
+                  </div>
+                  <div class="col-md-6 col-xxl-6" style="margin-top: 10px">
+                    <label class="form-label" style="margin-bottom: 2px;" for="grpbuy_end">Group Buying End</label>
+                    <input class="form-control" type="datetime-local" id="grpbuy_end" [formControl]="productForm.controls.grpbuy_end" style="border-radius: 3px; font-size: 15px; padding-left: 3px; padding-right: 3px; letter-spacing: -1.5px;">
+                  </div>
+                  <div class="col-12" style="margin-top: 10px">
+                    <div class="d-grid"></div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div><!--end row-->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+

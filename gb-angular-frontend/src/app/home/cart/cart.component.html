@@ -1,0 +1,313 @@
+<!--<p>cart works!</p>-->
+
+<!-- Start Breadcrumbs -->
+<!--<div class="breadcrumbs">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="breadcrumbs-content">
+          <h1 class="page-title">Cart</h1>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <ul class="breadcrumb-nav">
+          <li><a href="https://demo.graygrids.com/themes/shopgrids/index.html"><i class="lni lni-home"></i> Home</a></li>
+          <li><a href="https://demo.graygrids.com/themes/shopgrids/index.html">Shop</a></li>
+          <li>Cart</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>-->
+<!-- End Breadcrumbs -->
+
+<!-- Shopping Cart -->
+<div class="shopping-cart section" style="padding-top: 25px;">
+  <div class="container">
+    <div class="cart-list-head">
+      <!-- Cart List Title -->
+      <div class="cart-list-title">
+        <div class="row">
+
+          <div class="col-12 col-md-1 col-lg-1">Item</div>
+          <div class="col-12 col-md-3 col-lg-4 col-xxl-5">
+            <p>Product Name</p>
+          </div>
+          <div class="col-12 col-md-2 col-lg-2 col-xxl-1">
+            <p>Quantity</p>
+          </div>
+          <div class="col-xxl-1">
+            <p>Unit Price</p>
+          </div>
+          <div class="col-12 col-md-2 col-lg-2 col-xxl-1">
+            <p>Discount</p>
+          </div>
+          <div class="col-12 col-md-2 col-lg-2">
+            <p>Subtotal</p>
+          </div>
+          <div class="col-12 col-md-2 col-lg-1">
+            <p>Remove</p>
+          </div>
+
+
+<!--
+          <div class="col-lg-1 col-md-1 col-12">
+
+          </div>
+          <div class="col-lg-4 col-md-3 col-12">
+            <p>Product Name</p>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12">
+            <p>Quantity</p>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12">
+            <p>Subtotal</p>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12">
+            <p>Discount</p>
+          </div>
+          <div class="col-lg-1 col-md-2 col-12">
+            <p>Remove</p>
+          </div>
+-->
+        </div>
+      </div>
+      <!-- End Cart List Title -->
+
+<!--- Begin Cart List Generation ---->
+
+
+      <div *ngFor="let item of cartItemList" class="cart-single-list" style="padding-top: 20px; padding-bottom: 20px;">
+        <div class="row align-items-center">
+          <div class="col-lg-1 col-md-1 col-12">
+            <a href="javascript:void(0)"><img src="{{item.item_image_url}}" alt="#"></a>
+          </div>
+          <div class="col-lg-4 col-md-3 col-12 col-xxl-5">
+            <h5 class="product-name">
+              <a href="javascript:void(0)">
+                <b *ngIf="item.sell_type=='P'">Group Buy Package Set Item : </b>
+                <p *ngIf="item.sell_type=='P'">{{item.package_name}}</p>
+                <b *ngIf="item.sell_type=='G'">Group Buy Item : </b>
+                <p *ngIf="item.sell_type=='G' || item.sell_type=='S'">{{item.product_title}}</p>
+              </a></h5>
+            <p class="product-des">
+<!--
+              <span><em>Type:</em> Mirrorless</span>
+              <span><em>Color:</em> Black</span>
+-->
+            </p>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12 col-xxl-1">
+            <div class="count-input">
+              <select class="form-control" (change)="updateQuantity($event, item)" name="itemQty{{item.product_id}}" [value]='item.quantity' style="width: 80px;">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-xxl-1">
+            <p>{{curSymbol}}{{item.unit_price}}</p>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12  col-xxl-1">
+            <p>--</p>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12">
+            <p>{{curSymbol}}{{item.sub_Total}}</p>
+          </div>
+          <div class="col-lg-1 col-md-2 col-12">
+            <a class="remove-item" href="javascript:void(0)"><i (click)="onRemoveCartItem(item.cart_id)" class="lni lni-close"></i></a>
+          </div>
+        </div>
+
+<!--        <div *ngIf="item.sell_type=='P'" class="images row align-items-center">
+          AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          <img *ngFor="let pkgi of item.package_item_list" src="{{pkgi.photo_link}}" class="img" alt="#">
+&lt;!&ndash;          <img *ngFor="let pkgItem of item.package_item_list" src="http://192.168.56.104:8080/api/gb/uploads/8/ASUS04.png" class="img" alt="#">&ndash;&gt;
+        </div>-->
+
+        <div *ngIf="item.sell_type=='P'" class="product-images">
+          <main id="gallery">
+
+            <div class="images">
+              <p>Package Included Items: {{item.package_item_list?.length}}</p>
+              <img *ngFor="let pkgi of item.package_item_list; let j=index" src="{{pkgi.package_item_image}}" class="img" style="width: 80px" alt="#" >
+
+            </div>
+          </main>
+        </div>
+
+
+
+      </div>
+
+
+
+
+
+      <!--- End Cart List Generation ---->
+
+
+      <!-- Cart Single List list -->
+<!--
+      <div class="cart-single-list">
+        <div class="row align-items-center">
+          <div class="col-lg-1 col-md-1 col-12">
+            <a href="https://demo.graygrids.com/themes/shopgrids/product-details.html"><img src="assets/smartgroup/img/01.jpg" alt="#"></a>
+          </div>
+          <div class="col-lg-4 col-md-3 col-12">
+            <h5 class="product-name"><a href="https://demo.graygrids.com/themes/shopgrids/product-details.html">
+              Canon EOS M50 Mirrorless Camera</a></h5>
+            <p class="product-des">
+              <span><em>Type:</em> Mirrorless</span>
+              <span><em>Color:</em> Black</span>
+            </p>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12">
+            <div class="count-input">
+              <select class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12">
+            <p>$910.00</p>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12">
+            <p>$29.00</p>
+          </div>
+          <div class="col-lg-1 col-md-2 col-12">
+            <a class="remove-item" href="javascript:void(0)"><i class="lni lni-close"></i></a>
+          </div>
+        </div>
+      </div>
+-->
+      <!-- End Single List list -->
+      <!-- Cart Single List list -->
+<!--
+      <div class="cart-single-list">
+        <div class="row align-items-center">
+          <div class="col-lg-1 col-md-1 col-12">
+            <a href="https://demo.graygrids.com/themes/shopgrids/product-details.html"><img src="assets/smartgroup/img/02.jpg" alt="#"></a>
+          </div>
+          <div class="col-lg-4 col-md-3 col-12">
+            <h5 class="product-name"><a href="https://demo.graygrids.com/themes/shopgrids/product-details.html">
+              Apple iPhone X 256 GB Space Gray</a></h5>
+            <p class="product-des">
+              <span><em>Memory:</em> 256 GB</span>
+              <span><em>Color:</em> Space Gray</span>
+            </p>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12">
+            <div class="count-input">
+              <select class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12">
+            <p>$1100.00</p>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12">
+            <p>—</p>
+          </div>
+          <div class="col-lg-1 col-md-2 col-12">
+            <a class="remove-item" href="javascript:void(0)"><i class="lni lni-close"></i></a>
+          </div>
+        </div>
+      </div>
+-->
+      <!-- End Single List list -->
+      <!-- Cart Single List list -->
+<!--
+      <div class="cart-single-list">
+        <div class="row align-items-center">
+          <div class="col-lg-1 col-md-1 col-12">
+            <a href="https://demo.graygrids.com/themes/shopgrids/product-details.html"><img src="assets/smartgroup/img/03.jpg" alt="#"></a>
+          </div>
+          <div class="col-lg-4 col-md-3 col-12">
+            <h5 class="product-name"><a href="https://demo.graygrids.com/themes/shopgrids/product-details.html">HP LaserJet Pro Laser Printer</a></h5>
+            <p class="product-des">
+              <span><em>Type:</em> Laser</span>
+              <span><em>Color:</em> White</span>
+            </p>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12">
+            <div class="count-input">
+              <select class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12">
+            <p>$550.00</p>
+          </div>
+          <div class="col-lg-2 col-md-2 col-12">
+            <p>—</p>
+          </div>
+          <div class="col-lg-1 col-md-2 col-12">
+            <a class="remove-item" href="javascript:void(0)"><i class="lni lni-close"></i></a>
+          </div>
+        </div>
+      </div>
+-->
+      <!-- End Single List list -->
+
+
+
+
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <!-- Total Amount -->
+        <div class="total-amount">
+          <div class="row">
+            <div class="col-lg-8 col-md-6 col-12">
+              <div class="left">
+                <div class="coupon">
+                  <form action="smartgroup/cart" target="_blank">
+                    <input name="Coupon" placeholder="Enter Your Coupon">
+                    <div class="button">
+                      <button class="btn">Apply Coupon</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+              <div class="right">
+                <ul>
+                  <li>Cart Subtotal<span>{{curSymbol}}{{cartTotalAmount}}</span></li>
+                  <li>Shipping<span>{{curSymbol}}0.00</span></li>
+                  <li>You Save<span>{{curSymbol}}0.00</span></li>
+                  <li class="last">You Pay<span>{{curSymbol}}{{cartTotalAmount}}</span></li>
+                </ul>
+                <div class="button">
+                  <a href="smartgroup/checkout" class="btn">Checkout</a>
+                  <a href="smartgroup/productgrid" class="btn btn-alt">Continue shopping</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/ End Total Amount -->
+      </div>
+    </div>
+  </div>
+</div>
+<!--/ End Shopping Cart -->
+

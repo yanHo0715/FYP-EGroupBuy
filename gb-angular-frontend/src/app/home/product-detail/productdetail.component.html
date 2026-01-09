@@ -1,0 +1,440 @@
+<!--<p>productdetail works!</p>-->
+
+<!-- Start Breadcrumbs -->
+<!--<div class="breadcrumbs">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="breadcrumbs-content">
+          <h1 class="page-title">Single Product</h1>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <ul class="breadcrumb-nav">
+          <li><a href="smarttgroup"><i class="bx bx-home"></i> Home <span class="bx bx-chevron-right" style="font-size: 22px;position: absolute;top: 3px;right: -23px;"></span></a></li>
+          <li><a href="javascript:void(0)">Shop <span class="bx bx-chevron-right" style="font-size: 22px;position: absolute;top: 0px;right: -23px;bottom: -0.5px"></span></a></li>
+          <li>Single Product</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>-->
+<!-- End Breadcrumbs -->
+
+<!-- Start Item Details -->
+<section class="item-details section" style="padding-top: 25px;">
+  <div class="container">
+    <div class="top-area">
+      <div class="row align-items-center">
+        <div class="col-lg-6 col-md-12 col-12">
+          <div class="product-images">
+            <main id="gallery">
+              <div class="main-img">
+<!--                <img src="assets/smartgroup/images/single/01.jpg" id="current" alt="#">-->
+                <img src="{{displayImage}}" id="current" alt="#">
+              </div>
+              <div class="images">
+
+                <img *ngFor="let imgUrl of otherProdImageUrls; let i=index" src="{{displayThumbnailImage(i)}}" (click)="onChangeImage(i)" class="img" alt="#">
+
+
+              </div>
+            </main>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-12">
+          <div class="product-info">
+
+            <div class="row" style="padding-bottom: 30px; margin-top: -150px;">
+              <div class="col-12 col-md-4 col-lg-4 col-xxl-3">
+<!--                <h2 class="title">AAAAAA</h2>-->
+              </div>
+              <div class="col-xxl-3"></div>
+              <div class="col">
+<!--                <div class="row">
+                  <div class="col-xxl-3"><span class="fw-semibold text-center">Days</span></div>
+                  <div class="col-xxl-3"><span class="fw-semibold text-center">Hours</span></div>
+                  <div class="col-xxl-3"><span class="fw-semibold text-center">Mins</span></div>
+                  <div class="col-xxl-3"><span class="fw-semibold text-center">Secs</span></div>
+                </div>
+                <div class="row">
+                  <div class="col-xxl-3"><span class="text-center">1</span></div>
+                  <div class="col-xxl-3"><span class="text-center">12</span></div>
+                  <div class="col-xxl-3"><span class="text-center">30</span></div>
+                  <div class="col-xxl-3"><span class="text-center">50</span></div>
+                </div>-->
+
+<!--                <div *ngIf="product.sell_style=='G' || product.sell_style=='P'">-->
+                <div *ngIf="display_type=='G'">
+                  <div class="row" style="height: 50%;" ><p class="w-lg-50" style="font-size: 20px;color: orangered;">Group Buying In Progress</p></div>
+                  <div class="row" style="height: 50%;">
+                    <div class="col" style="width: 60px;margin-left: inherit;">
+                      <p class="fw-bold mb-0"  style="text-align: center;">Days</p>
+                      <p class="fw-bold mb-0"  style="text-align: center;" id="days">--</p>
+                    </div>
+                    <div class="col" style="width: 60px;margin-left: inherit;">
+                      <p class="fw-bold mb-0" style="text-align: center;">Hours</p>
+                      <p class="fw-bold mb-0" style="text-align: center;" id="hours">--</p>
+                    </div>
+                    <div class="col" style="width: 60px;margin-left: inherit;">
+                      <p class="fw-bold mb-0" style="text-align: center;">Mins</p>
+                      <p class="fw-bold mb-0" style="text-align: center;" id="minutes">--</p>
+                    </div>
+                    <div class="col" style="width: 60px;margin-left: inherit;">
+                      <p class="fw-bold mb-0" style="text-align: center;">Secs</p>
+                      <p class="fw-bold mb-0" style="text-align: center;" id="seconds">--</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-md-4 col-lg-4 col-xxl-11" style="width: 100%;">
+                <h2 class="title">{{product.title}}</h2>
+                <!--<p class="category"><i class="bx bx-purchase-tag"></i> Brand:<a href="javascript:void(0)">Dell</a></p>
+                <p class="category"><i class="bx bx-purchase-tag"></i> Category:<a href="javascript:void(0)">Computer</a></p>-->
+                <p *ngIf="product.brand_name" class="category"><i class="bx bx-purchase-tag"></i> Brand:<a href="javascript:void(0)">{{product.brand_name}}</a></p>
+                <p *ngIf="product.category_name" class="category"><i class="bx bx-purchase-tag"></i> Category:<a href="javascript:void(0)">{{product.category_name}}</a></p>
+
+                <ul *ngIf="avgOverallSore > 0" class="review">
+                  <li class="pd-li"><span style="padding-right: 4px;">{{avgOverallSore | number: '1.1-1' }} </span></li>
+                  <li class="pd-li pd-li-star"><i *ngIf="avgOverallSore < 0.25" class="bx bx-star"></i></li>
+                  <li class="pd-li pd-li-star"><i *ngIf="avgOverallSore >= 0.25 && avgOverallSore < 0.75" class="bx bxs-star-half"></i></li>
+                  <li class="pd-li pd-li-star"><i *ngIf="avgOverallSore >= 0.75 " class="bx bxs-star"></i></li>
+
+                  <li class="pd-li pd-li-star"><i *ngIf="avgOverallSore < 1.25" class="bx bx-star"></i></li>
+                  <li class="pd-li pd-li-star"><i *ngIf="avgOverallSore >= 1.25 && avgOverallSore < 1.75 " class="bx bxs-star-half"></i></li>
+                  <li class="pd-li pd-li-star"><i *ngIf="avgOverallSore >= 1.75 && avgOverallSore " class="bx bxs-star"></i></li>
+
+                  <li class="pd-li pd-li-star"><i *ngIf="avgOverallSore < 2.25" class="bx bx-star"></i></li>
+                  <li class="pd-li pd-li-star"><i *ngIf="avgOverallSore >= 2.25 && avgOverallSore < 2.75 " class="bx bxs-star-half"></i></li>
+                  <li class="pd-li pd-li-star"><i *ngIf="avgOverallSore >= 2.75 && avgOverallSore  " class="bx bxs-star"></i></li>
+
+                  <li class="pd-li pd-li-star"><i *ngIf="avgOverallSore < 3.25" class="bx bx-star"></i></li>
+                  <li class="pd-li pd-li-star"><i *ngIf="avgOverallSore >= 3.25 && avgOverallSore < 3.75 " class="bx bxs-star-half"></i></li>
+                  <li class="pd-li pd-li-star"><i *ngIf="avgOverallSore >= 3.75 && avgOverallSore  " class="bx bxs-star"></i></li>
+
+                  <li class="pd-li pd-li-star"><i *ngIf="avgOverallSore < 4.25  " class="bx bx-star"></i></li>
+                  <li class="pd-li pd-li-star"><i *ngIf="avgOverallSore >= 4.25 && avgOverallSore < 4.75 " class="bx bxs-star-half"></i></li>
+                  <li class="pd-li pd-li-star"><i *ngIf="avgOverallSore >= 4.75 && avgOverallSore <= 5 " class="bx bxs-star"></i></li>
+                  <li class="pd-li" style="padding-left: 4px;"><span>{{reviewOverallScore.total_review_count}} Review{{reviewOverallScore.total_review_count>1 ? 's' : ''}}</span></li>
+                </ul>
+
+                <h3 *ngIf="display_type=='S'" class="price" style="padding-top: 5px;">{{curSymbol}}{{product.sale_price}}<span>{{curSymbol}}{{product.regular_price}}</span></h3>
+                <h3 *ngIf="display_type=='G'" class="price">{{curSymbol}}{{product.grpbuy_sale_price}}<span>{{curSymbol}}{{product.grpbuy_sale_price}}</span></h3>
+                <p *ngIf="display_type=='G'" class="category" style="font-size: 20px; color: #000"> Min Threshold: {{product.min_threshold}}</p>
+                <p *ngIf="display_type=='G'">Threshold current progress</p>
+                <div *ngIf="display_type=='G'" class="progress mb-2" role="progressbar" aria-label="Info striped example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+<!--                  <div class="progress-bar progress-bar-striped bg-info" style="width:{{minThresholdProgress}}%; border-radius: 0.375rem">{{minThresholdProgress}}%</div>-->
+                  <div class="progress-bar progress-bar-striped bg-info" [ngStyle]="{'width': minThresholdProgress + '%'}" style="border-radius: 0.375rem">{{minThresholdProgress}}%</div>
+                </div>
+                <div class="form-group quantity"></div>
+              </div>
+            </div>
+
+
+            <div class="row">
+
+
+              <div class="col-lg-4 col-md-4 col-12">
+
+                <div *ngIf="display_type=='S'" class="form-group quantity">
+                  <label for="sQuantity">Quantity</label>
+                  <select class="form-control" [(ngModel)]="selectedQuantity" id="sQuantity">
+                    <option *ngFor="let q of qtyCounter( product.stock_quantity < maxOrderQty ? (product.stock_quantity < 0 ? 0 : product.stock_quantity) : maxOrderQty); let i = index">{{i+1}}</option>
+                    <option *ngIf="product.stock_quantity <= 0">Out of Stock</option>
+                  </select>
+                </div>
+
+                <div *ngIf="display_type=='G'" class="form-group quantity">
+                  <label for="gQuantity">Quantity</label>
+                  <select class="form-control" [(ngModel)]="selectedQuantity" id="gQuantity">
+                    <option *ngFor="let q of qtyCounter( product.grpbuy_quantity < maxOrderQty ? (product.grpbuy_quantity < 0 ? 0 : product.grpbuy_quantity) : maxOrderQty); let i = index">{{i+1}}</option>
+                    <option *ngIf="product.grpbuy_quantity <= 0">Out of Stock</option>
+                  </select>
+                </div>
+
+              </div>
+            </div>
+            <div class="bottom-content">
+              <div class="row align-items-end">
+
+                <div *ngIf="display_type=='S'" class="col-lg-4 col-md-4 col-12">
+                  <div *ngIf="product.stock_quantity > 0" class="button cart-button">
+                    <button *ngIf="product.stock_quantity > 0" class="btn" style="width: 100%;" (click)="addItemToCart(product)">Add to Cart</button>
+                  </div>
+                  <div *ngIf="product.stock_quantity <= 0" class="button cart-button" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Out of stock">
+                    <button *ngIf="product.stock_quantity <= 0" class="btn btn-secondary btn-lg"
+                            style="width: 100%; background-color: darkgray;" disabled >Add to Cart</button>
+                  </div>
+                </div>
+
+                <div *ngIf="display_type=='G'" class="col-lg-4 col-md-4 col-12">
+                  <div *ngIf="product.grpbuy_quantity > 0" class="button cart-button">
+                    <button *ngIf="product.grpbuy_quantity > 0" class="btn" style="width: 100%;" (click)="addItemToCart(product)">Add to Cart</button>
+                  </div>
+                  <div *ngIf="product.grpbuy_quantity <= 0" class="button cart-button" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Out of stock">
+                    <button *ngIf="product.grpbuy_quantity <= 0" class="btn btn-secondary btn-lg"
+                            style="width: 100%; background-color: darkgray;" disabled >Add to Cart</button>
+                  </div>
+                </div>
+
+<!--                <div class="col-lg-4 col-md-4 col-12">
+                  <div class="wish-button">
+                    <button class="btn"><i class="bx bx-category" style="font-size: 20px;"></i> Compare</button>
+                  </div>
+                </div>-->
+                <div class="col-lg-4 col-md-4 col-12">
+                  <div class="wish-button">
+                    <button class="btn" style="width: 100%;" (click)="addWishlistItem(product)"><i class="bx bx-heart" style="font-size: 20px;"></i> To Wishlist</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="product-details-info">
+      <div class="single-block">
+        <div class="row">
+<!--          <div class="col-lg-6 col-12">-->
+          <div class="col-12 col-lg-12 col-xl-12 col-xxl-12">
+            <div class="info-body custom-responsive-margin">
+              <h4>Details</h4>
+<!--              {{product.description}}-->
+              <div [innerHTML]="productDescription"></div>
+<!--              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.</p>
+              <h4>Features</h4>
+              <ul class="features">
+                <li>Capture 4K30 Video and 12MP Photos</li>
+                <li>Game-Style Controller with Touchscreen</li>
+                <li>View Live Camera Feed</li>
+                <li>Full Control of HERO6 Black</li>
+                <li>Use App for Dedicated Camera Operation</li>
+              </ul>-->
+            </div>
+          </div>
+
+<!--
+          <div class="col-lg-6 col-12">
+            <div class="info-body">
+              <h4>Specifications</h4>
+              <ul class="normal-list">
+                <li><span>Weight:</span> 35.5oz (1006g)</li>
+                <li><span>Maximum Speed:</span> 35 mph (15 m/s)</li>
+                <li><span>Maximum Distance:</span> Up to 9,840ft (3,000m)</li>
+                <li><span>Operating Frequency:</span> 2.4GHz</li>
+                <li><span>Manufacturer:</span> GoPro, USA</li>
+              </ul>
+              <h4>Shipping Options:</h4>
+              <ul class="normal-list">
+                <li><span>Courier:</span> 2 - 4 days, £22.50</li>
+                <li><span>Local Shipping:</span> up to one week, £10.00</li>
+                <li><span>UPS Ground Shipping:</span> 4 - 6 days, £18.00</li>
+                <li><span>Unishop Global Export:</span> 3 - 4 days, £25.00</li>
+              </ul>
+            </div>
+          </div>
+-->
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-12">
+          <div class="single-block give-review">
+            <h4 *ngIf="avgOverallSore > 0">{{avgOverallSore | number: '1.1-1'}} (Overall)</h4>
+            <h4 *ngIf="avgOverallSore <= 0">Not Available (Overall)</h4>
+            <ul>
+              <li>
+                <span>5 stars - {{score5Count}}</span>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+              </li>
+              <li>
+                <span>4 stars - {{score4Count}}</span>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bx-star"></i>
+              </li>
+              <li>
+                <span>3 stars - {{score3Count}}</span>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bx-star"></i>
+                <i class="bx bx-star"></i>
+              </li>
+              <li>
+                <span>2 stars - {{score2Count}}</span>
+                <i class="bx bxs-star"></i>
+                <i class="bx bxs-star"></i>
+                <i class="bx bx-star"></i>
+                <i class="bx bx-star"></i>
+                <i class="bx bx-star"></i>
+              </li>
+              <li>
+                <span>1 star - {{score1Count}}</span>
+                <i class="bx bxs-star"></i>
+                <i class="bx bx-star"></i>
+                <i class="bx bx-star"></i>
+                <i class="bx bx-star"></i>
+                <i class="bx bx-star"></i>
+              </li>
+            </ul>
+            <!-- Button trigger modal -->
+            <button *ngIf="isPurchased" type="button" class="btn review-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Leave a Review</button>
+            <button *ngIf="!isPurchased" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="width: 100%;" disabled>Leave Review After Purchased</button>
+          </div>
+        </div>
+        <div class="col-lg-8 col-12">
+          <div class="single-block">
+            <div class="reviews" style="min-height:256px; max-height: 800px; overflow-y: auto; ">
+              <h4 class="title">Latest Reviews</h4>
+              <!-- Start Single Review -->
+              <div *ngFor="let r of reviewList" class="single-review" style="padding-right: 30px;">
+                <img src="{{r.poster_icon}}" alt="#">
+                <div class="review-info">
+                  <h4>{{r.review_subject}}
+                    <span>{{r.poster_username}}</span>
+                  </h4>
+                  <ul class="stars">
+                    <li *ngIf="r.score>=1"><i class="bx bxs-star"></i></li>
+                    <li *ngIf="r.score<1"><i class="bx bx-star"></i></li>
+                    <li *ngIf="r.score>=2"><i class="bx bxs-star"></i></li>
+                    <li *ngIf="r.score<2"><i class="bx bx-star"></i></li>
+                    <li *ngIf="r.score>=3"><i class="bx bxs-star"></i></li>
+                    <li *ngIf="r.score<3"><i class="bx bx-star"></i></li>
+                    <li *ngIf="r.score>=4"><i class="bx bxs-star"></i></li>
+                    <li *ngIf="r.score<4"><i class="bx bx-star"></i></li>
+                    <li *ngIf="r.score>=5"><i class="bx bxs-star"></i></li>
+                    <li *ngIf="r.score<5"><i class="bx bx-star"></i></li>
+                  </ul>
+                  <p>{{r.review_content}}</p>
+                </div>
+              </div>
+              <div *ngIf="reviewList.length==0" class="single-review" style="padding-right: 30px;">
+                <div class="review-info">
+                  <h4>No review found!
+                  </h4>
+                </div>
+                </div>
+              <!-- End Single Review -->
+
+<!--              &lt;!&ndash; Start Single Review &ndash;&gt;-->
+<!--              <div class="single-review">-->
+<!--                <img src="assets/smartgroup/images/single/comment2.jpg" alt="#">-->
+<!--                <div class="review-info">-->
+<!--                  <h4>My husband love his new...-->
+<!--                    <span>Alex Jaza-->
+<!--                                            </span>-->
+<!--                  </h4>-->
+<!--                  <ul class="stars">-->
+<!--                    <li><i class="bx bxs-star"></i></li>-->
+<!--                    <li><i class="bx bxs-star"></i></li>-->
+<!--                    <li><i class="bx bxs-star"></i></li>-->
+<!--                    <li><i class="bx bxs-star"></i></li>-->
+<!--                    <li><i class="bx bx-star"></i></li>-->
+<!--                  </ul>-->
+<!--                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod-->
+<!--                    tempor...</p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              &lt;!&ndash; End Single Review &ndash;&gt;-->
+<!--              &lt;!&ndash; Start Single Review &ndash;&gt;-->
+<!--              <div class="single-review">-->
+<!--                <img src="assets/smartgroup/images/single/comment3.jpg" alt="#">-->
+<!--                <div class="review-info">-->
+<!--                  <h4>I love the built quality...-->
+<!--                    <span>Jacob Hammond-->
+<!--                                            </span>-->
+<!--                  </h4>-->
+<!--                  <ul class="stars">-->
+<!--                    <li><i class="bx bxs-star"></i></li>-->
+<!--                    <li><i class="bx bxs-star"></i></li>-->
+<!--                    <li><i class="bx bxs-star"></i></li>-->
+<!--                    <li><i class="bx bxs-star"></i></li>-->
+<!--                    <li><i class="bx bxs-star"></i></li>-->
+<!--                  </ul>-->
+<!--                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod-->
+<!--                    tempor...</p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              &lt;!&ndash; End Single Review &ndash;&gt;-->
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Item Details -->
+
+<!-- Review Modal -->
+<div class="modal fade review-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Leave a Review</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+<!--          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="review-name">Your Name</label>
+              <input class="form-control" type="text" id="review-name" required="">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="review-email">Your Email</label>
+              <input class="form-control" type="email" id="review-email" required="">
+            </div>
+          </div>-->
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="review-subject">Subject</label>
+              <input class="form-control" type="text" id="review-subject" required="" [(ngModel)]="reviewSubject">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="review-rating">Rating</label>
+              <select class="form-control" id="review-rating" [(ngModel)]="reviewScore">
+                <option [value]="5">5 Stars</option>
+                <option [value]="4">4 Stars</option>
+                <option [value]="3">3 Stars</option>
+                <option [value]="2">2 Stars</option>
+                <option [value]="1">1 Star</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="review-message">Review</label>
+          <textarea class="form-control" id="review-message" rows="8" required="" [(ngModel)]="reviewContent"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer button">
+        <button type="button" class="btn" (click)="addUserReview()" data-bs-dismiss="modal">Submit Review</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Review Modal -->
+

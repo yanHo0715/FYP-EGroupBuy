@@ -1,0 +1,80 @@
+<!--<p>refund works!</p>-->
+<div class="page-content">
+<!--  <h3>Group Buying Event History</h3>-->
+  <div class="card card-warning card-outline" style="margin-top: 7px">
+    <div class="card-header" style="padding-top: 5px; padding-bottom: 7px">
+      <div class="card-title" style="font-size: 25px"><span>Group Buying Event History</span></div>
+      <mat-progress-bar *ngIf="queryMode" mode="indeterminate" class="mat-progress-bar"></mat-progress-bar>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table mb-0">
+          <thead class="table-light">
+          <tr>
+            <th>Event ID</th>
+            <th>Event Start</th>
+            <th>Event End</th>
+<!--            <th>Seller ID</th>-->
+            <th>Product ID</th>
+            <th>Pack Grp ID</th>
+            <th>Sell Type</th>
+            <th>Min Threshold</th>
+            <th>Success Sold Qty</th>
+            <th>End Process Time</th>
+            <th>Event Result</th>
+            <th>Remark</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let e of groupBuyEventList; let i = index">
+            <td>
+              <h6 class="mb-0 font-14">#{{e.grpbuy_event_id}}</h6>
+            </td>
+            <td>{{formatDate(e.grpbuy_start, 'dd/MM/yyyy HH:mm:ss', 'en-US')}}</td>
+            <td>{{formatDate(e.grpbuy_end, 'dd/MM/yyyy HH:mm:ss', 'en-US')}}</td>
+<!--            <td>{{e.seller_id}}</td>-->
+            <td>
+              <a routerLink="../producteditmain/{{e.product_id}}" >#{{e.product_id}}</a>
+            </td>
+            <td>
+              <a *ngIf="e.sell_type == 'P'" routerLink="../packagegroupedit/{{e.package_grp_id}}" >#{{e.package_grp_id}}</a>
+            </td>
+            <td>
+              <img *ngIf="e.sell_type == 'G'" src="assets/smartgroup/img/group-buy-01.png" alt="" height=30px width=30px style="margin-right: 5px; ">
+              <img *ngIf="e.sell_type == 'P'" src="assets/smartgroup/img/groupbuy-packages-02.png" alt="" height=30px width=30px>
+            </td>
+            <td>{{e.min_threshold}}</td>
+            <td>{{e.success_sold_qty}}</td>
+            <td>{{formatDate(e.event_end_process, 'dd/MM/yyyy HH:mm:ss', 'en-US')}}</td>
+            <td>
+              <img *ngIf="e.grpbuy_result !== 'Success'" src="assets/smartgroup/img/no-02.png" alt="" height=25px width=25px>
+              <img *ngIf="e.grpbuy_result == 'Success'" src="assets/smartgroup/img/yes-02.png" alt="" height=25px width=25px>
+            </td>
+            <td>{{e.remark}}</td>
+
+            <!--
+                        <td>
+                          <div [class]="p.progress_status=='Declined' ? 'text-danger bg-light-danger' : p.progress_status=='Refunded' ? 'text-success bg-light-success' : 'text-primary bg-light-primary'"
+                               class="badge rounded-pill p-2 text-uppercase px-3">
+                            <i class='bx bxs-circle me-1'></i>{{p.progress_status}}
+                          </div>
+                        </td>
+                        <td>
+                          <select #_status class="form-select" name="actions" id="actions"
+                                  (change)="onStatusChange(i, _status.value)" [disabled]="p.progress_status == 'Refunded'">
+                            <option *ngIf="p.progress_status=='Refund Requested'"
+                                    [selected]="p.progress_status=='Refund Requested'" value="Refund Requested">Refund
+                              Requested</option>
+                            <option [selected]="p.progress_status=='Declined'" value="Declined">Declined</option>
+                            <option [selected]="p.progress_status=='Refund Processing'" value="Refund Processing">Refund
+                              Processing</option>
+                            <option [selected]="p.progress_status=='Refunded'" value="Refunded">Refunded</option>
+                          </select>
+                        </td>-->
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

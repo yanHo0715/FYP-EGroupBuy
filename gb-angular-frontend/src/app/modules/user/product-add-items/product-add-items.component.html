@@ -1,0 +1,231 @@
+
+
+<mat-card class="mat-elevation-z8" >
+
+  <mat-card-actions>
+    <button class="mat-raised-button mr-4"
+            (click)="addNewItemRow()">
+      <span class="mat-button-wrapper">
+      <mat-icon class="mat-icon material-icons">add</mat-icon>
+      <mat-icon class="mat-icon material-icons">sell</mat-icon>
+        Product Item
+      </span>
+    </button>
+
+<!--
+
+    <button class="mat-raised-button"
+            (click)="createRow()">
+      <span class="mat-button-wrapper">
+      <mat-icon class="mat-icon material-icons">cloud_download</mat-icon>
+      Add Items by Images
+      </span>
+    </button>
+
+-->
+
+    <label class="mat-raised-button mr-4">
+      <input type="file" (change)="onSelectFile($event)" multiple/>
+      <span class="mat-button-wrapper">
+      <mat-icon class="mat-icon material-icons">add</mat-icon>
+      <mat-icon class="mat-icon material-icons">photo_library</mat-icon>
+        Add Items by Images
+      </span>
+    </label>
+
+  </mat-card-actions>
+
+<div class="card mat-table-container mat-elevation-z8" style="margin-left: 9px; margin-bottom: 10px; margin-right: 10px;">
+
+<mat-table #table [dataSource]="dataSource" class="mat-elevation-z8" matSort >
+
+
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+<!--  <ng-container matColumnDef="position">-->
+  <ng-container matColumnDef="itemNumber">
+    <mat-header-cell *matHeaderCellDef> Item No. </mat-header-cell>
+<!--    <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>-->
+    <mat-cell *matCellDef="let element; let i = index"> {{i+1}}
+    </mat-cell>
+  </ng-container>
+
+
+<!--  <ng-container matColumnDef="itemImageUrl">-->
+  <ng-container matColumnDef="itemImage">
+    <mat-header-cell *matHeaderCellDef> Image </mat-header-cell>
+<!--    <mat-cell *matCellDef="let element"> <img [src]="element.itemImageUrl" width="80px" height="80px"/> </mat-cell>-->
+    <mat-cell *matCellDef="let element; let i=index"> <img [src]="element.item_image" width="80px" height="80px" /> </mat-cell>
+
+  </ng-container>
+
+  <!-- Name Column -->
+<!--  <ng-container matColumnDef="itemDesc">-->
+<!--    <th mat-header-cell *matHeaderCellDef> Description </th>-->
+<!--    <td mat-cell *matCellDef="let element"> {{element.itemDesc}} </td>-->
+<!--  </ng-container>-->
+
+
+  <ng-container matColumnDef="itemName">
+    <mat-header-cell *matHeaderCellDef >
+      Item Title
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element;let i = index">
+      <input
+        type="text"
+        matInput
+        [formControl]="getControl(i,'item_name')" style="width:10rem; border-radius: 3px" class="form-control"
+      />
+    </mat-cell>
+  </ng-container>
+
+
+
+<!--  <ng-container matColumnDef="itemDesc">-->
+  <ng-container matColumnDef="itemDescription">
+    <mat-header-cell *matHeaderCellDef >
+      Description
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element;let i = index">
+      <input
+        type="text"
+        matInput
+        [formControl]="getControl(i,'description')" style="width:25rem; border-radius: 3px" class="form-control"
+      />
+    </mat-cell>
+  </ng-container>
+
+  <!-- Weight Column -->
+<!--  <ng-container matColumnDef="itemQuantity">-->
+<!--    <th mat-header-cell *matHeaderCellDef> Quantity </th>-->
+<!--    <td mat-cell *matCellDef="let element"> {{element.itemQuantity}} </td>-->
+<!--  </ng-container>-->
+
+<!--  <ng-container matColumnDef="itemQuantity">-->
+  <ng-container matColumnDef="itemQuantity">
+    <mat-header-cell *matHeaderCellDef >
+      Quantity
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element;let i = index">
+      <input
+        type="number"
+        matInput
+        [formControl]="getControl(i,'quantity')" style="width:6rem; border-radius: 3px" class="form-control"
+      />
+    </mat-cell>
+  </ng-container>
+
+
+  <!-- Symbol Column -->
+<!--  <ng-container matColumnDef="itemPrice">-->
+<!--    <th mat-header-cell *matHeaderCellDef> Price </th>-->
+<!--    <td mat-cell *matCellDef="let element"> {{element.itemPrice}} </td>-->
+<!--  </ng-container>-->
+
+
+<!--  <ng-container matColumnDef="itemPrice">-->
+  <ng-container matColumnDef="itemRegularPrice">
+    <mat-header-cell *matHeaderCellDef >
+      Price
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element;let i = index">
+      <input
+        type="text"
+        matInput
+        [formControl]="getControl(i,'regular_price')" style="width:6rem; border-radius: 3px" placeholder="00.00" class="form-control"
+      />
+    </mat-cell>
+  </ng-container>
+
+<!--  <ng-container matColumnDef="itemSalePrice">-->
+  <ng-container matColumnDef="itemSalePrice">
+    <mat-header-cell *matHeaderCellDef >
+      Sale Price
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element;let i = index">
+      <input
+        type="text"
+        matInput
+        [formControl]="getControl(i,'sale_price')" style="width:6rem; border-radius: 3px" placeholder="00.00" class="form-control"
+      />
+    </mat-cell>
+  </ng-container>
+
+<!--  <ng-container matColumnDef="itemStatus">-->
+  <ng-container matColumnDef="itemStatus">
+    <mat-header-cell *matHeaderCellDef >
+      Status
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element;let i = index">
+
+<!--      <input
+        type="text"
+        matInput
+        [formControl]="getControl(i,'status')" style="width:6rem;" class="form-control"
+      />-->
+
+      <select matInput [formControl]="getControl(i,'status')" class="form-select" style="width: 110px; border-radius: 3px">
+        <option>New</option>
+        <option>Pending</option>
+        <option>Active</option>
+        <option>Inactive</option>
+      </select>
+
+
+    </mat-cell>
+  </ng-container>
+
+<!--  <ng-container matColumnDef="mandatory">-->
+<!--  <ng-container matColumnDef="popularity">
+    <mat-header-cell *matHeaderCellDef >Mandatory</mat-header-cell>
+    <mat-cell *matCellDef="let element;let i=index">
+
+      <mat-checkbox
+        [formControl]="getControl(i,'popularity')"
+      ></mat-checkbox>
+    </mat-cell>
+  </ng-container>-->
+
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef >Action</mat-header-cell>
+    <mat-cell *matCellDef="let element;let i=index">
+
+<!--      <mat-button
+        [formControl]="getControl(i,'remove')"
+      ></mat-button>-->
+<!--      <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true" (click)="removeItem(element)">delete_forever</mat-icon>-->
+      <button class="mat-raised-button mr-4"
+              (click)="removeItem(element, i)">
+      <span class="mat-button-wrapper">
+      <mat-icon class="mat-icon material-icons" style="position: absolute;right: 3px; bottom: 5px;">delete_forever</mat-icon>
+      </span>
+      </button>
+    </mat-cell>
+
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <div class="table-content-wrapper">
+<!--  <mat-row *matRowDef="let row; columns: displayedColumns;" style="border-bottom-style: solid; border-bottom-width: 1px;">-->
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+
+  </mat-row>
+  </div>
+
+
+</mat-table>
+
+</div>
+
+</mat-card>
+
+
+<!--
+
+<pre>
+  {{formArray.value|json}}
+</pre>
+-->

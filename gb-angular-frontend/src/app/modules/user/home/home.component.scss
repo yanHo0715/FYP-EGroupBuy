@@ -1,0 +1,22 @@
+//@import "https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css";
+//@import "https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css";
+//@import "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css";
+//@import "http://192.168.56.104:4200/assets/admin/dist/css/adminlte.css";
+//@import "http://192.168.56.104/assets/admin/dist/css/adminlte.css";
+//@import url('assets/admin/dist/css/adminlte.css');
+
+[data-astro-image] {
+  width: 100%;
+  height: auto;
+  object-fit: var(--fit);
+  object-position: var(--pos);
+  aspect-ratio: var(--w) / var(--h);
+}
+[data-astro-image='responsive'] {
+  max-width: calc(var(--w) * 1px);
+  max-height: calc(var(--h) * 1px);
+}
+[data-astro-image='fixed'] {
+  width: calc(var(--w) * 1px);
+  height: calc(var(--h) * 1px);
+}

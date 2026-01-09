@@ -1,0 +1,81 @@
+
+<div class="page-content">
+  <!--  <div class="card">-->
+
+  <div class="card card-primary card-outline" style="margin-top: 7px">
+    <div class="card-header" style="padding-top: 5px; padding-bottom: 7px">
+      <div class="card-title" style="font-size: 25px"><span>Package Group List  -  Product Id #{{productID}} </span></div>
+
+      <div class="d-lg-flex align-items-center mb-4 gap-3" style="padding-left: 25px; padding-top: 3px; margin-bottom: 5px !important;" >
+
+        <div class="ms-auto"><a routerLink="../../packageadd/{{productID}}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i
+          class="bx bxs-plus-square"></i>Add Package Group</a></div>
+      </div>
+
+    </div>
+
+    <div class="card-body">
+      <!--      <div class="d-lg-flex align-items-center mb-4 gap-3">
+              <div class="position-relative">
+                <input type="text" class="form-control ps-5 radius-30" placeholder="Search Product" style="width: 400px"> <span
+                class="position-absolute top-50 product-show translate-middle-y"><i
+                class="bx bx-search" style="padding-left: 12px;padding-top: 10px"></i></span>
+              </div>
+              <div class="ms-auto"><a routerLink="../productadd" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i
+                class="bx bxs-plus-square"></i>Add New Product</a></div>
+            </div>-->
+      <div class="table-responsive">
+        <table class="table mb-0">
+          <thead class="table-light">
+          <tr>
+            <th>Pack Grp Id#</th>
+            <th>Image</th>
+            <th>Package Group Name</th>
+            <th>Quantity</th>
+            <th>Min. Threshold</th>
+            <th>Sub-Packages</th>
+            <th>Status</th>
+            <th>Group Buy Start</th>
+            <th>Group Buy End</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let p of pkgGrpList">
+            <td>
+              <h6 class="mb-0 font-14">#{{p.package_grp_id}}</h6>
+            </td>
+            <td>
+              <img src="{{p.package_grp_image}}" alt="" style="height:40px; max-width:50px; margin-right: 5px">
+            </td>
+            <td>{{p.package_grp_name}}</td>
+            <td>{{p.quantity}}</td>
+            <td>{{p.min_threshold}}</td>
+            <td><a routerLink="../../packagegroupedit/{{p.package_grp_id}}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit package group details">
+              {{p.package_count}}</a></td>
+            <td>
+              <div [class]="p.status=='Inactive' ? 'text-danger bg-light-danger' : p.status=='Pending' ? 'text-warning bg-light-warning' : 'text-success bg-light-success'"
+                   class="badge rounded-pill p-2 text-uppercase px-3">
+                <i class='bx bxs-circle me-1'></i>{{p.status}}
+              </div>
+            </td>
+            <td>{{formatDate(p.grpbuy_start, 'dd/MM/yyyy HH:mm:ss', 'en-US')}}</td>
+            <td>{{formatDate(p.grpbuy_end, 'dd/MM/yyyy HH:mm:ss', 'en-US')}}</td>
+            <td>
+              <div class="d-flex order-actions">
+
+                <a routerLink="../../packagegroupedit/{{p.package_grp_id}}" class="" style="font-size: 22px;margin-left: -2px;" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit package group details">
+                  <i class='bx bxs-edit'></i></a>
+<!--                <a routerLink="../packageadd/{{p.product_id}}" class="" style="font-size: 22px;padding-left: 2px;"><i class='bx bx-customize'></i></a>
+                <a (click)="onDelete(p.product_id)" class="ms-3 cursor-pointer" ><i style="font-size: 20px;padding-left: 0px;margin-left: -14px; margin-top: 3px;" class='bx bxs-trash'></i></a>
+-->
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

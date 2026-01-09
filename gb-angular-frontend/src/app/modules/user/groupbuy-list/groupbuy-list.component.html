@@ -1,0 +1,139 @@
+<!--<p>product-list works!</p>-->
+
+<div class="page-content">
+  <!--  <div class="card">-->
+
+  <div class="card card-primary card-outline" style="margin-top: 7px">
+    <div class="card-header" style="padding-top: 5px; padding-bottom: 7px">
+      <div class="card-title" style="font-size: 25px"><span>Group Buying Product List</span></div>
+
+      <div class="d-lg-flex align-items-center mb-4 gap-3" style="padding-left: 25px; padding-top: 3px; margin-bottom: 5px !important;" >
+        <div class="position-relative">
+          <input type="text" class="form-control ps-5 radius-30" placeholder="Search Product" style="width: 400px" id="search" name="search" (keydown.enter)="onSearch($event)"> <span
+          class="position-absolute top-50 product-show translate-middle-y"><i
+          class="bx bx-search" style="padding-left: 12px;padding-top: 10px"></i></span>
+        </div>
+<!--        <div class="ms-auto"><a routerLink="../productadd" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i
+          class="bx bxs-plus-square"></i>Add New Product</a></div>-->
+      </div>
+
+      <mat-progress-bar *ngIf="queryMode" mode="indeterminate" class="mat-progress-bar"></mat-progress-bar>
+
+<!--      <div class="d-lg-flex align-items-center mb-4 gap-3" style="padding-left: 25px; padding-top: 3px; margin-bottom: 5px !important;" >
+        <div class="position-relative">
+          <input type="text" class="form-control ps-5 radius-30" placeholder="Search Product" style="width: 400px"> <span
+          class="position-absolute top-50 product-show translate-middle-y"><i
+          class="bx bx-search" style="padding-left: 12px;padding-top: 10px"></i></span>
+        </div>
+        <div class="ms-auto"><a routerLink="../productadd" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i
+          class="bx bxs-plus-square"></i>Add New Product</a></div>
+      </div>-->
+    </div>
+
+    <div class="card-body">
+      <!--      <div class="d-lg-flex align-items-center mb-4 gap-3">
+              <div class="position-relative">
+                <input type="text" class="form-control ps-5 radius-30" placeholder="Search Product" style="width: 400px"> <span
+                class="position-absolute top-50 product-show translate-middle-y"><i
+                class="bx bx-search" style="padding-left: 12px;padding-top: 10px"></i></span>
+              </div>
+              <div class="ms-auto"><a routerLink="../productadd" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i
+                class="bx bxs-plus-square"></i>Add New Product</a></div>
+            </div>-->
+      <div class="table-responsive">
+        <table class="table mb-0">
+          <thead class="table-light">
+          <tr>
+<!--            <th>Sell Type</th>-->
+            <th>Prod Id#</th>
+            <th>Pack Grp#</th>
+            <th>Image</th>
+            <th>Product/Package Group Name</th>
+            <th style="width: 70px;">Sell Type</th>
+            <th style="width: 70px;">Sell Enable</th>
+            <th>GroupBuy Status</th>
+            <th>GroupBuy Qty</th>
+            <th>Min. Threshold</th>
+            <th>Group Pack Count</th>
+            <th>GroupBuy Event Start</th>
+            <th>GroupBuy Event End</th>
+            <th>Regular Price</th>
+            <th>Sale Price</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let p of pdtPackageList">
+            <td>
+              <h6 class="mb-0 font-14">
+                <a routerLink="../producteditmain/{{p.product_id}}" >#{{p.product_id}}</a>
+              </h6>
+            </td>
+            <td>
+              <h6 *ngIf="p.sell_type == 'G'" class="mb-0 font-14"> </h6>
+              <h6 *ngIf="p.sell_type == 'P'" class="mb-0 font-14">
+                <a routerLink="../packagegroupedit/{{p.pkg_grp_id}}" >#{{p.pkg_grp_id}}</a>
+              </h6>
+            </td>
+            <td>
+              <img src="{{p.main_image}}" alt="" style="height:40px; max-width:50px; margin-right: 5px">
+            </td>
+            <td>
+              {{p.sell_type == 'G' ? p.title : p.pkg_grp_name}}
+            </td>
+            <td>
+<!--              <img *ngIf="p.sell_style.indexOf('S') != -1" src="assets/smartgroup/img/price-tag-01.5.png" alt="" height=30px width=30px style="margin-right: 5px">-->
+<!--              <img *ngIf="p.sell_style.indexOf('S') == -1" src="assets/smartgroup/img/price-tag-01.5-BW.png" alt="" height=30px width=30px style="margin-right: 5px; opacity: 0.5">-->
+<!--              <img *ngIf="p.sell_style.indexOf('G') != -1" src="assets/smartgroup/img/group-buy-01.png" alt="" height=30px width=30px style="margin-right: 5px">-->
+              <img *ngIf="p.sell_type == 'G'" src="assets/smartgroup/img/group-buy-01.png" alt="" height=30px width=30px style="margin-right: 5px; ">
+              <img *ngIf="p.sell_type == 'P'" src="assets/smartgroup/img/groupbuy-packages-02.png" alt="" height=30px width=30px>
+<!--              <img *ngIf="p.sell_style.indexOf('P') == -1" src="assets/smartgroup/img/groupbuy-packages-02-BW.png" alt="" height=30px width=30px style="margin-right: 5px; opacity: 0.5">-->
+            </td>
+            <td *ngIf="p.sell_type == 'G'">
+<!--              {{p.sell_style.indexOf('G') == -1? "No" : "Yes"}}-->
+              <img *ngIf="p.sell_style.indexOf('G') == -1" src="assets/smartgroup/img/no-02.png" alt="" height=25px width=25px>
+              <img *ngIf="p.sell_style.indexOf('G') !== -1" src="assets/smartgroup/img/yes-02.png" alt="" height=25px width=25px>
+            </td>
+            <td *ngIf="p.sell_type == 'P'">
+<!--              {{p.sell_style.indexOf('P') == -1? "No" : "Yes"}}-->
+              <img *ngIf="p.sell_style.indexOf('P') == -1" src="assets/smartgroup/img/no-02.png" alt="" height=25px width=25px>
+              <img *ngIf="p.sell_style.indexOf('P') !== -1" src="assets/smartgroup/img/yes-02.png" alt="" height=25px width=25px>
+            </td>
+
+            <td>
+              <div [class]="p.grpbuy_status=='Inactive' ? 'text-danger bg-light-danger' : p.grpbuy_status=='Pending' ? 'text-warning bg-light-warning' : 'text-success bg-light-success'" style="margin-left: -15px;"
+                   class="badge rounded-pill p-2 text-uppercase px-3">
+                <i class='bx bxs-circle me-1'></i>{{p.grpbuy_status}}
+              </div>
+            </td>
+            <td>{{p.grpbuy_quantity}}</td>
+            <td>{{p.min_threshold}}</td>
+            <td>
+<!--              <a *ngIf="p.sell_type == 'G'" routerLink="../packagegrouplist/{{p.product_id}}" >{{p.package_count}}</a>-->
+              <a *ngIf="p.sell_type == 'P'" routerLink="../packagegroupedit/{{p.pkg_grp_id}}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Package Group details">
+                {{p.package_count}}</a>
+            </td>
+            <td>{{formatDate(p.grpbuy_start, 'dd/MM/yyyy HH:mm:ss', 'en-US')}}</td>
+            <td>{{formatDate(p.grpbuy_start, 'dd/MM/yyyy HH:mm:ss', 'en-US')}}</td>
+            <td>{{ p.sell_type == 'G' ? curSymbol + p.grpbuy_regular_price.toFixed(2): ''}}</td>
+            <td>{{ p.sell_type == 'G' ? curSymbol + p.grpbuy_sale_price.toFixed(2): ''}}</td>
+            <td>
+              <div class="d-flex order-actions">
+                <a *ngIf="p.sell_type == 'G'" routerLink="../producteditmain/{{p.product_id}}" class="" style="font-size: 22px;margin-left: -2px;" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Product details">
+                  <i class='bx bxs-edit'></i></a>
+                <a *ngIf="p.sell_type == 'P'" routerLink="../packagegroupedit/{{p.pkg_grp_id}}" class="" style="font-size: 22px;margin-left: -2px;" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit Package Group details">
+                  <i class='bx bxs-edit'></i></a>
+
+<!--                <a routerLink="../packageadd/{{p.product_id}}" class="" style="font-size: 22px;padding-left: 2px;"><i class='bx bx-customize'></i></a>-->
+                <!--                <a (click)="onAddPackageItem(p)" class="" style="font-size: 22px;padding-left: 2px;"><i class='bx bx-customize'></i></a>-->
+                <!--                <a (click)="onEditProductMain(p.product_id)" class=""><i class='bx bxs-edit'></i></a>-->
+<!--                <a (click)="onDelete(p.product_id)" class="ms-3 cursor-pointer" ><i style="font-size: 20px;padding-left: 0px;margin-left: -14px; margin-top: 3px;" class='bx bxs-trash'></i></a>-->
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

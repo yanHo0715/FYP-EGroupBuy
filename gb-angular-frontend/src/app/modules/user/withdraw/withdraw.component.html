@@ -1,0 +1,94 @@
+<!--<p>withdraw works!</p>-->
+<div class="page-content">
+<!--  <h3>Withdraw Your Earnings</h3>-->
+  <div class="card card-warning card-outline" style="margin-top: 7px; margin-bottom: 5px;">
+    <div class="card-header" style="padding-top: 5px; padding-bottom: 7px">
+      <div class="card-title" style="font-size: 25px"><span>Balance Withdrawal</span></div>
+      <mat-progress-bar *ngIf="queryMode" mode="indeterminate" class="mat-progress-bar"></mat-progress-bar>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div class="card" style="margin-right: -8px;">
+        <div class="card-body">
+          <h5>Account Summary</h5>
+          <hr>
+          <table class="table">
+            <tr style="height: 30px;">
+              <th style="width: 200px;">Holder Name :</th>
+              <td>{{user.holder_name}}</td>
+            </tr>
+            <tr style="height: 30px;">
+              <th style="width: 200px;">Account Number :</th>
+              <td>{{user.account_number}}</td>
+            </tr>
+            <tr style="height: 30px;">
+              <th style="width: 200px;">Bank Name :</th>
+              <td>{{user.bank_name}}</td>
+            </tr>
+            <tr style="height: 30px;">
+              <th style="width: 200px;">Branch Name :</th>
+              <td>{{user.branch_name}}</td>
+            </tr>
+          </table>
+          <hr>
+          <h6 class="text-center">Current Balance : {{user.balance | currency: 'GBP ':'symbol':'1.2-2'}}</h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card" style="margin-left: -8px;">
+        <div class="card-body">
+          <h5>Withdraw Request</h5>
+          <hr>
+          <!--          <label class="form-label" for="amount">Amount to withdraw</label>-->
+          <label class="form-label">Amount to withdraw</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text">{{curSymbol}}</span>
+            <input class="form-control" type="number" [(ngModel)]="amount">
+          </div>
+
+          <span class="text-secondary d-block">Minimum {{curName}} {{minWithdraw | number: '1.2-2'}}</span>
+          <span class="text-secondary d-block">Threshold {{curName}} {{withdrawThreshold | number: '1.2-2'}}</span>
+          <div class="text-center mt-2">
+            <button (click)="onWithdraw()" class="btn btn-primary w-25" style="min-width: 100px">Withdraw</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--  <h3>Transactions History</h3>-->
+  <div class="card card-outline" style="margin-top: 8px; margin-bottom: 5px;">
+    <div class="card-header" style="padding-top: 5px; padding-bottom: 7px">
+      <div class="card-title" style="font-size: 25px"><span>Transaction History</span></div>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Request Date</th>
+          <th>Process Date</th>
+          <th>Amount</th>
+          <th>Payment Date</th>
+          <th>Status</th>
+        </tr>
+        <tr *ngFor="let t of transactions">
+          <td>{{t.withdrawal_id}}</td>
+          <td>{{t.request_date ? formatDate(t.request_date, 'dd/MM/yyyy HH:mm:ss', 'en-US'): ''}}</td>
+          <td>{{t.approval_date ? formatDate(t.approval_date, 'dd/MM/yyyy HH:mm:ss', 'en-US'): ''}}</td>
+          <td>{{curSymbol}}{{t.amount | number: '1.2-2'}}</td>
+          <td>{{t.payment_date ? formatDate(t.payment_date, 'dd/MM/yyyy HH:mm:ss', 'en-US'): ''}}</td>
+          <td>
+            <div [class]="t.status=='Declined' ? 'text-danger bg-light-danger' : t.status=='Pending' ? 'text-warning bg-light-warning' : 'text-success bg-light-success'"
+                 class="badge rounded-pill p-2 text-uppercase px-3" style="margin-left: -15px;">
+              <i class='bx bxs-circle me-1'></i>{{t.status}}
+            </div>
+          </td>
+        </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+</div>
+

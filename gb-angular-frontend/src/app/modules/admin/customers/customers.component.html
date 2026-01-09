@@ -1,0 +1,50 @@
+<!--<p>customers works!</p>-->
+
+<div class="page-content">
+<!--  <h3>Customers</h3>-->
+  <div class="card card-secondary card-outline" style="margin-top: 7px">
+    <div class="card-header" style="padding-top: 5px; padding-bottom: 7px">
+      <div class="card-title" style="font-size: 25px"><span>User List</span></div>
+      <mat-progress-bar *ngIf="queryMode" mode="indeterminate" class="mat-progress-bar"></mat-progress-bar>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table mb-0">
+          <thead class="table-light">
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Balance</th>
+            <th>Hold Fund</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let a of users; let i = index">
+            <td>{{a.user_id}}</td>
+            <td>{{a.username}}</td>
+            <td>{{a.email}}</td>
+            <td>{{curSymbol}}{{a.balance | number: '1.2-2'}}</td>
+            <td>{{curSymbol}}{{a.hold_fund | number: '1.2-2'}}</td>
+            <td>
+              <div [class]="a.status=='Inactive' ? 'text-danger bg-light-danger' : a.status=='Active' ? 'text-success bg-light-success' : 'text-warning bg-light-warning'"
+                   class="badge rounded-pill p-2 text-uppercase px-3" style="margin-left: -15px;">
+                <i class='bx bxs-circle me-1'></i>{{a.status}}
+              </div>
+            </td>
+            <td>
+              <select #_status class="form-select" name="actions" id="actions" (change)="updateProduct(a, _status.value)">
+                <option [selected]="a.status=='Pending'" value="Pending">Pending</option>
+                <option [selected]="a.status=='Active'" value="Active">Active</option>
+                <option [selected]="a.status=='Inactive'" value="Inactive">Inactive</option>
+              </select>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,483 @@
+<!--<p>header works!</p>-->
+<!--[if lte IE 9]>
+<p class="browserupgrade">
+  You are using an <strong>outdated</strong> browser. Please
+  <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+  your experience and security.
+</p>
+<![endif]-->
+
+<!-- Preloader -->
+<div class="preloader" style="opacity: 0; display: none;">
+  <div class="preloader-inner">
+    <div class="preloader-icon">
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+<!-- /End Preloader -->
+
+<!-- Start Header Area -->
+<header class="header navbar-area">
+  <!-- Start Topbar -->
+  <div class="topbar">
+<!--    <div class="container" style="display: none;">-->
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-4 col-md-4 col-12">
+          <div class="top-left">
+            <ul class="menu-top-link">
+              <li>
+                <div class="select-position">
+                  <select id="select4">
+                    <option value="0" selected="">£ GBP</option>
+                    <option value="1">$ USD</option>
+                    <option value="1">€ EURO</option>
+                    <option value="2">$ HKD</option>
+                    <option value="4">¥ CNY</option>
+                  </select>
+                </div>
+              </li>
+              <li>
+                <div class="select-position">
+                  <select id="select5">
+                    <option value="0" selected="">English</option>
+<!--
+                    <option value="1">Español</option>
+                    <option value="2">Filipino</option>
+                    <option value="3">Français</option>
+                    <option value="4">العربية</option>
+                    <option value="5">हिन्दी</option>
+                    <option value="6">বাংলা</option>
+-->
+                  </select>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-12">
+          <div class="top-middle">
+            <ul class="useful-links">
+              <li><a href="smartgroup">Home</a></li>
+              <li><a href="smartgroup/about">About Us</a></li>
+              <li><a href="smartgroup/contactus">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-12">
+          <div class="top-end">
+            <div class="user">
+              <i class="bx bx-user"></i>
+              Hello
+            </div>
+            <ul class="user-login">
+              <li>
+                <a href="smartgroup/auth/login">Sign In</a>
+              </li>
+              <li>
+                <a href="smartgroup/auth/register">Register</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Topbar -->
+  <!-- Start Header Middle -->
+  <div class="header-middle">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-3 col-md-3 col-7">
+          <!-- Start Header Logo -->
+          <a class="navbar-brand" href="smartgroup">
+<!--            <img src="assets/smartgroup/images/hero/logo.svg" alt="Logo">-->
+            <img src="assets/smartgroup/img/smartgroup.png" alt="Logo">
+          </a>
+          <!-- End Header Logo -->
+        </div>
+        <div class="col-lg-5 col-md-7 d-xs-none">
+          <!-- Start Main Menu Search -->
+          <div class="main-menu-search">
+            <!-- navbar search start -->
+            <div class="navbar-search search-style-5">
+              <!--<div class="search-select">
+                <div class="select-position">
+                  <select id="select1">
+                    <option selected="">All</option>
+                    <option value="1">option 01</option>
+                    <option value="2">option 02</option>
+                    <option value="3">option 03</option>
+                    <option value="4">option 04</option>
+                    <option value="5">option 05</option>
+                  </select>
+                </div>
+              </div>-->
+              <form (submit)="searchProducts()" style="width: 100%; display: flex;">
+                <div class="search-input">
+                  <input type="text" [(ngModel)]="searchValue" name="searchValue" placeholder="Search">
+                </div>
+                <div class="search-btn">
+                  <button type="submit"><i class="bx bx-search"></i></button>
+                </div>
+              </form>
+            </div>
+            <!-- navbar search Ends -->
+          </div>
+          <!-- End Main Menu Search -->
+        </div>
+        <div class="col-lg-4 col-md-2 col-5">
+          <div class="middle-right-area">
+            <div class="nav-hotline">
+              <!--<i class="bx bx-phone"></i>
+              <h3>Hotline:
+                <span>(+100) 123 456 7890</span>
+              </h3>-->
+            </div>
+            <div class="navbar-cart">
+<!--              <div class="wishlist">-->
+              <div class="cart-items" style="padding-right: 10px;">
+                <a href="javascript:void(0)"  class="main-btn">
+                  <i class="bx bx-heart"></i>
+                  <!--<span class="total-items">0</span>-->
+                  <span class="total-items">{{wishlistList.length ? wishlistList.length : 0}}</span>
+                </a>
+                <!-- Wishlist Item -->
+                <div class="shopping-item" style="width: 450px;">
+                  <div class="dropdown-cart-header">
+                    <!--                    <span>2 Items</span>-->
+                    <span>{{wishlistList.length ? wishlistList.length : 0}} Items</span>
+                    <a href="customer/home/wishlist">View Wishlist</a>
+                  </div>
+                  <ul class="shopping-list">
+
+                    <li *ngFor="let item of wishlistList">
+
+                      <div *ngIf="item.sell_type=='P'" class="row" style="padding-top: 0px;padding-bottom: 0px">
+                        <a href="javascript:void(0)" class="remove" title="Remove this item" style="width: 25px; height: 25px"><i class="bx bx-trash" style="font-size: 20px" (click)="removeWishlistItem(item.wishlist_id)"></i></a>
+
+                        <div class="row" style="margin-bottom: -5px">
+                          <div class="col-md-6 col-xxl-3">
+                            <a class="cart-img" href="javascript:void(0)"><img src="{{item.product_image}}" alt="#" style="max-width: 70px"></a>
+                          </div>
+                          <div class="col-md-6 col-xxl-8" style="padding-left: 52px;">
+                            <p><a href="smartgroup/packagegrid/{{item.package_grp_id}}" style="word-wrap: anywhere;">
+                              {{item.package_name}}
+                            </a></p>
+<!--                            <span class="amount">{{curSymbol}}{{item.sale_price.toFixed(2)}}</span>-->
+                            <div class="amount">
+                              <span>{{curSymbol}}{{item.sale_price}}</span>
+                              <span style="display: inline-block; margin-left: 15px; color: #888; text-decoration: line-through;">{{curSymbol}}{{item.regular_price}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="item.sell_type=='S'" class="row" style="padding-top: 0px;padding-bottom: 0px">
+                        <a href="javascript:void(0)" class="remove" title="Remove this item" style="width: 25px; height: 25px"><i class="bx bx-trash" style="font-size: 20px" (click)="removeWishlistItem(item.wishlist_id)"></i></a>
+
+                        <div class="row" style="margin-bottom: -5px">
+                          <div class="col-md-6 col-xxl-3">
+                            <a class="cart-img" href="javascript:void(0)"><img src="{{item.product_image}}" alt="#" style="max-width: 70px"></a>
+                          </div>
+                          <div class="col-md-6 col-xxl-8" style="">
+                            <p><a href="smartgroup/productdetail/{{item.product_id}}/{{item.sell_type}}" style="word-wrap: anywhere;">
+                              {{item.product_title}}
+                            </a></p>
+                            <!--                            <span class="amount">{{curSymbol}}{{item.sale_price.toFixed(2)}}</span>-->
+                            <div class="amount">
+                              <span>{{curSymbol}}{{item.sale_price}}</span>
+                              <span style="display: inline-block; margin-left: 15px; color: #888; text-decoration: line-through;">{{curSymbol}}{{item.regular_price}}</span>
+                            </div>                          </div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="item.sell_type=='G'" class="row" style="padding-top: 0px;padding-bottom: 0px">
+                        <a href="javascript:void(0)" class="remove" title="Remove this item" style="width: 25px; height: 25px"><i class="bx bx-trash" style="font-size: 20px" (click)="removeWishlistItem(item.wishlist_id)"></i></a>
+
+                        <div class="row" style="margin-bottom: -5px">
+                          <div class="col-md-6 col-xxl-3">
+                            <a class="cart-img" href="javascript:void(0)"><img src="{{item.product_image}}" alt="#" style="max-width: 70px"></a>
+                          </div>
+                          <div class="col-md-6 col-xxl-8" style="padding-left: 35px;">
+                            <p><a href="smartgroup/productdetail/{{item.product_id}}/{{item.sell_type}}" style="word-wrap: anywhere;">
+                              {{item.product_title}}
+                            </a></p>
+                            <!--                            <span class="amount">{{curSymbol}}{{item.sale_price.toFixed(2)}}</span>-->
+                            <div class="amount">
+                              <span>{{curSymbol}}{{item.sale_price}}</span>
+                              <span style="display: inline-block; margin-left: 15px; color: #888; text-decoration: line-through;">{{curSymbol}}{{item.regular_price}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </li>
+                  </ul>
+                </div>
+                <!--/ End Wishlist Item -->
+              </div>
+              <div class="cart-items">
+                <a href="javascript:void(0)" class="main-btn">
+                  <i class="bx bx-cart"></i>
+<!--                  <span class="total-items">2</span>-->
+                  <span class="total-items">{{cartItemList.length ? cartItemList.length : 0}}</span>
+                </a>
+                <!-- Shopping Item -->
+                <div class="shopping-item" style="width: 450px;">
+                  <div class="dropdown-cart-header">
+<!--                    <span>2 Items</span>-->
+                    <span>{{cartItemList ? cartItemList.length : 0}} Items</span>
+                    <a href="smartgroup/cart">View Cart</a>
+                  </div>
+                  <ul class="shopping-list">
+
+                    <li *ngFor="let item of cartItemList">
+
+                      <div *ngIf="item.sell_type=='P'" class="row" style="padding-top: 0px;padding-bottom: 0px">
+                        <a href="javascript:void(0)" class="remove" title="Remove this item" style="width: 25px; height: 25px"><i class="bx bx-trash" style="font-size: 20px" (click)="onRemoveCartItem(item.cart_id)"></i></a>
+
+                        <div class="row" style="margin-bottom: -5px">
+                          <div class="col-md-6 col-xxl-3">
+                            <a class="cart-img" href="javascript:void(0)"><img src="{{item.item_image_url}}" alt="#" style="max-width: 70px"></a>
+                          </div>
+                          <div class="col-md-6 col-xxl-8" style="padding-left: 52px;">
+                            <p><a href="smartgroup/packagegrid/{{item.package_grp_id}}" style="word-wrap: anywhere;">
+                              {{item.package_name}}
+                            </a></p>
+                            <p class="quantity">{{item.quantity}} x - <span class="amount">{{curSymbol}}{{item.unit_price.toFixed(2)}}</span></p>
+                          </div>
+                        </div>
+
+<!--
+                        <div class="cart-img-head">
+                          <a class="cart-img" href="javascript:void(0)"><img src="{{item.item_image_url}}" alt="#" style="max-width: 70px"></a>
+                        </div>
+                        <div class="content" style="max-width: 300px">
+                          <h4><a href="smartgroup/packagegrid/{{item.package_id}}">
+                            {{item.package_name}}
+                          </a></h4>
+                          &lt;!&ndash;                         <p class="quantity">1x - <span class="amount">$99.00</span></p>&ndash;&gt;
+                          <p class="quantity">{{item.quantity}} x - <span class="amount">{{curSymbol}}{{item.unit_price.toFixed(2)}}</span></p>
+                        </div>
+-->
+
+
+                      </div>
+
+                      <div *ngIf="item.sell_type=='S'" class="row" style="padding-top: 0px;padding-bottom: 0px">
+                        <a href="javascript:void(0)" class="remove" title="Remove this item" style="width: 25px; height: 25px"><i class="bx bx-trash" style="font-size: 20px" (click)="onRemoveCartItem(item.cart_id)"></i></a>
+
+                        <div class="row" style="margin-bottom: -5px">
+                          <div class="col-md-6 col-xxl-3">
+                            <a class="cart-img" href="javascript:void(0)"><img src="{{item.item_image_url}}" alt="#" style="max-width: 70px"></a>
+                          </div>
+                          <div class="col-md-6 col-xxl-8" style="">
+                            <p><a href="smartgroup/productdetail/{{item.product_id}}/{{item.sell_type}}" style="word-wrap: anywhere;">
+                              {{item.product_title}}
+                            </a></p>
+                            <p class="quantity">{{item.quantity}} x - <span class="amount">{{curSymbol}}{{item.unit_price.toFixed(2)}}</span></p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="item.sell_type=='G'" class="row" style="padding-top: 0px;padding-bottom: 0px">
+                        <a href="javascript:void(0)" class="remove" title="Remove this item" style="width: 25px; height: 25px"><i class="bx bx-trash" style="font-size: 20px" (click)="onRemoveCartItem(item.cart_id)"></i></a>
+
+                        <div class="row" style="margin-bottom: -5px">
+                          <div class="col-md-6 col-xxl-3">
+                            <a class="cart-img" href="javascript:void(0)"><img src="{{item.item_image_url}}" alt="#" style="max-width: 70px"></a>
+                          </div>
+                          <div class="col-md-6 col-xxl-8" style="padding-left: 35px;">
+                            <p><a href="smartgroup/productdetail/{{item.product_id}}/{{item.sell_type}}" style="word-wrap: anywhere;">
+                              {{item.product_title}}
+                            </a></p>
+                            <p class="quantity">{{item.quantity}} x - <span class="amount">{{curSymbol}}{{item.unit_price.toFixed(2)}}</span></p>
+                          </div>
+                        </div>
+
+
+<!--                        <div class="cart-img-head">
+                          <a class="cart-img" href="javascript:void(0)" ><img src="{{item.item_image_url}}" alt="#" style="max-width: 70px"></a>
+                        </div>
+                        <div class="content" style="max-width: 300px">
+                          <h4><a href="smartgroup/productdetail/{{item.product_id}}">
+                            {{item.product_title}}
+                          </a></h4>
+  &lt;!&ndash;                        <p class="quantity">1x - <span class="amount">$99.00</span></p>&ndash;&gt;
+                          <p class="quantity">{{item.quantity}} x - <span class="amount">{{curSymbol}}{{item.unit_price.toFixed(2)}}</span></p>
+                        </div>-->
+
+
+                      </div>
+
+                    </li>
+
+<!--
+                    <li>
+                      <a href="javascript:void(0)" class="remove" title="Remove this item"><i class="bx bx-trash"></i></a>
+                      <div class="cart-img-head">
+                        <a class="cart-img" href="smartgroup/productdetail"><img src="assets/smartgroup/images/hero/item1.jpg" alt="#"></a>
+                      </div>
+
+                      <div class="content">
+                        <h4><a href="smartgroup/productdetail">
+                          Apple Watch Series 6</a></h4>
+                        <p class="quantity">1x - <span class="amount">$99.00</span></p>
+                      </div>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0)" class="remove" title="Remove this item"><i class="bx bx-trash"></i></a>
+                      <div class="cart-img-head">
+                        <a class="cart-img" href="smartgroup/productdetail"><img src="assets/smartgroup/images/hero/item2.jpg" alt="#"></a>
+                      </div>
+                      <div class="content">
+                        <h4><a href="smartgroup/productdetail">Wi-Fi Smart Camera</a></h4>
+                        <p class="quantity">1x - <span class="amount">$35.00</span></p>
+                      </div>
+                    </li>
+-->
+
+
+                  </ul>
+                  <div class="bottom">
+                    <div class="total">
+                      <span>Total</span>
+<!--                      <span class="total-amount">$134.00</span>-->
+                      <span class="total-amount">{{curSymbol}}{{cartTotal ? cartTotal.toFixed(2): '0.00'}}</span>
+                    </div>
+                    <div class="button">
+                      <a href="smartgroup/cart" class="btn animate">Checkout</a>
+                    </div>
+                  </div>
+                </div>
+                <!--/ End Shopping Item -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Header Middle -->
+  <!-- Start Header Bottom -->
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8 col-md-6 col-12">
+        <div class="nav-inner">
+          <!-- Start Mega Category Menu -->
+          <div class="mega-category-menu">
+            <span class="cat-button"><i class="bx bx-menu"></i>All Categories</span>
+            <ul class="sub-category">
+
+              <li *ngFor="let c of categories; let i = index">
+                <a href="smartgroup/productgrid" (click)="selectCategory(c.category_id)">{{c.category_name}}</a>
+<!--                <a href="smartgroup/productgrid/{{c.category_id}}">{{c.category_name}}</a>-->
+              </li>
+            </ul>
+          </div>
+          <!-- End Mega Category Menu -->
+          <!-- Start Navbar -->
+          <nav class="navbar navbar-expand-lg">
+            <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="toggler-icon"></span>
+              <span class="toggler-icon"></span>
+              <span class="toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+              <ul id="nav" class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a href="smartgroup" class="active" aria-label="Toggle navigation">Home</a>
+<!--                  <a href="smartgroup" class="active" aria-label="Toggle navigation" style="text-decoration: none !important;">Home</a>-->
+                </li>
+                <li class="nav-item">
+                  <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
+                     data-bs-target="#submenu-1-2" aria-controls="navbarSupportedContent"
+                     aria-expanded="false" aria-label="Toggle navigation">Pages</a>
+<!--                  <a class="dd-menu collapsed" style="text-decoration: none !important;" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#submenu-1-2" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Pages <span class="bx bx-chevron-down" style="font-size: 21px;position: absolute; right: -23px;"></span></a>-->
+                  <ul class="sub-menu collapse" id="submenu-1-2">
+                    <li class="nav-item"><a href="smartgroup/about">About Us</a></li>
+                    <li class="nav-item"><a href="smartgroup/faq">Faq</a></li>
+                    <li class="nav-item"><a href="smartgroup/auth/login">Login</a></li>
+                    <li class="nav-item"><a href="smartgroup/auth/register">Register</a></li>
+                    <li class="nav-item"><a href="mailsuccess">Mail Success</a></li>
+                    <li class="nav-item"><a href="Error">404 Error</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
+                     data-bs-target="#submenu-1-3" aria-controls="navbarSupportedContent"
+                     aria-expanded="false" aria-label="Toggle navigation">Shop</a>
+<!--                  <a class="dd-menu collapsed" style="text-decoration: none !important;" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#submenu-1-3" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Shop <span class="bx bx-chevron-down" style="font-size: 21px;position: absolute; right: -23px;"></span></a>-->
+                  <ul class="sub-menu collapse" id="submenu-1-3">
+                    <li class="nav-item"><a href="smartgroup/productgrid">Shop Grid</a></li>
+                    <li class="nav-item"><a href="smartgroup/productgrid">Shop List</a></li>
+                    <li class="nav-item"><a href="smartgroup/productdetail">shop Single</a></li>
+                    <li class="nav-item"><a href="smartgroup/cart">Cart</a></li>
+                    <li class="nav-item"><a href="smartgroup/checkout">Checkout</a></li>
+                    <li class="nav-item"><a href="smartgroup/invoice">Invoice</a></li>
+                  </ul>
+                </li>
+                <!--<li class="nav-item">
+                  <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
+                     data-bs-target="#submenu-1-4" aria-controls="navbarSupportedContent"
+                     aria-expanded="false" aria-label="Toggle navigation">Blog</a>
+&lt;!&ndash;                  <a class="dd-menu collapsed" style="text-decoration: none !important;" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#submenu-1-4" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Blog <span class="bx bx-chevron-down" style="font-size: 21px;position: absolute; right: -23px;"></span></a>&ndash;&gt;
+                  <ul class="sub-menu collapse" id="submenu-1-4">
+                    <li class="nav-item"><a href="javascript:void(0)">Blog Grid Sidebar</a>
+                    </li>
+                    <li class="nav-item"><a href="javascript:void(0)">Blog Single</a></li>
+                    <li class="nav-item"><a href="javascript:void(0)">Blog Single
+                      Sibebar</a></li>
+                  </ul>
+                </li>-->
+                <li class="nav-item">
+                  <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
+                     data-bs-target="#submenu-1-5" aria-controls="navbarSupportedContent"
+                     aria-expanded="false" aria-label="Toggle navigation">My Account</a>
+<!--                  <a class="dd-menu collapsed" style="text-decoration: none !important;" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#submenu-1-5" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">My Account <span class="bx bx-chevron-down" style="font-size: 21px;position: absolute; right: -23px;"></span></a>-->
+                  <ul class="sub-menu collapse" id="submenu-1-5">
+                    <li class="nav-item"><a href="/customer/home">User Dashboard</a>
+                    </li>
+                    <li class="nav-item"><a href="/admin/home">Admin Dashboard</a></li>
+                  </ul>
+                </li>
+
+                <li class="nav-item">
+                  <a href="smartgroup/contactus" aria-label="Toggle navigation">Contact Us</a>
+<!--                  <a href="smartgroup/contactus" aria-label="Toggle navigation" style="text-decoration: none !important;">Contact Us</a>-->
+                </li>
+              </ul>
+            </div> <!-- navbar collapse -->
+          </nav>
+          <!-- End Navbar -->
+        </div>
+      </div>
+      <!--<div class="col-lg-4 col-md-6 col-12">
+        &lt;!&ndash; Start Nav Social &ndash;&gt;
+        <div class="nav-social">
+          <h5 class="title">Follow Us:</h5>
+          <ul>
+            <li>
+              <a href="javascript:void(0)"><i class="bx bxl-facebook"></i></a>
+            </li>
+            <li>
+              <a href="javascript:void(0)"><i class="bx bxl-twitter"></i></a>
+            </li>
+            <li>
+              <a href="javascript:void(0)"><i class="bx bxl-instagram"></i></a>
+            </li>
+            <li>
+              <a href="javascript:void(0)"><i class="bx bxl-skype"></i></a>
+            </li>
+          </ul>
+        </div>
+        &lt;!&ndash; End Nav Social &ndash;&gt;
+      </div>-->
+    </div>
+  </div>
+  <!-- End Header Bottom -->
+</header>
+

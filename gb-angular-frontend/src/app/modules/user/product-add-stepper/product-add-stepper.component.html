@@ -1,0 +1,63 @@
+
+
+<!--
+<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear" >
+  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button>
+-->
+
+<mat-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <ng-template matStepLabel>Add New Product</ng-template>
+    <app-product-add-new #AddProductComponent></app-product-add-new>
+
+<!--
+    <div >
+      <button class="gb-stepper-btn" mat-button matStepperNext (click)="goAddItems(stepper)" >Next</button>
+    </div>
+-->
+    <div *ngIf="addProductMainComponent.newProd.sell_style=='S' || addProductMainComponent.newProd.sell_style=='G' || addProductMainComponent.newProd.sell_style=='SG'">
+            <button class="gb-stepper-btn" mat-button matStepperNext (click)="goAddItems(stepper)" >Save</button>
+    </div>
+    <div *ngIf="addProductMainComponent.newProd.sell_style=='P' || addProductMainComponent.newProd.sell_style=='SP' || addProductMainComponent.newProd.sell_style=='GP' || addProductMainComponent.newProd.sell_style=='SGP'">
+      <button class="gb-stepper-btn" mat-button matStepperNext (click)="goAddItems(stepper)" >Next</button>
+    </div>
+
+  </mat-step>
+  <!-- #docregion label -->
+<!--  <mat-step [stepControl]="secondFormGroup" label="Fill out your address">-->
+  <mat-step [stepControl]="secondFormGroup" label="Add Product Items" optional>
+    <!-- #enddocregion label -->
+    <app-mat-table-add-product-item #AddProductItemComponent></app-mat-table-add-product-item>
+
+    <div>
+<!--      <button class="gb-stepper-btn" mat-button matStepperPrevious>Back</button>-->
+      <button class="gb-stepper-btn" mat-button matStepperNext (click)="goAddPackages(stepper)">Next</button>
+    </div>
+
+  </mat-step>
+
+  <mat-step [stepControl]="thirdFormGroup" label="Assign Packages" optional>
+
+    <app-cdk-drag-drop-connected-sorting-group #AddProductPackageComponent></app-cdk-drag-drop-connected-sorting-group>
+
+    <div>
+<!--      <button class="gb-stepper-btn" mat-button matStepperPrevious>Back</button>-->
+      <button class="gb-stepper-btn" mat-button matStepperNext (click)="goComplete(stepper)">Save</button>
+    </div>
+
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>The product and package(s) have been added successfully.</p>
+    <div>
+<!--      <button class="gb-stepper-btn" mat-button matStepperPrevious>Back</button>-->
+<!--      <button mat-button (click)="stepper.reset()">Reset</button>-->
+      <button class="gb-stepper-btn" style="width: 200px" mat-button (click)="goNewInputAgain(stepper)">Add New Product Again</button>
+      <button class="gb-stepper-btn" mat-button (click)="goHomePage(stepper)">Home</button>
+    </div>
+  </mat-step>
+</mat-stepper>
+
+

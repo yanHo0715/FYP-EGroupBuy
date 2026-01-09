@@ -1,0 +1,871 @@
+<!--<p>productgrid works!</p>-->
+
+<!-- Start Breadcrumbs -->
+<!--<div class="breadcrumbs">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="breadcrumbs-content">
+          <h1 class="page-title">Shop Grid</h1>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <ul class="breadcrumb-nav">
+          <li><a href="smartgroup"><i class="bx bx-home"></i> Home <span class="bx bx-chevron-right" style="font-size: 22px;position: absolute;top: 3px;right: -23px;"></span></a></li>
+          <li><a href="javascript:void(0)">Shop <span class="bx bx-chevron-right" style="font-size: 22px;position: absolute;top: 0px;right: -23px;bottom: -0.5px"></span></a></li>
+          <li>Shop Grid</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>-->
+<!-- End Breadcrumbs -->
+
+<!-- Start Product Grids -->
+<section class="product-grids section" style="padding-top: 25px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-12">
+        <!-- Start Product Sidebar -->
+        <div class="product-sidebar">
+          <!-- Start Single Widget -->
+          <div class="single-widget search">
+            <h3 (click)="toggleSearchBar()" style="position: relative; cursor: pointer;">Search Product<span class="bx bx-chevron-down" style="font-size: 21px; position: absolute; right: -10px;"></span></h3>
+            <form (submit)="onSearch()" *ngIf="isSearchBarOpen">
+              <input type="text" [(ngModel)]="searchValue" name="searchValue" placeholder="Search Here...">
+              <button type="submit"><i class="bx bx-search"></i></button>
+            </form>
+          </div>
+          <!-- End Single Widget -->
+          <!-- Start Single Widget -->
+          <div class="single-widget">
+<!--            <h3>All Categories</h3>-->
+            <h3 (click)="toggleCategoryList()" style="position: relative; cursor: pointer;">All Categories<span class="bx bx-chevron-down" style="font-size: 21px; position: absolute; right: -10px;"></span></h3>
+            <ul class="list" *ngIf="isCategoryListOpen">
+
+              <li *ngFor="let c of categories; let i = index">
+                <!--<a href="smartgroup/productgrid" (click)="onSelectCategory(c.category_id)">{{ c.category_name }}</a>-->
+                <label (click)="onSelectCategory(c.category_id)" style="cursor: pointer;" [ngClass]="{'selected-category': c.category_id === this.selectedCategoryId}">{{ c.category_name }}</label>
+              </li>
+
+            </ul>
+          </div>
+          <!-- End Single Widget -->
+          <!-- Start Single Widget -->
+          <div class="single-widget range">
+            <h3 (click)="togglePriceRange()" style="position: relative; cursor: pointer;">Price Range<span class="bx bx-chevron-down" style="font-size: 21px; position: absolute; right: -10px;"></span></h3>
+            <input type="range" class="form-range" *ngIf="isPriceRangeOpen" [min]="minPrice" [max]="maxPrice" [(ngModel)]="minSelectedPrice" (input)="filterProductsByPrice()">
+            <div class="range-inner" *ngIf="isPriceRangeOpen">
+              <label>£</label>
+              <input type="text" [(ngModel)]="minSelectedPrice" (input)="filterProductsByPrice()">
+              <span> TO </span>
+              <!--<label>£</label>-->
+              <input type="text" [(ngModel)]="maxSelectedPrice" (input)="filterProductsByPrice()">
+            </div>
+            <input type="range" class="form-range" *ngIf="isPriceRangeOpen" [min]="minPrice" [max]="maxPrice" [(ngModel)]="maxSelectedPrice" (input)="filterProductsByPrice()">
+
+<!--            <ngx-slider [(value)]="minSelectedPrice" [(highValue)]="maxSelectedPrice" [options]="priceSliderOptions" (userChangeEnd)="filterProductsByPrice()">-->
+
+<!--            <ngx-slider [(value)]="minSelectedPrice" [(highValue)]="maxSelectedPrice" [options]="priceSliderOptions" (valueChange)="filterProductsByPrice()" (highValueChange)="filterProductsByPrice()">-->
+            <!--<div class="range-inner">
+              <label>£</label>
+              <input type="text" [(ngModel)]="minSelectedPrice" (input)="filterProductsByPrice()">
+              <span> - </span>
+              <label>£</label>
+              <input type="text" [(ngModel)]="maxSelectedPrice" (input)="filterProductsByPrice()">
+            </div>-->
+          </div>
+          <!-- End Single Widget -->
+          <!-- Start Single Widget -->
+          <!--<div class="single-widget condition">
+            <h3>Filter by Price</h3>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
+              <label class="form-check-label" for="flexCheckDefault1">
+                £50 - £100L (208)
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
+              <label class="form-check-label" for="flexCheckDefault2">
+                £100L - £500 (311)
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">
+              <label class="form-check-label" for="flexCheckDefault3">
+                £500 - £1,000 (485)
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
+              <label class="form-check-label" for="flexCheckDefault4">
+                £1,000 - £5,000 (213)
+              </label>
+            </div>
+          </div>-->
+          <!-- End Single Widget -->
+          <!-- Start Single Widget -->
+          <div class="single-widget condition">
+<!--            <h3>Filter by Brand</h3>-->
+            <h3 (click)="toggleBrandList()" style="position: relative; cursor: pointer;">Filter by Brand<span class="bx bx-chevron-down" style="font-size: 21px; position: absolute; right: -10px;"></span></h3>
+            <div *ngIf="isBrandListOpen">
+              <div *ngFor="let b of brands; let i = index" class="form-check">
+<!--                <input class="form-check-input" type="checkbox" value="{{b.brand_id}}" id="brand{{b.brand_id}}">-->
+                <input class="form-check-input" type="checkbox" (change)="onBrandChange($event, b.brand_id)" [checked]="selectedBrands[b.brand_id]" id="brand{{b.brand_id}}">
+                <label class="form-check-label" for="brand{{b.brand_id}}">
+                  {{b.brand_name}}
+                </label>
+              </div>
+              <input class="form-check-input" type="checkbox" (change)="onBrandChange($event, 0)" [checked]="selectedBrands[0]" id="brand{{0}}">
+              <label class="form-check-label">&nbsp;&nbsp;Other</label>
+            </div>
+          </div>
+          <!-- End Single Widget -->
+        </div>
+        <!-- End Product Sidebar -->
+      </div>
+      <div class="col-lg-9 col-12">
+        <div class="product-grids-head">
+          <div class="product-grid-topbar">
+            <div class="row align-items-center">
+              <div class="col-lg-7 col-md-8 col-12">
+                <div class="product-sorting">
+                  <label for="sorting">Sort by:</label>
+                  <!--<select class="form-control" id="sorting">-->
+                  <select class="form-control" id="sorting" [(ngModel)]="selectedSortOption" (change)="sortProdPkgList()">
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+<!--                    <option value="popularity">Popularity</option>-->
+                    <option value="priceLowHigh">Low - High Price</option>
+                    <option value="priceHighLow">High - Low Price</option>
+<!--                    <option value="rating">Average Rating</option>-->
+                    <option value="nameAsc">A - Z Order</option>
+                    <option value="nameDesc">Z - A Order</option>
+                  </select>
+<!--                  <h3 class="total-show-product">Showing: <span>1 - 12 items</span></h3>-->
+                  <h3 class="total-show-product">Showing: <span>{{startProductIndex}} - {{endProductIndex}} items</span></h3>
+                </div>
+              </div>
+              <div class="col-lg-5 col-md-4 col-12">
+                <nav>
+                  <div class="nav nav-tabs" id="sell-type-tab" role="tablist" style="margin-left: 20px">
+                    <!--<button class="nav-link active" id="sell-prod-pkg-tab" data-bs-toggle="tab" data-bs-target="" type="button" role="tab" aria-controls="" aria-selected="true"><i class="bx bx-layer" (click)="onDisplayProdPkgList()"></i></button>
+                    <button class="nav-link" id="sell-product-tab" data-bs-toggle="tab" data-bs-target="" type="button" role="tab" aria-controls="" aria-selected="false"><i class="bx bx-purchase-tag" (click)="onDisplayProductList()"></i></button>
+                    <button class="nav-link" id="sell-package-tab" data-bs-toggle="tab" data-bs-target="" type="button" role="tab" aria-controls="" aria-selected="false"><i class="bx bx-customize" (click)="onDisplayPackageList()"></i></button>-->
+                    <button #sellTypeBtn class="nav-link active" id="sell-prod-pkg-tab" data-bs-toggle="tab" data-bs-target="" type="button" role="tab" aria-controls="" aria-selected="true"><i class="bx bx-layer" (click)="onDisplayProdPkgList()"></i></button>
+                    <button #sellTypeBtn class="nav-link" id="sell-product-tab" data-bs-toggle="tab" data-bs-target="" type="button" role="tab" aria-controls="" aria-selected="false"><i class="bx bx-purchase-tag" (click)="onDisplayProductList()"></i></button>
+                    <button #sellTypeBtn class="nav-link" id="sell-package-tab" data-bs-toggle="tab" data-bs-target="" type="button" role="tab" aria-controls="" aria-selected="false"><i class="bx bx-customize" (click)="onDisplayPackageList()"></i></button>
+                  </div>
+
+                  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-grid-tab" data-bs-toggle="tab" data-bs-target="#nav-grid" type="button" role="tab" aria-controls="nav-grid" aria-selected="true"><i class="bx bx-grid-alt"></i></button>
+                    <button class="nav-link" id="nav-list-tab" data-bs-toggle="tab" data-bs-target="#nav-list" type="button" role="tab" aria-controls="nav-list" aria-selected="false"><i class="bx bx-list-ul"></i></button>
+                  </div>
+                </nav>
+              </div>
+            </div>
+          </div>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
+              <div class="row">
+
+
+<!------                      ------->
+
+<!--                  <div *ngFor="let p of productList" class="col-lg-4 col-md-6 col-12">-->
+                  <div *ngFor="let p of displayProdPkgList" class="col-lg-4 col-md-6 col-12">
+
+                    <!-- Start Single Product -->
+                    <div *ngIf="p.sell_type=='S'" class="single-product"  >
+<!--                      <div *ngIf="p.sell_type=='S'" class="single-product" style="width: 306px;">-->
+                      <div class="product-image" style="text-align: center;">
+<!--                        {{p.product_id}}-->
+                        <div style="max-height: 230px;min-width: 200px;">
+<!--                        <img src="{{p.main_image}}" alt="#" style="text-align: center; max-height: 100%; object-fit: contain; object-position: center; object-fit: fill;">-->
+                          <img src="{{p.main_image}}" alt="#" style="text-align: center; max-height: 100%; max-width: 100%; aspect-ratio: 4/3; object-fit: contain; object-position: center;">
+                        </div>
+                        <span *ngIf="utilityService.discount(p.regular_price, p.sale_price)>0" class="sale-tag">-{{utilityService.discount(p.regular_price, p.sale_price).toFixed(0)}}%</span>
+                        <span *ngIf="utilityService.isNewItem(p.creation_date)" class="new-tag" style="left: calc(100% - 45px);">New</span>
+                        <div class="button">
+                          <a href="javascript:void (0)" class="btn" (click)="addItemToCart(p)"><i class="bx bx-cart"></i>Add to Cart</a>
+                        </div>
+                      </div>
+                      <div class="product-info" style="height: 155px;">
+<!--                        <span class="category">Watches</span>-->
+                        <h4 class="title line-clamp" style="word-wrap: anywhere;">
+<!--                          <a href="smartgroup/productgrid">{{p.title}}</a>-->
+                          <a href="smartgroup/productdetail/{{p.product_id}}/{{p.sell_type}}" (click)="displayProductInfo(p.product_id, p.sell_type)">{{p.title}}</a>
+                        </h4>
+                        <h2 class="float-end text-warning cursor-pointer" style="font-size:27px" (click)="toggleWishlist(p)"><i class='bx' [class]="p.wished ? 'bxs-heart' : 'bx-heart'"></i></h2>
+                        <ul *ngIf="p.review_overall_score" class="review">
+                          <li><i *ngIf="calOverScore(p.review_overall_score) < 0.25" class="bx bx-star"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 0.25 && calOverScore(p.review_overall_score) < 0.75 " class="bx bxs-star-half"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 0.75 " class="bx bxs-star"></i></li>
+
+                          <li><i *ngIf="calOverScore(p.review_overall_score) < 1.25" class="bx bx-star"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 1.25 && calOverScore(p.review_overall_score) < 1.75 " class="bx bxs-star-half"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 1.75 && calOverScore(p.review_overall_score) " class="bx bxs-star"></i></li>
+
+                          <li><i *ngIf="calOverScore(p.review_overall_score) < 2.25" class="bx bx-star"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 2.25 && calOverScore(p.review_overall_score) < 2.75 " class="bx bxs-star-half"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 2.75 && calOverScore(p.review_overall_score)  " class="bx bxs-star"></i></li>
+
+                          <li><i *ngIf="calOverScore(p.review_overall_score) < 3.25" class="bx bx-star"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 3.25 && calOverScore(p.review_overall_score) < 3.75 " class="bx bxs-star-half"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 3.75 && calOverScore(p.review_overall_score)  " class="bx bxs-star"></i></li>
+
+                          <li><i *ngIf="calOverScore(p.review_overall_score) < 4.25  " class="bx bx-star"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 4.25 && calOverScore(p.review_overall_score) < 4.75 " class="bx bxs-star-half"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 4.75 && calOverScore(p.review_overall_score) <= 5 " class="bx bxs-star"></i></li>
+
+                          <li><span>{{calOverScore(p.review_overall_score) | number: '1.1-1' }}</span></li>
+                        </ul>
+                        <ul *ngIf="!p.review_overall_score" class="review">
+                          <li><i class="bx bxs-star"></i></li>
+                          <li><i class="bx bxs-star"></i></li>
+                          <li><i class="bx bxs-star"></i></li>
+                          <li><i class="bx bxs-star"></i></li>
+                          <li><i class="bx bxs-star"></i></li>
+                        </ul>
+
+                        <div class="price">
+<!--                          <span>{{curSymbol}}{{p.regular_price}}</span>-->
+                          <span style="display: inline-block; color: #0000ff;">{{curSymbol}}{{p.sale_price}}</span>
+                          <span style="display: inline-block; margin-left: 15px; color: #888; text-decoration: line-through;">{{curSymbol}}{{p.regular_price}}</span>
+
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Single Product -->
+
+                    <!-- Start Single Product Group Buying -->
+                    <div *ngIf="p.sell_type=='G'" class="single-product">
+                      <div class="product-image" style="text-align: center;">
+<!--                        {{p.product_id}}-->
+<!--                        <img src="{{p.main_image}}" alt="#" style="height: 230px; text-align: center; max-width: 100%; max-height: 100%; object-fit: contain; object-position: center; object-fit: fill;">-->
+                        <div style="max-height: 230px;min-width: 200px;">
+                          <img src="{{p.main_image}}" alt="#" style="text-align: center; max-height: 100%; max-width: 100%; aspect-ratio: 4/3; object-fit: contain; object-position: center;">
+                        </div>
+
+                        <span *ngIf="utilityService.discount(p.grpbuy_regular_price, p.grpbuy_sale_price)>0" class="sale-tag">-{{utilityService.discount(p.grpbuy_regular_price, p.grpbuy_sale_price).toFixed(0)}}%</span>
+<!--                        <span *ngIf="utilityService.isNewItem(p.creation_date)" class="new-tag" style="left:243px">New</span>-->
+                        <span *ngIf="utilityService.isNewItem(p.creation_date)" class="new-tag" style="left: calc(100% - 45px);" >New</span>
+                        <div class="button">
+                          <a href="javascript:void (0)" class="btn" (click)="addItemToCart(p)"><i class="bx bx-cart"></i>Add to Cart</a>
+                        </div>
+                      </div>
+
+                      <div class="product-info" style="height: 155px;">
+                        <!--                        <span class="category">Watches</span>-->
+                        <h4 class="title line-clamp2" style="word-wrap: anywhere;">
+                          <!--                          <a href="smartgroup/productgrid">{{p.title}}</a>-->
+                          <a href="smartgroup/productdetail/{{p.product_id}}/{{p.sell_type}}" (click)="displayProductInfo(p.product_id, p.sell_type)">{{p.title}}</a>
+                        </h4>
+                        <h2 class="float-end text-warning cursor-pointer" style="font-size:27px" (click)="toggleWishlist(p)"><i class='bx' [class]="p.wished ? 'bxs-heart' : 'bx-heart'"></i></h2>
+<!--                        <ul class="review">-->
+<!--                          <li><i class="bx bxs-star"></i></li>-->
+<!--                          <li><i class="bx bxs-star"></i></li>-->
+<!--                          <li><i class="bx bxs-star"></i></li>-->
+<!--                          <li><i class="bx bxs-star"></i></li>-->
+<!--                          <li><i class="bx bx-star"></i></li>-->
+<!--                          <li><span>4.0 Review(s)</span></li>-->
+<!--                        </ul>-->
+
+                        <ul *ngIf="p.review_overall_score" class="review">
+                          <li><i *ngIf="calOverScore(p.review_overall_score) < 0.25" class="bx bx-star"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 0.25 && calOverScore(p.review_overall_score) < 0.75 " class="bx bxs-star-half"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 0.75 " class="bx bxs-star"></i></li>
+
+                          <li><i *ngIf="calOverScore(p.review_overall_score) < 1.25" class="bx bx-star"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 1.25 && calOverScore(p.review_overall_score) < 1.75 " class="bx bxs-star-half"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 1.75 && calOverScore(p.review_overall_score) " class="bx bxs-star"></i></li>
+
+                          <li><i *ngIf="calOverScore(p.review_overall_score) < 2.25" class="bx bx-star"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 2.25 && calOverScore(p.review_overall_score) < 2.75 " class="bx bxs-star-half"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 2.75 && calOverScore(p.review_overall_score)  " class="bx bxs-star"></i></li>
+
+                          <li><i *ngIf="calOverScore(p.review_overall_score) < 3.25" class="bx bx-star"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 3.25 && calOverScore(p.review_overall_score) < 3.75 " class="bx bxs-star-half"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 3.75 && calOverScore(p.review_overall_score)  " class="bx bxs-star"></i></li>
+
+                          <li><i *ngIf="calOverScore(p.review_overall_score) < 4.25  " class="bx bx-star"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 4.25 && calOverScore(p.review_overall_score) < 4.75 " class="bx bxs-star-half"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 4.75 && calOverScore(p.review_overall_score) <= 5 " class="bx bxs-star"></i></li>
+
+                          <li><span>{{calOverScore(p.review_overall_score) | number: '1.1-1' }}</span></li>
+                        </ul>
+                        <ul *ngIf="!p.review_overall_score" class="review">
+                          <li><i class="bx bxs-star"></i></li>
+                          <li><i class="bx bxs-star"></i></li>
+                          <li><i class="bx bxs-star"></i></li>
+                          <li><i class="bx bxs-star"></i></li>
+                          <li><i class="bx bxs-star"></i></li>
+<!--                          <li><span>0 Review</span></li>-->
+                        </ul>
+
+                        <div class="price" style="margin-top: 0px; min-width: 200px">
+                          <!--                          <span>{{curSymbol}}{{p.regular_price}}</span>-->
+                          <span style="display: inline-block; color: #4e4e50; font-size: calc(12px + 0.15vw);">Group Buy</span>
+                          <span style="display: inline-block; margin-left: 15px; color: #0000ff; font-size: calc(12px + 0.15vw);"> {{curSymbol}}{{p.grpbuy_sale_price}}</span>
+                          <span style="display: inline-block; margin-left: 15px; color: #888; text-decoration: line-through; font-size: calc(12px + 0.15vw);">{{curSymbol}}{{p.grpbuy_regular_price}}</span>
+                          <!--                          <span style="display: inline-block; color: #0000ff;">End At : {{p.pkg_grpbuy_end}}</span>-->
+                          <!--                          <span style="display: inline-block; margin-left: 15px; color: #888; text-decoration: line-through;">{{curSymbol}}{{p.regular_price}}</span>-->
+
+                        </div>
+
+                        <div class="row">
+                          <div class="col">
+                            <div class="row">
+                              <div class="col-xxl-3" style="width: 25%"><span class="fw-semibold text-center">Days</span></div>
+                              <div class="col-xxl-3" style="width: 25%"><span class="fw-semibold text-center">Hours</span></div>
+                              <div class="col-xxl-3" style="width: 25%"><span class="fw-semibold text-center">Mins</span></div>
+                              <div class="col-xxl-3" style="width: 25%"><span class="fw-semibold text-center">Secs</span></div>
+                            </div>
+                            <div class="row">
+                              <div class="col-xxl-3" style="width: 25%"><span class="text-center">{{p.pkg_end_time_counter.EndDay}}</span></div>
+                              <div class="col-xxl-3" style="width: 25%"><span class="text-center">{{p.pkg_end_time_counter.EndHour}}</span></div>
+                              <div class="col-xxl-3" style="width: 25%"><span class="text-center">{{p.pkg_end_time_counter.EndMin}}</span></div>
+                              <div class="col-xxl-3" style="width: 25%"><span class="text-center">{{p.pkg_end_time_counter.EndSec}}</span></div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </div>
+
+                    </div>
+                    <!-- End Single Product Group Buying -->
+
+                    <!-- Start Package Product -->
+                    <div *ngIf="p.sell_type=='P'" class="single-product">
+                      <div class="product-image" style="text-align: center;">
+<!--                        {{p.product_id}}-->
+<!--                        <img src="{{p.pkg_grp_image}}" alt="#" style="height: 230px; text-align: center; max-width: 100%; max-height: 100%; object-fit: contain; object-position: center; object-fit: fill;">-->
+                        <div style="max-height: 230px;min-width: 200px;">
+                          <img src="{{p.pkg_grp_image}}" alt="#" style="text-align: center; max-height: 100%; max-width: 100%; aspect-ratio: 4/3; object-fit: contain; object-position: center;">
+                        </div>
+
+<!--                        <span *ngIf="utilityService.isNewItem(p.pkg_creation_date)" class="new-tag" style="left:243px">New</span>-->
+                        <span *ngIf="utilityService.isNewItem(p.pkg_creation_date)" class="new-tag" style="left: calc(100% - 45px);" >New</span>
+                        <div class="button">
+                          <a href="smartgroup/packagegrid/{{p.pkg_grp_id}}" class="btn" (click)="displayPackageInfo(p.pkg_grp_id)"><i class="bx bx-search-alt"></i>View Package Details</a>
+                        </div>
+                      </div>
+
+                      <div class="product-info" style="height: 155px;">
+                        <!--                        <span class="category">Watches</span>-->
+                        <h4 class="title line-clamp2" style="word-wrap: anywhere;">
+                          <!--                          <a href="smartgroup/productgrid">{{p.title}}</a>-->
+                          <a href="smartgroup/packagegrid/{{p.pkg_grp_id}}" (click)="displayPackageInfo(p.pkg_grp_id)">{{p.pkg_grp_name}}</a>
+                        </h4>
+                        <h2 class="float-end text-warning cursor-pointer" style="font-size:27px" (click)="toggleWishlist(p)"><i class='bx' [class]="p.wished ? 'bxs-heart' : 'bx-heart'"></i></h2>
+<!--
+                        <ul class="review">
+                          <li><i class="bx bxs-star"></i></li>
+                          <li><i class="bx bxs-star"></i></li>
+                          <li><i class="bx bxs-star"></i></li>
+                          <li><i class="bx bxs-star"></i></li>
+                          <li><i class="bx bx-star"></i></li>
+                          <li><span>4.0 Review(s)</span></li>
+                        </ul>
+-->
+                        <ul *ngIf="p.review_overall_score" class="review">
+                          <li><i *ngIf="calOverScore(p.review_overall_score) < 0.25" class="bx bx-star"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 0.25 && calOverScore(p.review_overall_score) < 0.75 " class="bx bxs-star-half"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 0.75 " class="bx bxs-star"></i></li>
+
+                          <li><i *ngIf="calOverScore(p.review_overall_score) < 1.25" class="bx bx-star"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 1.25 && calOverScore(p.review_overall_score) < 1.75 " class="bx bxs-star-half"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 1.75 && calOverScore(p.review_overall_score) " class="bx bxs-star"></i></li>
+
+                          <li><i *ngIf="calOverScore(p.review_overall_score) < 2.25" class="bx bx-star"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 2.25 && calOverScore(p.review_overall_score) < 2.75 " class="bx bxs-star-half"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 2.75 && calOverScore(p.review_overall_score)  " class="bx bxs-star"></i></li>
+
+                          <li><i *ngIf="calOverScore(p.review_overall_score) < 3.25" class="bx bx-star"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 3.25 && calOverScore(p.review_overall_score) < 3.75 " class="bx bxs-star-half"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 3.75 && calOverScore(p.review_overall_score)  " class="bx bxs-star"></i></li>
+
+                          <li><i *ngIf="calOverScore(p.review_overall_score) < 4.25  " class="bx bx-star"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 4.25 && calOverScore(p.review_overall_score) < 4.75 " class="bx bxs-star-half"></i></li>
+                          <li><i *ngIf="calOverScore(p.review_overall_score) >= 4.75 && calOverScore(p.review_overall_score) <= 5 " class="bx bxs-star"></i></li>
+
+                        <li><span>{{calOverScore(p.review_overall_score) | number: '1.1-1' }}</span></li>
+                        </ul>
+                        <ul *ngIf="!p.review_overall_score" class="review">
+                          <li><i class="bx bxs-star"></i></li>
+                          <li><i class="bx bxs-star"></i></li>
+                          <li><i class="bx bxs-star"></i></li>
+                          <li><i class="bx bxs-star"></i></li>
+                          <li><i class="bx bxs-star"></i></li>
+                          <!--                          <li><span>0 Review</span></li>-->
+                        </ul>
+
+                        <div class="price" style="margin-top: 0px; min-width: 200px">
+                          <!--                          <span>{{curSymbol}}{{p.regular_price}}</span>-->
+                          <span style="display: inline-block; color: #0000ff; font-size: calc(13px + 0.15vw);">Group Buying Offering</span>
+
+<!--                          <span style="display: inline-block; color: #0000ff;">End At : {{p.pkg_grpbuy_end}}</span>-->
+                          <!--                          <span style="display: inline-block; margin-left: 15px; color: #888; text-decoration: line-through;">{{curSymbol}}{{p.regular_price}}</span>-->
+
+                        </div>
+
+                        <div class="row">
+                          <div class="col">
+                            <div class="row">
+                              <div class="col-xxl-3" style="width: 25%"><span class="fw-semibold text-center">Days</span></div>
+                              <div class="col-xxl-3" style="width: 25%"><span class="fw-semibold text-center">Hours</span></div>
+                              <div class="col-xxl-3" style="width: 25%"><span class="fw-semibold text-center">Mins</span></div>
+                              <div class="col-xxl-3" style="width: 25%"><span class="fw-semibold text-center">Secs</span></div>
+                            </div>
+                            <div class="row">
+                              <div class="col-xxl-3" style="width: 25%"><span class="text-center">{{p.pkg_end_time_counter.EndDay}}</span></div>
+                              <div class="col-xxl-3" style="width: 25%"><span class="text-center">{{p.pkg_end_time_counter.EndHour}}</span></div>
+                              <div class="col-xxl-3" style="width: 25%"><span class="text-center">{{p.pkg_end_time_counter.EndMin}}</span></div>
+                              <div class="col-xxl-3" style="width: 25%"><span class="text-center">{{p.pkg_end_time_counter.EndSec}}</span></div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </div>
+
+                    </div>
+                    <!-- End Package Product -->
+
+
+                  </div>
+
+<!------                      ------->
+
+<!------                      ------->
+
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <!-- Pagination -->
+
+
+
+                  <mat-paginator #paginator
+                                 class="demo-paginator"
+                                 (page)="handlePageEvent($event)"
+                                 [length]="length"
+                                 [pageSize]="pageSize"
+                                 [disabled]="disabled"
+                                 [showFirstLastButtons]="showFirstLastButtons"
+                                 [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+                                 [hidePageSize]="hidePageSize"
+                                 [pageIndex]="pageIndex"
+                                 aria-label="Select page"
+                                 style="margin-top: 20px">
+                  </mat-paginator>
+
+<!--
+                  <div class="pagination left">
+                    <ul class="pagination-list">
+                      <li class="active"><a href="javascript:void(0)">1</a></li>
+                      <li><a href="javascript:void(0)">2</a></li>
+                      <li><a href="javascript:void(0)">3</a></li>
+                      <li><a href="javascript:void(0)">4</a></li>
+                      <li><a href="javascript:void(0)"><i class="bx bx-chevron-right"></i></a></li>
+                    </ul>
+                  </div>
+-->
+
+                  <!--/ End Pagination -->
+                </div>
+              </div>
+            </div>
+
+
+            <div class="tab-pane fade" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
+              <div class="row">
+
+
+                <div *ngFor="let p of displayProdPkgList" class="col-lg-12 col-md-12 col-12">
+                  <!-- Start Single Product -->
+                  <div *ngIf="p.sell_type=='S'" class="single-product">
+                    <div class="row align-items-center">
+                      <div class="col-lg-4 col-md-4 col-12">
+                        <div class="product-image" style="height: 260px;">
+                          <img src="{{p.main_image}}" alt="#" style="text-align: center; max-width: 100%; max-height: 100%; object-fit: contain; object-position: center; object-fit: fill;">
+                          <span *ngIf="utilityService.discount(p.regular_price, p.sale_price)>0" class="sale-tag">-{{utilityService.discount(p.regular_price, p.sale_price).toFixed(0)}}%</span>
+                          <span *ngIf="utilityService.isNewItem(p.creation_date)" class="new-tag" style="left:243px">New</span>
+                          <div class="button">
+                            <a href="javascript:void (0)" class="btn" (click)="addItemToCart(p)"><i class="bx bx-cart"></i> Add to Cart</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-8 col-md-8 col-12">
+                        <div class="product-info">
+<!--                          <span class="category">Watches</span>-->
+                          <h2 class="float-end text-warning cursor-pointer" style="font-size:27px" (click)="toggleWishlist(p)"><i class='bx' [class]="p.wished ? 'bxs-heart' : 'bx-heart'"></i></h2>
+
+                          <h4 class="title">
+                            <a href="smartgroup/productdetail/{{p.product_id}}/{{p.sell_type}}" (click)="displayProductInfo(p.product_id, p.sell_type)">{{p.title}}</a>
+                          </h4>
+                          <p class="category"><i class="bx bx-purchase-tag"></i> Brand:<a href="javascript:void(0)">{{p.brand_name}}</a></p>
+                          <p class="category"><i class="bx bx-purchase-tag"></i> Category:<a href="javascript:void(0)">{{p.category_name}}</a></p>
+
+<!--                          <ul class="review">
+                            <li><i class="bx bxs-star"></i></li>
+                            <li><i class="bx bxs-star"></i></li>
+                            <li><i class="bx bxs-star"></i></li>
+                            <li><i class="bx bxs-star"></i></li>
+                            <li><i class="bx bx-star"></i></li>
+                            <li><span>4.0 Review(s)</span></li>
+                          </ul>-->
+
+                          <ul *ngIf="p.review_overall_score" class="review">
+                            <li><span style="padding-right: 3px;">{{calOverScore(p.review_overall_score) | number: '1.1-1' }} </span></li>
+                            <li><i *ngIf="calOverScore(p.review_overall_score) < 0.25" class="bx bx-star"></i></li>
+                            <li><i *ngIf="calOverScore(p.review_overall_score) >= 0.25 && calOverScore(p.review_overall_score) < 0.75 " class="bx bxs-star-half"></i></li>
+                            <li><i *ngIf="calOverScore(p.review_overall_score) >= 0.75 " class="bx bxs-star"></i></li>
+
+                            <li><i *ngIf="calOverScore(p.review_overall_score) < 1.25" class="bx bx-star"></i></li>
+                            <li><i *ngIf="calOverScore(p.review_overall_score) >= 1.25 && calOverScore(p.review_overall_score) < 1.75 " class="bx bxs-star-half"></i></li>
+                            <li><i *ngIf="calOverScore(p.review_overall_score) >= 1.75 && calOverScore(p.review_overall_score) " class="bx bxs-star"></i></li>
+
+                            <li><i *ngIf="calOverScore(p.review_overall_score) < 2.25" class="bx bx-star"></i></li>
+                            <li><i *ngIf="calOverScore(p.review_overall_score) >= 2.25 && calOverScore(p.review_overall_score) < 2.75 " class="bx bxs-star-half"></i></li>
+                            <li><i *ngIf="calOverScore(p.review_overall_score) >= 2.75 && calOverScore(p.review_overall_score)  " class="bx bxs-star"></i></li>
+
+                            <li><i *ngIf="calOverScore(p.review_overall_score) < 3.25" class="bx bx-star"></i></li>
+                            <li><i *ngIf="calOverScore(p.review_overall_score) >= 3.25 && calOverScore(p.review_overall_score) < 3.75 " class="bx bxs-star-half"></i></li>
+                            <li><i *ngIf="calOverScore(p.review_overall_score) >= 3.75 && calOverScore(p.review_overall_score)  " class="bx bxs-star"></i></li>
+
+                            <li><i *ngIf="calOverScore(p.review_overall_score) < 4.25  " class="bx bx-star"></i></li>
+                            <li><i *ngIf="calOverScore(p.review_overall_score) >= 4.25 && calOverScore(p.review_overall_score) < 4.75 " class="bx bxs-star-half"></i></li>
+                            <li><i *ngIf="calOverScore(p.review_overall_score) >= 4.75 && calOverScore(p.review_overall_score) <= 5 " class="bx bxs-star"></i></li>
+
+                            <li><span>{{p.review_overall_score.total_review_count}} Review{{p.review_overall_score.total_review_count>1 ? 's' : ''}}</span></li>
+                          </ul>
+                          <ul *ngIf="!p.review_overall_score" class="review">
+                            <li><i class="bx bxs-star"></i></li>
+                            <li><i class="bx bxs-star"></i></li>
+                            <li><i class="bx bxs-star"></i></li>
+                            <li><i class="bx bxs-star"></i></li>
+                            <li><i class="bx bxs-star"></i></li>
+                            <li><span></span></li>
+                          </ul>
+
+                          <div class="price">
+                            <span>{{curSymbol}}{{p.sale_price}}</span>
+                            <span style="display: inline-block; margin-left: 15px; color: #888; text-decoration: line-through;">{{curSymbol}}{{p.regular_price}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Single Product -->
+
+                  <!-- Start Single Product Group Buying -->
+                  <div *ngIf="p.sell_type=='G'" class="single-product">
+
+                    <div class="row align-items-center">
+                      <div class="col-12 col-md-4 col-lg-4">
+                        <div class="product-image" style="height: 260px;">
+                          <img src="{{p.main_image}}" alt="#" style="text-align: center; max-width: 100%; max-height: 100%; object-fit: contain; object-position: center; object-fit: fill;">
+                          <span *ngIf="utilityService.discount(p.grpbuy_regular_price, p.grpbuy_sale_price)>0" class="sale-tag">-{{utilityService.discount(p.grpbuy_regular_price, p.grpbuy_sale_price).toFixed(0)}}%</span>
+                          <span *ngIf="utilityService.isNewItem(p.creation_date)" class="new-tag" style="left:243px">New</span>
+                          <div class="button">
+                            <a href="javascript:void (0)" class="btn" (click)="addItemToCart(p)"><i class="bx bx-cart"></i> Add to Cart</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-8 col-lg-8">
+                        <div class="product-info">
+                          <div class="row" style="margin-top: -30px;">
+                            <div class="col-xxl-6"></div>
+                            <div class="col">
+                              <!--                              <h4 class="title">AAXXXXXX</h4>-->
+                              <h2 class="float-end text-warning cursor-pointer" style="font-size:27px" (click)="toggleWishlist(p)"><i class='bx' [class]="p.wished ? 'bxs-heart' : 'bx-heart'"></i></h2>
+
+                              <p class="w-lg-50" style="font-size: 20px;color: orangered;">Group Buying In Progress</p>
+                              <div class="row">
+                                <div class="col-xxl-3"><span class="fw-semibold text-center">Days</span></div>
+                                <div class="col-xxl-3"><span class="fw-semibold text-center">Hours</span></div>
+                                <div class="col-xxl-3"><span class="fw-semibold text-center">Mins</span></div>
+                                <div class="col-xxl-3"><span class="fw-semibold text-center">Secs</span></div>
+                              </div>
+                              <div class="row">
+                                <div class="col-xxl-3"><span class="text-center">{{p.pkg_end_time_counter.EndDay}}</span></div>
+                                <div class="col-xxl-3"><span class="text-center">{{p.pkg_end_time_counter.EndHour}}</span></div>
+                                <div class="col-xxl-3"><span class="text-center">{{p.pkg_end_time_counter.EndMin}}</span></div>
+                                <div class="col-xxl-3"><span class="text-center">{{p.pkg_end_time_counter.EndSec}}</span></div>
+                              </div>
+
+
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col">
+                              <h4 class="title">
+                                <a href="smartgroup/productdetail/{{p.product_id}}/{{p.sell_type}}" (click)="displayProductInfo(p.product_id, p.sell_type)">{{p.title}}</a>
+                              </h4>
+                              <!--                              <span style="display:inline-block;color:#0000ff;">Group Buying Offering</span>
+                                                            <p>
+                                                              <span style="display:inline-block;color:#0000ff;">End At : 2025-02-27T13:35:55.000+00:00</span>
+                                                            </p>-->
+                              <p class="category"><i class="bx bx-purchase-tag"></i> Brand:<a href="javascript:void(0)">{{p.brand_name}}</a></p>
+                              <p class="category"><i class="bx bx-purchase-tag"></i> Category:<a href="javascript:void(0)">{{p.category_name}}</a></p>
+<!--
+                              <ul class="review">
+                                <li><i class="bx bxs-star"></i></li>
+                                <li><i class="bx bxs-star"></i></li>
+                                <li><i class="bx bxs-star"></i></li>
+                                <li><i class="bx bxs-star"></i></li>
+                                <li><i class="bx bx-star"></i></li>
+                                <li><span>4.0 Review(s)</span></li>
+                              </ul>
+
+-->
+                              <ul *ngIf="p.review_overall_score" class="review">
+                                <li><span style="padding-right: 3px;">{{calOverScore(p.review_overall_score) | number: '1.1-1' }} </span></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) < 0.25" class="bx bx-star"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 0.25 && calOverScore(p.review_overall_score) < 0.75 " class="bx bxs-star-half"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 0.75 " class="bx bxs-star"></i></li>
+
+                                <li><i *ngIf="calOverScore(p.review_overall_score) < 1.25" class="bx bx-star"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 1.25 && calOverScore(p.review_overall_score) < 1.75 " class="bx bxs-star-half"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 1.75 && calOverScore(p.review_overall_score) " class="bx bxs-star"></i></li>
+
+                                <li><i *ngIf="calOverScore(p.review_overall_score) < 2.25" class="bx bx-star"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 2.25 && calOverScore(p.review_overall_score) < 2.75 " class="bx bxs-star-half"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 2.75 && calOverScore(p.review_overall_score)  " class="bx bxs-star"></i></li>
+
+                                <li><i *ngIf="calOverScore(p.review_overall_score) < 3.25" class="bx bx-star"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 3.25 && calOverScore(p.review_overall_score) < 3.75 " class="bx bxs-star-half"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 3.75 && calOverScore(p.review_overall_score)  " class="bx bxs-star"></i></li>
+
+                                <li><i *ngIf="calOverScore(p.review_overall_score) < 4.25  " class="bx bx-star"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 4.25 && calOverScore(p.review_overall_score) < 4.75 " class="bx bxs-star-half"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 4.75 && calOverScore(p.review_overall_score) <= 5 " class="bx bxs-star"></i></li>
+
+                                <li><span>{{p.review_overall_score.total_review_count}} Review{{p.review_overall_score.total_review_count>1 ? 's' : ''}}</span></li>
+                              </ul>
+                              <ul *ngIf="!p.review_overall_score" class="review">
+                                <li><i class="bx bxs-star"></i></li>
+                                <li><i class="bx bxs-star"></i></li>
+                                <li><i class="bx bxs-star"></i></li>
+                                <li><i class="bx bxs-star"></i></li>
+                                <li><i class="bx bxs-star"></i></li>
+                                <li><span></span></li>
+                              </ul>
+                            </div>
+                            </div>
+                          <div class="row"></div>
+                          <div class="price">
+                            <span>{{curSymbol}}{{p.sale_price}}</span>
+                            <span style="display: inline-block; margin-left: 15px; color: #888; text-decoration: line-through;">{{curSymbol}}{{p.regular_price}}</span>
+                            <!--                            <span style="display: inline-block; color: #0000ff;">Group Buying Offering</span>
+                                                        <p>
+                                                          <span style="display: inline-block; color: #0000ff;">End At : {{p.pkg_grpbuy_end}}</span>
+                                                        </p>-->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- End Single Product Group Buying -->
+
+                  <!-- Start Package Product Group Buying -->
+                  <div *ngIf="p.sell_type=='P'" class="single-product">
+
+                    <div class="row align-items-center">
+                      <div class="col-12 col-md-4 col-lg-4">
+                        <div class="product-image" style="height: 260px;">
+                          <img src="{{p.pkg_grp_image}}" alt="#" style="text-align: center; max-width: 100%; max-height: 100%; object-fit: contain; object-position: center; object-fit: fill;">
+                          <span *ngIf="utilityService.isNewItem(p.pkg_creation_date)" class="new-tag" style="left:243px">New</span>
+                          <div class="button">
+                            <a href="smartgroup/packagegrid/{{p.pkg_grp_id}}" class="btn" (click)="displayPackageInfo(p.pkg_grp_id)"><i class="bx bx-search"></i>View Package Details</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-8 col-lg-8">
+                        <div class="product-info">
+                          <div class="row" style="margin-top: -30px;">
+                            <div class="col-xxl-6"></div>
+                            <div class="col">
+<!--                              <h4 class="title">AAXXXXXX</h4>-->
+                              <h2 class="float-end text-warning cursor-pointer" style="font-size:27px" (click)="toggleWishlist(p)"><i class='bx' [class]="p.wished ? 'bxs-heart' : 'bx-heart'"></i></h2>
+
+                              <p class="w-lg-50" style="font-size: 20px;color: orangered;">Group Buying In Progress</p>
+                              <div class="row">
+                                <div class="col-xxl-3"><span class="fw-semibold text-center">Days</span></div>
+                                <div class="col-xxl-3"><span class="fw-semibold text-center">Hours</span></div>
+                                <div class="col-xxl-3"><span class="fw-semibold text-center">Mins</span></div>
+                                <div class="col-xxl-3"><span class="fw-semibold text-center">Secs</span></div>
+                              </div>
+                              <div class="row">
+                                <div class="col-xxl-3"><span class="text-center">{{p.pkg_end_time_counter.EndDay}}</span></div>
+                                <div class="col-xxl-3"><span class="text-center">{{p.pkg_end_time_counter.EndHour}}</span></div>
+                                <div class="col-xxl-3"><span class="text-center">{{p.pkg_end_time_counter.EndMin}}</span></div>
+                                <div class="col-xxl-3"><span class="text-center">{{p.pkg_end_time_counter.EndSec}}</span></div>
+                              </div>
+
+
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col">
+                              <h4 class="title">
+                                <a href="smartgroup/packagegrid/{{p.pkg_grp_id}}" (click)="displayPackageInfo(p.pkg_grp_id)">{{p.title}}</a>
+                              </h4>
+<!--                              <span style="display:inline-block;color:#0000ff;">Group Buying Offering</span>
+                              <p>
+                                <span style="display:inline-block;color:#0000ff;">End At : 2025-02-27T13:35:55.000+00:00</span>
+                              </p>-->
+                              <p class="category"><i class="bx bx-purchase-tag"></i> Brand:<a href="javascript:void(0)">{{p.brand_name}}</a></p>
+                              <p class="category"><i class="bx bx-purchase-tag"></i> Category:<a href="javascript:void(0)">{{p.category_name}}</a></p>
+<!--
+                              <ul class="review">
+                                <li><i class="bx bxs-star"></i></li>
+                                <li><i class="bx bxs-star"></i></li>
+                                <li><i class="bx bxs-star"></i></li>
+                                <li><i class="bx bxs-star"></i></li>
+                                <li><i class="bx bx-star"></i></li>
+                                <li><span>4.0 Review(s)</span></li>
+                              </ul>
+-->
+                              <ul *ngIf="p.review_overall_score" class="review">
+                                <li><span style="padding-right: 3px;">{{calOverScore(p.review_overall_score) | number: '1.1-1' }} </span></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) < 0.25" class="bx bx-star"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 0.25 && calOverScore(p.review_overall_score) < 0.75 " class="bx bxs-star-half"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 0.75 " class="bx bxs-star"></i></li>
+
+                                <li><i *ngIf="calOverScore(p.review_overall_score) < 1.25" class="bx bx-star"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 1.25 && calOverScore(p.review_overall_score) < 1.75 " class="bx bxs-star-half"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 1.75 && calOverScore(p.review_overall_score) " class="bx bxs-star"></i></li>
+
+                                <li><i *ngIf="calOverScore(p.review_overall_score) < 2.25" class="bx bx-star"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 2.25 && calOverScore(p.review_overall_score) < 2.75 " class="bx bxs-star-half"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 2.75 && calOverScore(p.review_overall_score)  " class="bx bxs-star"></i></li>
+
+                                <li><i *ngIf="calOverScore(p.review_overall_score) < 3.25" class="bx bx-star"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 3.25 && calOverScore(p.review_overall_score) < 3.75 " class="bx bxs-star-half"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 3.75 && calOverScore(p.review_overall_score)  " class="bx bxs-star"></i></li>
+
+                                <li><i *ngIf="calOverScore(p.review_overall_score) < 4.25  " class="bx bx-star"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 4.25 && calOverScore(p.review_overall_score) < 4.75 " class="bx bxs-star-half"></i></li>
+                                <li><i *ngIf="calOverScore(p.review_overall_score) >= 4.75 && calOverScore(p.review_overall_score) <= 5 " class="bx bxs-star"></i></li>
+
+                                <li><span>{{p.review_overall_score.total_review_count}} Review{{p.review_overall_score.total_review_count>1 ? 's' : ''}}</span></li>
+                              </ul>
+                              <ul *ngIf="!p.review_overall_score" class="review">
+                                <li><i class="bx bxs-star"></i></li>
+                                <li><i class="bx bxs-star"></i></li>
+                                <li><i class="bx bxs-star"></i></li>
+                                <li><i class="bx bxs-star"></i></li>
+                                <li><i class="bx bxs-star"></i></li>
+                                <li><span></span></li>
+                              </ul>
+
+                            </div>
+                          </div>
+                          <div class="row"></div>
+                          <div class="price">
+<!--                            <span style="display: inline-block; color: #0000ff;">Group Buying Offering</span>
+                            <p>
+                              <span style="display: inline-block; color: #0000ff;">End At : {{p.pkg_grpbuy_end}}</span>
+                            </p>-->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+<!--
+                    <div class="row align-items-center">
+                      <div class="col-lg-4 col-md-4 col-12">
+                        <div class="product-image">
+                          <img src="{{p.pkg_grp_image}}" alt="#">
+                          <div class="button">
+                            <a href="smartgroup/packagegrid/{{p.pkg_grp_id}}" class="btn" (click)="displayPackageInfo(p.pkg_grp_id)"><i class="bx bx-search"></i>View Package Details</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-8 col-md-8 col-12">
+                        <div class="product-info">
+                          &lt;!&ndash;                          <span class="category">Watches</span>&ndash;&gt;
+                          <h4 class="title">
+                            <a href="smartgroup/packagegrid/{{p.pkg_grp_id}}" (click)="displayPackageInfo(p.pkg_grp_id)">{{p.title}}</a>
+                          </h4>
+                          <ul class="review">
+                            <li><i class="bx bxs-star"></i></li>
+                            <li><i class="bx bxs-star"></i></li>
+                            <li><i class="bx bxs-star"></i></li>
+                            <li><i class="bx bxs-star"></i></li>
+                            <li><i class="bx bx-star"></i></li>
+                            <li><span>4.0 Review(s)</span></li>
+                          </ul>
+                          <div class="price">
+
+                            <span style="display: inline-block; color: #0000ff;">Group Buying Offering</span>
+                            <p>
+                              <span style="display: inline-block; color: #0000ff;">End At : {{p.pkg_grpbuy_end}}</span>
+                            </p>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+-->
+                  </div>
+
+                  <!-- End Package Product Group Buying -->
+
+                </div>
+
+
+
+
+
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <!-- Pagination -->
+
+                  <mat-paginator #paginator
+                                 class="demo-paginator"
+                                 (page)="handlePageEvent($event)"
+                                 [length]="length"
+                                 [pageSize]="pageSize"
+                                 [disabled]="disabled"
+                                 [showFirstLastButtons]="showFirstLastButtons"
+                                 [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+                                 [hidePageSize]="hidePageSize"
+                                 [pageIndex]="pageIndex"
+                                 aria-label="Select page"
+                                 style="margin-top: 20px">
+                  </mat-paginator>
+
+<!--
+                  <div class="pagination left">
+                    <ul class="pagination-list">
+                      <li class="active"><a href="javascript:void(0)">1</a></li>
+                      <li><a href="javascript:void(0)">2</a></li>
+                      <li><a href="javascript:void(0)">3</a></li>
+                      <li><a href="javascript:void(0)">4</a></li>
+                      <li><a href="javascript:void(0)"><i class="bx bx-chevron-right"></i></a></li>
+                    </ul>
+                  </div>
+-->
+
+
+
+                  <!--/ End Pagination -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Product Grids -->
+

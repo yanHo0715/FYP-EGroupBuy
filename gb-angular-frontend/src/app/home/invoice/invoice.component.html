@@ -1,0 +1,323 @@
+<!--<p>invoice works!</p>-->
+
+<!-- ========== section start ========== -->
+<!--<section>
+  <div class="container-fluid">
+    &lt;!&ndash; ========== title-wrapper start ========== &ndash;&gt;
+    <div class="title-wrapper pt-30">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <div class="title d-flex align-items-center flex-wrap">
+            <h2 class="mr-40">Invoice</h2>
+            <a href="#0" class="main-btn primary-btn btn-hover btn-sm">
+              <i class="lni lni-plus mr-5"></i> New Invoice</a>
+          </div>
+        </div>
+        &lt;!&ndash; end col &ndash;&gt;
+        <div class="col-md-6">
+          <div class="breadcrumb-wrapper">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="#0">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  Invoice
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        &lt;!&ndash; end col &ndash;&gt;
+      </div>
+      &lt;!&ndash; end row &ndash;&gt;
+    </div>-->
+    <!-- ========== title-wrapper end ========== -->
+
+
+
+
+
+<!-- ========== section start ========== -->
+<section>
+  <div class="container-fluid">
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30" style="padding-top: 0px;" >
+      <div class="row align-items-center">
+<!--
+        <div class="col-md-6">
+          <div class="title d-flex align-items-center flex-wrap">
+            <h2 class="mr-40">Invoice</h2>
+            <a href="#0" class="main-btn primary-btn btn-hover btn-sm">
+              <i class="lni lni-plus mr-5"></i> New Invoice</a>
+          </div>
+        </div>
+        &lt;!&ndash; end col &ndash;&gt;
+        <div class="col-md-6">
+          <div class="breadcrumb-wrapper">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="#0">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  Invoice
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+-->
+        <!-- end col -->
+      </div>
+      <!-- end row -->
+    </div>
+    <!-- ========== title-wrapper end ========== -->
+
+    <!-- Invoice Wrapper Start -->
+
+
+
+<section id="invoice" class="shopping-cart section invoice section">
+  <div class="container">
+
+    <div class="invoice-wrapper">
+      <div class="row">
+        <div class="col-12">
+          <div class="invoice-card card-style mb-30" style="margin-top: 25px; padding: 100px;">
+            <div class="invoice-header">
+              <div class="invoice-for">
+                <h2 class="mb-10">Invoice</h2>
+                <p class="text-sm">
+<!--                  Admin Dashboard Design & Development-->
+                </p>
+              </div>
+              <div class="invoice-logo" style="width: 200px;border-radius: 0;margin-top: -25px;margin-left: 70px;">
+                <img src="assets/smartgroup/img/smartgroup.png" alt="" />
+              </div>
+              <div class="invoice-date">
+                <p><span>Date Issued:</span> {{order? order.order_date: ''}}</p>
+<!--                <p><span>Date Due:</span> 20/02/2028</p>-->
+                <p><span>Order ID:</span> #{{order? order.order_id: ''}}</p>
+              </div>
+            </div>
+            <div class="invoice-address">
+              <div class="address-item">
+                <h5 class="text-bold">To</h5>
+                <h1>{{userFirstName}} {{userLastName}}</h1>
+                <p class="text-sm">
+                  {{order? order.shipping_address: ''}}, {{order? order.shipping_post_code: ''}}, {{order? order.shipping_country: ''}}
+                </p>
+                <p class="text-sm">
+                  <span class="text-medium">Email:</span>
+                  {{userEmail}}
+                </p>
+              </div>
+
+<!--
+              <div class="address-item">
+                <h5 class="text-bold">To</h5>
+                <h1>Santa Gosh</h1>
+                <p class="text-sm">
+                  2972 Westheimer Rd. Santa Ana, Illinois 85486
+                </p>
+                <p class="text-sm">
+                  <span class="text-medium">Email:</span>
+                  admin01&#64;smartgroup.com
+                </p>
+              </div>
+-->
+
+            </div>
+            <div class="table-responsive">
+              <table class="invoice-table table">
+                <thead>
+                <tr>
+                  <th class="service">
+                    <h6 class="text-sm text-medium">Item</h6>
+                  </th>
+                  <th class="desc">
+                    <h6 class="text-sm text-medium">Descriptions</h6>
+                  </th>
+                  <th class="amount">
+                    <h6 class="text-sm text-medium">Unit Price</h6>
+                  </th>
+                  <th class="qty">
+                    <h6 class="text-sm text-medium">Qty</h6>
+                  </th>
+                  <th class="amount">
+                    <h6 class="text-sm text-medium">Amount</h6>
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr *ngFor="let ordDetail of order.order_detail_list">
+                  <td>
+<!--                    <p class="text-sm">{{ordDetail.sell_type=='P' ? ordDetail.product_name: ordDetail.product_name}}</p>-->
+                    <img src="{{ordDetail.product_image_url}}" class="img" style="width: 80px" alt="#">
+<!--                    <img *ngFor="let pkgi of item.package_item_list; let j=index" src="{{pkgi.photo_link}}" class="img" style="width: 80px" alt="#" >-->
+                  </td>
+                  <td>
+
+                    <p class="text-sm" *ngIf="ordDetail.sell_type=='G'">
+<!--                      {{ordDetail.sell_type=='P' ? "Package : " + ordDetail.package_name: ordDetail.product_title}}-->
+                      <b>Group Buy Item: </b>{{ordDetail.product_title}}
+                    </p>
+                    <p class="text-sm" *ngIf="ordDetail.sell_type=='P'">
+<!--                      {{ordDetail.sell_type=='P' ? "Package : " + ordDetail.package_name: ordDetail.product_title}}-->
+                      <b>Group Buy Package Set: </b>{{ordDetail.package_name}}
+                    </p>
+                    <p class="text-sm" *ngIf="ordDetail.sell_type=='S'">
+<!--                      {{ordDetail.sell_type=='P' ? "Package : " + ordDetail.package_name: ordDetail.product_title}}-->
+                      {{ordDetail.product_title}}
+                    </p>
+                    <p *ngIf="ordDetail.sell_type=='P'" class="text-sm">
+                      Included Items : {{ordDetail.package_item_list?.length}}
+                    </p>
+                    <p *ngIf="ordDetail.sell_type=='P'" class="text-sm">
+                      <img *ngFor="let packItem of ordDetail.package_item_list" src="{{packItem.package_item_image}}" class="img" style="width: 65px; padding-right: 10px" alt="#">
+                    </p>
+
+
+                  </td>
+                  <td>
+                    <p class="text-sm">{{curSymbol}}{{ordDetail.product_unit_price? ordDetail.product_unit_price.toFixed(2): 0.00}}</p>
+                  </td>
+                  <td>
+                    <p class="text-sm">{{ordDetail.quantity}}</p>
+                  </td>
+
+                  <td>
+                    <p class="text-sm">{{curSymbol}}{{ordDetail.sub_total? ordDetail.sub_total.toFixed(2): 0.00}}</p>
+                  </td>
+                </tr>
+
+
+<!--
+                <tr>
+                  <td>
+                    <p class="text-sm">Landing Page</p>
+                  </td>
+                  <td>
+                    <p class="text-sm">
+                      Landing Page Ui kit design and Development
+                    </p>
+                  </td>
+                  <td>
+                    <p class="text-sm">1</p>
+                  </td>
+                  <td>
+                    <p class="text-sm">$1000</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p class="text-sm">Web design</p>
+                  </td>
+                  <td>
+                    <p class="text-sm">
+                      Web Design and Development and Seo
+                    </p>
+                  </td>
+                  <td>
+                    <p class="text-sm">2</p>
+                  </td>
+                  <td>
+                    <p class="text-sm">$4000</p>
+                  </td>
+                </tr>
+-->
+
+
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <h6 class="text-sm text-medium">Subtotal</h6>
+                  </td>
+                  <td>
+                    <h6 class="text-sm text-bold">{{curSymbol}}{{order.sub_total? order.sub_total.toFixed(2): 0.00}}</h6>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <h6 class="text-sm text-medium">Tax</h6>
+                  </td>
+                  <td>
+                    <h6 class="text-sm text-bold">{{curSymbol}}{{order.tax? order.tax.toFixed(2): 0.00}}</h6>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <h6 class="text-sm text-medium">Shipping Charge</h6>
+                  </td>
+                  <td>
+                    <h6 class="text-sm text-bold">{{curSymbol}}{{order.shipping_fee? order.shipping_fee.toFixed(2): 0.00 }}
+                    </h6>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <h4>Total</h4>
+                  </td>
+                  <td>
+                    <h4>{{curSymbol}}{{order.order_total? order.order_total.toFixed(2): 0.00}}</h4>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="note-wrapper warning-alert py-4 px-sm-3 px-lg-5">
+              <div class="alert">
+                <h5 class="text-bold mb-15">Notes:</h5>
+                <p class="text-sm text-gray">
+                  All amounts are to be paid within 7 days from receipt
+                  of invoice. To be paid by credit/debit card payment online.
+                </p>
+              </div>
+            </div>
+            <div class="invoice-action">
+              <ul class="d-flex flex-wrap align-items-center justify-content-center">
+                <li class="m-2">
+                  <a href="#0" class="main-btn primary-btn-outline btn-hover">
+                    Download Invoice
+                  </a>
+                </li>
+                <li class="m-2">
+                  <a href="#0" class="main-btn primary-btn btn-hover">
+                    Send Invoice
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- End Card -->
+        </div>
+        <!-- ENd Col -->
+      </div>
+      <!-- End Row -->
+    </div>
+    <!-- Invoice Wrapper End -->
+  </div>
+  <!-- end container -->
+</section>
+<!-- ========== section end ========== -->
+<!--
+  </div>
+  &lt;!&ndash; end container &ndash;&gt;
+</section>
+&lt;!&ndash; ========== section end ========== &ndash;&gt;
+-->
+  </div>
+</section>

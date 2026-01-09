@@ -1,0 +1,62 @@
+<!--<p>wishlist works!</p>-->
+<div class="page-content">
+
+<div class="card card-secondary card-outline" style="margin-top: 7px">
+  <div class="card-header" style="padding-top: 5px; padding-bottom: 7px">
+    <div class="card-title" style="font-size: 25px"><span>Wishlist</span></div>
+    <mat-progress-bar *ngIf="queryMode" mode="indeterminate" class="mat-progress-bar"></mat-progress-bar>
+  </div>
+
+  <div class="card-body">
+<!--    <h3>Wishlist</h3>-->
+    <div class="table-responsive">
+      <table class="table mb-0">
+        <thead class="table-light">
+        <tr>
+          <th>Item</th>
+          <th>Sell Type</th>
+          <th>Product/Package Name</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>View Details</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let p of wishlists; let  i=index">
+          <td>{{i+1}}</td>
+          <td>
+            <img *ngIf="p.sell_type=='S'" src="assets/smartgroup/img/price-tag-01.5.png" alt="" height=30px width=30px style="margin-right: 10px" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Single Product">
+            <img *ngIf="p.sell_type=='G'" src="assets/smartgroup/img/group-buy-01.png" alt="" height=30px width=30px style="margin-right: 10px" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Group Buying offers on single product">
+            <img *ngIf="p.sell_type=='P'" src="assets/smartgroup/img/groupbuy-packages-02.png" alt="" height=30px width=30px style="margin-right:10px" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Group Buying offers on sub-packages">
+          </td>
+          <td>
+            <span *ngIf="p.sell_type=='S'" >{{p.product_title}}</span>
+            <span *ngIf="p.sell_type=='G'" >Group Buy: {{p.product_title}}</span>
+            <span *ngIf="p.sell_type=='P' && !p.package_id" >Package Group: {{p.package_grp_name}}</span>
+            <span *ngIf="p.sell_type=='P' && p.package_id" >Package Group: {{p.package_grp_name}}<br />Sub-Package: {{p.package_name}}</span>
+          </td>
+          <td>{{curSymbol}}{{p.sale_price | number: '1.2-2'}}</td>
+          <td>{{p.stock_status}}</td>
+          <td>
+            <button *ngIf="p.sell_type=='S'" type="button" (click)="showDetails(p.product_id, p.sell_type)" style="padding-left: 10px !important; padding-right: 10px !important; min-width: 110px;"
+                    class="btn btn-primary btn-sm radius-30 px-4">View Details</button>
+            <button *ngIf="p.sell_type=='G'" type="button" (click)="showDetails(p.product_id, p.sell_type)" style="padding-left: 10px !important; padding-right: 10px !important; min-width: 110px;"
+                    class="btn btn-primary btn-sm radius-30 px-4">View Details</button>
+            <button *ngIf="p.sell_type=='P'" type="button" (click)="showDetails(p.package_grp_id!, p.sell_type)" style="padding-left: 10px !important; padding-right: 10px !important; min-width: 110px;"
+                    class="btn btn-primary btn-sm radius-30 px-4">View Details</button>
+          </td>
+          <td>
+<!--            <button type="button" (click)="removeWishlistItem(p.wishlist_id)"-->
+<!--                    class="btn btn-danger btn-sm radius-30 px-4">Remove</button>-->
+            <img src="assets/smartgroup/img/delete-03.png" alt="" height=30px  (click)="removeWishlistItem(p.wishlist_id)" onMouseOver="this.style.cursor='pointer'"
+                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Remove this from wishlist">
+
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,60 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* For Stepper -- Start -- */
+
+@use '@angular/material' as mat;
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 0;
+  //padding: 30px;
+  padding: 0px;
+  height: 100%;
+
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+html {
+  height: 100%;
+}
+
+/* For Stepper -- end -- */
+
+
+/* For Shop Admin -- begin -- */
+/*
+
+section {
+  margin: 3rem 0;
+}
+
+.mybg1 {
+  background: url("assets/images/bg-themes/7.png");
+}
+
+.mybg2 {
+  background: url("assets/images/bg-themes/5.png");
+}
+
+.menu-title {
+  color: white;
+}
+
+.parent-icon {
+  color: white;
+}
+
+.metismenu li:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+*/
+
+/* For Shop Admin -- end -- */

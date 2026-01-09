@@ -1,0 +1,901 @@
+<!--<p>dashboard works!</p>-->
+<div class="card card-primary card-outline" style="margin: 7px">
+  <div class="card-header" style="padding-top: 5px; padding-bottom: 7px">
+    <div class="card-title" style="font-size: 25px"><span>Dashboard</span></div>
+    <mat-progress-bar *ngIf="queryMode" mode="indeterminate" class="mat-progress-bar"></mat-progress-bar>
+  </div>
+
+<!--begin::App Content Header-->
+<div class="app-content-header" style="padding-top: 0;">
+  <!--begin::Container-->
+  <div class="container-fluid">
+    <!--begin::Row-->
+    <div class="row">
+<!--      <div class="col-sm-6">
+        <h3 class="mb-0">Dashboard</h3>
+      </div>
+
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-end">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+          </ol>
+        </div>-->
+    </div>
+    <!--end::Row-->
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::App Content Header-->
+
+
+  <!--begin::App Content-->
+<div class="app-content">
+  <!--begin::Container-->
+  <div class="container-fluid">
+    <!--begin::Row-->
+    <div class="row">
+      <!--begin::Col-->
+      <div class="col-lg-3 col-6">
+        <!--begin::Small Box Widget 1-->
+        <div class="small-box text-bg-primary">
+          <div class="inner">
+            <h3>{{admDashboard.newOrders}}</h3>
+            <p>New Orders in 24 hours</p>
+          </div>
+          <svg
+            class="small-box-icon"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z"
+            ></path>
+          </svg>
+          <a
+            href="admin/orders" target="_blank"
+            class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
+          >
+            More info <i class="bi bi-link-45deg"></i>
+          </a>
+        </div>
+        <!--end::Small Box Widget 1-->
+      </div>
+      <!--end::Col-->
+      <div class="col-lg-3 col-6">
+        <!--begin::Small Box Widget 2-->
+        <div class="small-box text-bg-success">
+          <div class="inner">
+            <h3>{{admDashboard.totalGrgbuyEvents ? ((admDashboard.totalSuccessEvents!/admDashboard.totalGrgbuyEvents!)*100 | number: '1.0-0') :0}}<sup class="fs-5">%</sup></h3>
+            <p>Group Buy Success in 30 days</p>
+          </div>
+          <svg
+            class="small-box-icon"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z"
+            ></path>
+          </svg>
+          <a
+            href="admin/groupbuyevent" target="_blank"
+            class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
+          >
+            More info <i class="bi bi-link-45deg"></i>
+          </a>
+        </div>
+        <!--end::Small Box Widget 2-->
+      </div>
+      <!--end::Col-->
+      <div class="col-lg-3 col-6">
+        <!--begin::Small Box Widget 3-->
+        <div class="small-box text-bg-warning">
+          <div class="inner">
+            <h3>{{admDashboard.newRegisterUsers}}</h3>
+            <p>User Registration in 7 days</p>
+          </div>
+          <svg
+            class="small-box-icon"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z"
+            ></path>
+          </svg>
+          <a
+            href="admin/customers" target="_blank"
+            class="small-box-footer link-dark link-underline-opacity-0 link-underline-opacity-50-hover"
+          >
+            More info <i class="bi bi-link-45deg"></i>
+          </a>
+        </div>
+        <!--end::Small Box Widget 3-->
+      </div>
+      <!--end::Col-->
+      <div class="col-lg-3 col-6">
+        <!--begin::Small Box Widget 4-->
+        <div class="small-box text-bg-danger">
+          <div class="inner">
+            <h3>{{admDashboard.users}}</h3>
+            <p>Total Customers</p>
+          </div>
+          <svg
+            class="small-box-icon"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              clip-rule="evenodd"
+              fill-rule="evenodd"
+              d="M2.25 13.5a8.25 8.25 0 018.25-8.25.75.75 0 01.75.75v6.75H18a.75.75 0 01.75.75 8.25 8.25 0 01-16.5 0z"
+            ></path>
+            <path
+              clip-rule="evenodd"
+              fill-rule="evenodd"
+              d="M12.75 3a.75.75 0 01.75-.75 8.25 8.25 0 018.25 8.25.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75V3z"
+            ></path>
+          </svg>
+          <a
+            href="admin/customers" target="_blank"
+            class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
+          >
+            More info <i class="bi bi-link-45deg"></i>
+          </a>
+        </div>
+        <!--end::Small Box Widget 4-->
+      </div>
+      <!--end::Col-->
+    </div>
+    <!--end::Row-->
+    <!--begin::Row-->
+    <div class="row">
+      <!-- Start col -->
+      <div class="col-lg-6 connectedSortable">
+        <div class="card mb-4">
+          <div class="card-header"><h3 class="card-title">Sales Volume in last 7 days</h3></div>
+          <div class="card-body">
+<!--            <div id="revenue-chart"></div>-->
+            <div id="salesVolumeChart">
+              <apx-chart
+                [series]="salesVolumeChartOptions.series!"
+                [chart]="salesVolumeChartOptions.chart!"
+                [xaxis]="salesVolumeChartOptions.xaxis!"
+                [yaxis]="salesVolumeChartOptions.yaxis!"
+                [stroke]="salesVolumeChartOptions.stroke!"
+                [tooltip]="salesVolumeChartOptions.tooltip!"
+                [dataLabels]="salesVolumeChartOptions.dataLabels!"
+              ></apx-chart>
+            </div>
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.Start col -->
+
+      <!-- Start col -->
+      <div class="col-lg-6 connectedSortable">
+        <!--        <div class="card text-white bg-primary bg-gradient border-primary mb-4">-->
+        <div class="card mb-4">
+          <!--          <div class="card-header border-0">-->
+          <div class="card-header">
+            <h3 class="card-title">Monthly Sales Quantity in Product Sell Types</h3>
+
+
+            <!--            <div class="card-tools">-->
+            <!--              <button-->
+            <!--                type="button"-->
+            <!--                class="btn btn-primary btn-sm"-->
+            <!--                data-lte-toggle="card-collapse"-->
+            <!--              >-->
+            <!--                <i data-lte-icon="expand" class="bi bi-plus-lg"></i>-->
+            <!--                <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>-->
+            <!--              </button>-->
+            <!--            </div>-->
+          </div>
+          <div class="card-body">
+            <!--            <div id="world-map" style="height: 220px"></div>-->
+
+
+            <div id="salesTypeQtyChart">
+              <apx-chart
+                [series]="salesTypeChartOptions.series!"
+                [chart]="salesTypeChartOptions.chart!"
+                [dataLabels]="salesTypeChartOptions.dataLabels!"
+                [plotOptions]="salesTypeChartOptions.plotOptions!"
+                [yaxis]="salesTypeChartOptions.yaxis!"
+                [legend]="salesTypeChartOptions.legend!"
+                [fill]="salesTypeChartOptions.fill!"
+                [stroke]="salesTypeChartOptions.stroke!"
+                [tooltip]="salesTypeChartOptions.tooltip!"
+                [xaxis]="salesTypeChartOptions.xaxis!"
+              ></apx-chart>
+            </div>
+
+<!--            <div id="salesRadarChart">
+              <apx-chart
+                [series]="salesRadarChartOptions.series!"
+                [chart]="salesRadarChartOptions.chart!"
+                [xaxis]="salesRadarChartOptions.xaxis!"
+                [stroke]="salesRadarChartOptions.stroke!"
+                [markers]="salesRadarChartOptions.markers!"
+                [fill]="salesRadarChartOptions.fill!"
+                [title]="salesRadarChartOptions.title!"
+                [labels]="salesRadarChartOptions.labels!"
+              ></apx-chart>
+            </div>-->
+
+          </div>
+          <!--          <div class="card-footer border-0">
+                      &lt;!&ndash;begin::Row&ndash;&gt;
+                      <div class="row">
+                        <div class="col-4 text-center">
+                          <div id="sparkline-1" class="text-dark"></div>
+                          <div class="text-white">Visitors</div>
+                        </div>
+                        <div class="col-4 text-center">
+                          <div id="sparkline-2" class="text-dark"></div>
+                          <div class="text-white">Online</div>
+                        </div>
+                        <div class="col-4 text-center">
+                          <div id="sparkline-3" class="text-dark"></div>
+                          <div class="text-white">Sales</div>
+                        </div>
+                      </div>
+                      &lt;!&ndash;end::Row&ndash;&gt;
+                    </div>-->
+        </div>
+      </div>
+      <!-- /.Start col -->
+
+        <!-- DIRECT CHAT -->
+      <div class="col-lg-8">
+
+        <!--begin::Latest Order Widget-->
+<!--
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Latest Orders</h3>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse">
+                <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+                <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-lte-toggle="card-remove">
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </div>
+          </div>
+          &lt;!&ndash; /.card-header &ndash;&gt;
+          <div class="card-body p-0">
+            <div class="table-responsive" style="max-height: 263px;">
+              <table class="table table-striped m-0">
+                <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Item</th>
+                  <th>Status</th>
+                  <th>Popularity</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>
+                    <a
+                      href="pages/examples/invoice.html"
+                      class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                    >OR9842</a
+                    >
+                  </td>
+                  <td>Call of Duty IV</td>
+                  <td><span class="badge text-bg-success"> Shipped </span></td>
+                  <td><div id="table-sparkline-1"></div></td>
+                </tr>
+                <tr>
+                  <td>
+                    <a
+                      href="pages/examples/invoice.html"
+                      class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                    >OR1848</a
+                    >
+                  </td>
+                  <td>Samsung Smart TV</td>
+                  <td><span class="badge text-bg-warning">Pending</span></td>
+                  <td><div id="table-sparkline-2"></div></td>
+                </tr>
+                <tr>
+                  <td>
+                    <a
+                      href="pages/examples/invoice.html"
+                      class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                    >OR7429</a
+                    >
+                  </td>
+                  <td>iPhone 6 Plus</td>
+                  <td><span class="badge text-bg-danger"> Delivered </span></td>
+                  <td><div id="table-sparkline-3"></div></td>
+                </tr>
+                <tr>
+                  <td>
+                    <a
+                      href="pages/examples/invoice.html"
+                      class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                    >OR7429</a
+                    >
+                  </td>
+                  <td>Samsung Smart TV</td>
+                  <td><span class="badge text-bg-info">Processing</span></td>
+                  <td><div id="table-sparkline-4"></div></td>
+                </tr>
+                <tr>
+                  <td>
+                    <a
+                      href="pages/examples/invoice.html"
+                      class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                    >OR1848</a
+                    >
+                  </td>
+                  <td>Samsung Smart TV</td>
+                  <td><span class="badge text-bg-warning">Pending</span></td>
+                  <td><div id="table-sparkline-5"></div></td>
+                </tr>
+                <tr>
+                  <td>
+                    <a
+                      href="pages/examples/invoice.html"
+                      class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                    >OR7429</a
+                    >
+                  </td>
+                  <td>iPhone 6 Plus</td>
+                  <td><span class="badge text-bg-danger"> Delivered </span></td>
+                  <td><div id="table-sparkline-6"></div></td>
+                </tr>
+                <tr>
+                  <td>
+                    <a
+                      href="pages/examples/invoice.html"
+                      class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                    >OR9842</a
+                    >
+                  </td>
+                  <td>Call of Duty IV</td>
+                  <td><span class="badge text-bg-success">Shipped</span></td>
+                  <td><div id="table-sparkline-7"></div></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            &lt;!&ndash; /.table-responsive &ndash;&gt;
+          </div>
+          &lt;!&ndash; /.card-body &ndash;&gt;
+          <div class="card-footer clearfix">
+            <a href="javascript:void(0)" class="btn btn-sm btn-primary float-start">
+              Place New Order
+            </a>
+            <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-end">
+              View All Orders
+            </a>
+          </div>
+          &lt;!&ndash; /.card-footer &ndash;&gt;
+        </div>
+        &lt;!&ndash; /.card &ndash;&gt;
+-->
+
+
+
+        <div class="card mb-4">
+          <div class="card-header border-0" style="padding-bottom: 10px;">
+            <h3 class="card-title">Top Selling Products in last 45 days</h3>
+            <div class="card-tools">
+<!--              <a href="#" class="btn btn-tool btn-sm"> <i class="bi bi-download"></i> </a>-->
+<!--              <a href="#" class="btn btn-tool btn-sm"> <i class="bi bi-list"></i> </a>-->
+              <a href="admin/orders" target="_blank" class="btn btn-sm btn-primary float-end" style="margin-right: 15px; margin-bottom: -10px; margin-top: -8px;">
+                View All Orders
+              </a>
+            </div>
+          </div>
+          <div class="card-body table-responsive p-0" style="max-height: 330px; height: 330px; margin-top: -10px;">
+            <table class="table table-striped align-middle">
+              <thead>
+              <tr>
+                <th style="padding-bottom: 2px;">Item</th>
+                <th style="padding-bottom: 2px;">P.ID</th>
+                <th style="padding-bottom: 2px;">Image</th>
+                <th style="min-width: 200px;max-width: 300px;padding-bottom: 2px;">Product Name</th>
+                <th style="padding-bottom: 2px;">Type</th>
+                <th style="padding-bottom: 2px;">Price</th>
+                <th style="min-width: 80px; padding-bottom: 2px;">SoldQty</th>
+                <th style="padding-bottom: 2px;">TotalAmt</th>
+                <th style="padding-bottom: 2px;">More</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let p of bestSellProductList; let i = index">
+                <td>{{i+1}}</td>
+                <td>#{{p.prod_id}}</td>
+                <td>
+                  <img
+                    src="{{p.prod_image}}"
+                    alt="Product 1"
+                    class="rounded-2 img-size-32 me-2"
+                  />
+                </td>
+                <td style="min-width: 200px;max-width: 300px;">{{p.prod_name}}</td>
+                <td>
+                <img *ngIf="p.sell_type=='S'" src="assets/smartgroup/img/price-tag-01.5-rm-bg.png" alt="" height=30px width=30px style="margin-right: 10px" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Single Product">
+                <img *ngIf="p.sell_type=='G'" src="assets/smartgroup/img/group-buy-01-rm-bg.png" alt="" height=30px width=30px style="margin-right: 10px" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Group Buying offers on single product">
+                <img *ngIf="p.sell_type=='P'" src="assets/smartgroup/img/groupbuy-packages-02-rm-bg.png" alt="" height=30px width=30px style="margin-right:10px" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Group Buying offers on sub-packages">
+                </td>
+                <td>{{curSymbol}}{{p.unit_price | number: '1.2-2'}}</td>
+                <td style="min-width: 100px;">
+<!--
+                  <small class="text-success me-1">
+                    <i class="bi bi-arrow-up"></i>
+                    12%
+                  </small>
+-->
+                  {{p.total_qty}}
+                </td>
+                <td>{{curSymbol}}{{p.total_amt | number: '1.2-2'}}</td>
+                <td>
+                  <a *ngIf="p.sell_type=='S'" href="smartgroup/productdetail/{{p.prod_id}}/S" target="_blank" class="text-secondary"> <i class="bi bi-search"></i> </a>
+                  <a *ngIf="p.sell_type=='G'" href="smartgroup/productdetail/{{p.prod_id}}/G" target="_blank" class="text-secondary"> <i class="bi bi-search"></i> </a>
+                  <a *ngIf="p.sell_type=='P'" href="smartgroup/packagegrid/{{p.prod_id}}" target="_blank" class="text-secondary"> <i class="bi bi-search"></i> </a>
+                </td>
+              </tr>
+<!--
+              <tr>
+                <td>
+                  <img
+                    src="../../dist/assets/img/default-150x150.png"
+                    alt="Product 1"
+                    class="rounded-circle img-size-32 me-2"
+                  />
+                  Some Product
+                </td>
+                <td>$13 USD</td>
+                <td>
+                  <small class="text-success me-1">
+                    <i class="bi bi-arrow-up"></i>
+                    12%
+                  </small>
+                  12,000 Sold
+                </td>
+                <td>
+                  <a href="#" class="text-secondary"> <i class="bi bi-search"></i> </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    src="../../dist/assets/img/default-150x150.png"
+                    alt="Product 1"
+                    class="rounded-circle img-size-32 me-2"
+                  />
+                  Some Product
+                </td>
+                <td>$13 USD</td>
+                <td>
+                  <small class="text-success me-1">
+                    <i class="bi bi-arrow-up"></i>
+                    12%
+                  </small>
+                  12,000 Sold
+                </td>
+                <td>
+                  <a href="#" class="text-secondary"> <i class="bi bi-search"></i> </a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <img
+                    src="../../dist/assets/img/default-150x150.png"
+                    alt="Product 1"
+                    class="rounded-circle img-size-32 me-2"
+                  />
+                  Some Product
+                </td>
+                <td>$13 USD</td>
+                <td>
+                  <small class="text-success me-1">
+                    <i class="bi bi-arrow-up"></i>
+                    12%
+                  </small>
+                  12,000 Sold
+                </td>
+                <td>
+                  <a href="#" class="text-secondary"> <i class="bi bi-search"></i> </a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <img
+                    src="../../dist/assets/img/default-150x150.png"
+                    alt="Product 1"
+                    class="rounded-circle img-size-32 me-2"
+                  />
+                  Some Product
+                </td>
+                <td>$13 USD</td>
+                <td>
+                  <small class="text-success me-1">
+                    <i class="bi bi-arrow-up"></i>
+                    12%
+                  </small>
+                  12,000 Sold
+                </td>
+                <td>
+                  <a href="#" class="text-secondary"> <i class="bi bi-search"></i> </a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <img
+                    src="../../dist/assets/img/default-150x150.png"
+                    alt="Product 1"
+                    class="rounded-circle img-size-32 me-2"
+                  />
+                  Some Product
+                </td>
+                <td>$13 USD</td>
+                <td>
+                  <small class="text-success me-1">
+                    <i class="bi bi-arrow-up"></i>
+                    12%
+                  </small>
+                  12,000 Sold
+                </td>
+                <td>
+                  <a href="#" class="text-secondary"> <i class="bi bi-search"></i> </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    src="../../dist/assets/img/default-150x150.png"
+                    alt="Product 1"
+                    class="rounded-circle img-size-32 me-2"
+                  />
+                  Another Product
+                </td>
+                <td>$29 USD</td>
+                <td>
+                  <small class="text-info me-1">
+                    <i class="bi bi-arrow-down"></i>
+                    0.5%
+                  </small>
+                  123,234 Sold
+                </td>
+                <td>
+                  <a href="#" class="text-secondary"> <i class="bi bi-search"></i> </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    src="../../dist/assets/img/default-150x150.png"
+                    alt="Product 1"
+                    class="rounded-circle img-size-32 me-2"
+                  />
+                  Amazing Product
+                </td>
+                <td>$1,230 USD</td>
+                <td>
+                  <small class="text-danger me-1">
+                    <i class="bi bi-arrow-down"></i>
+                    3%
+                  </small>
+                  198 Sold
+                </td>
+                <td>
+                  <a href="#" class="text-secondary"> <i class="bi bi-search"></i> </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    src="../../dist/assets/img/default-150x150.png"
+                    alt="Product 1"
+                    class="rounded-circle img-size-32 me-2"
+                  />
+                  Perfect Item
+                  <span class="badge text-bg-danger">NEW</span>
+                </td>
+                <td>$199 USD</td>
+                <td>
+                  <small class="text-success me-1">
+                    <i class="bi bi-arrow-up"></i>
+                    63%
+                  </small>
+                  87 Sold
+                </td>
+                <td>
+                  <a href="#" class="text-secondary"> <i class="bi bi-search"></i> </a>
+                </td>
+              </tr>
+-->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- /.card -->
+
+
+<!--
+        <div class="card direct-chat direct-chat-primary mb-4">
+          <div class="card-header">
+            <h3 class="card-title">Direct Chat</h3>
+            <div class="card-tools">
+              <span title="3 New Messages" class="badge text-bg-primary"> 3 </span>
+              <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse">
+                <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+                <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-tool"
+                title="Contacts"
+                data-lte-toggle="chat-pane"
+              >
+                <i class="bi bi-chat-text-fill"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-lte-toggle="card-remove">
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </div>
+          </div>
+          &lt;!&ndash; /.card-header &ndash;&gt;
+          <div class="card-body">
+            &lt;!&ndash; Conversations are loaded here &ndash;&gt;
+            <div class="direct-chat-messages">
+              &lt;!&ndash; Message. Default to the start &ndash;&gt;
+              <div class="direct-chat-msg">
+                <div class="direct-chat-infos clearfix">
+                  <span class="direct-chat-name float-start"> Alexander Pierce </span>
+                  <span class="direct-chat-timestamp float-end"> 23 Jan 2:00 pm </span>
+                </div>
+                &lt;!&ndash; /.direct-chat-infos &ndash;&gt;
+                <img
+                  class="direct-chat-img"
+                  src="../../dist/assets/img/user1-128x128.jpg"
+                  alt="message user image"
+                />
+                &lt;!&ndash; /.direct-chat-img &ndash;&gt;
+                <div class="direct-chat-text">
+                  Is this template really for free? That's unbelievable!
+                </div>
+                &lt;!&ndash; /.direct-chat-text &ndash;&gt;
+              </div>
+              &lt;!&ndash; /.direct-chat-msg &ndash;&gt;
+              &lt;!&ndash; Message to the end &ndash;&gt;
+              <div class="direct-chat-msg end">
+                <div class="direct-chat-infos clearfix">
+                  <span class="direct-chat-name float-end"> Sarah Bullock </span>
+                  <span class="direct-chat-timestamp float-start"> 23 Jan 2:05 pm </span>
+                </div>
+                &lt;!&ndash; /.direct-chat-infos &ndash;&gt;
+                <img
+                  class="direct-chat-img"
+                  src="../../dist/assets/img/user3-128x128.jpg"
+                  alt="message user image"
+                />
+                &lt;!&ndash; /.direct-chat-img &ndash;&gt;
+                <div class="direct-chat-text">You better believe it!</div>
+                &lt;!&ndash; /.direct-chat-text &ndash;&gt;
+              </div>
+              &lt;!&ndash; /.direct-chat-msg &ndash;&gt;
+              &lt;!&ndash; Message. Default to the start &ndash;&gt;
+              <div class="direct-chat-msg">
+                <div class="direct-chat-infos clearfix">
+                  <span class="direct-chat-name float-start"> Alexander Pierce </span>
+                  <span class="direct-chat-timestamp float-end"> 23 Jan 5:37 pm </span>
+                </div>
+                &lt;!&ndash; /.direct-chat-infos &ndash;&gt;
+                <img
+                  class="direct-chat-img"
+                  src="../../dist/assets/img/user1-128x128.jpg"
+                  alt="message user image"
+                />
+                &lt;!&ndash; /.direct-chat-img &ndash;&gt;
+                <div class="direct-chat-text">
+                  Working with AdminLTE on a great new app! Wanna join?
+                </div>
+                &lt;!&ndash; /.direct-chat-text &ndash;&gt;
+              </div>
+              &lt;!&ndash; /.direct-chat-msg &ndash;&gt;
+              &lt;!&ndash; Message to the end &ndash;&gt;
+              <div class="direct-chat-msg end">
+                <div class="direct-chat-infos clearfix">
+                  <span class="direct-chat-name float-end"> Sarah Bullock </span>
+                  <span class="direct-chat-timestamp float-start"> 23 Jan 6:10 pm </span>
+                </div>
+                &lt;!&ndash; /.direct-chat-infos &ndash;&gt;
+                <img
+                  class="direct-chat-img"
+                  src="../../dist/assets/img/user3-128x128.jpg"
+                  alt="message user image"
+                />
+                &lt;!&ndash; /.direct-chat-img &ndash;&gt;
+                <div class="direct-chat-text">I would love to.</div>
+                &lt;!&ndash; /.direct-chat-text &ndash;&gt;
+              </div>
+              &lt;!&ndash; /.direct-chat-msg &ndash;&gt;
+            </div>
+            &lt;!&ndash; /.direct-chat-messages&ndash;&gt;
+            &lt;!&ndash; Contacts are loaded here &ndash;&gt;
+            <div class="direct-chat-contacts">
+              <ul class="contacts-list">
+                <li>
+                  <a href="#">
+                    <img
+                      class="contacts-list-img"
+                      src="../../dist/assets/img/user1-128x128.jpg"
+                      alt="User Avatar"
+                    />
+                    <div class="contacts-list-info">
+                              <span class="contacts-list-name">
+                                Count Dracula
+                                <small class="contacts-list-date float-end"> 2/28/2023 </small>
+                              </span>
+                      <span class="contacts-list-msg"> How have you been? I was... </span>
+                    </div>
+                    &lt;!&ndash; /.contacts-list-info &ndash;&gt;
+                  </a>
+                </li>
+                &lt;!&ndash; End Contact Item &ndash;&gt;
+                <li>
+                  <a href="#">
+                    <img
+                      class="contacts-list-img"
+                      src="../../dist/assets/img/user7-128x128.jpg"
+                      alt="User Avatar"
+                    />
+                    <div class="contacts-list-info">
+                              <span class="contacts-list-name">
+                                Sarah Doe
+                                <small class="contacts-list-date float-end"> 2/23/2023 </small>
+                              </span>
+                      <span class="contacts-list-msg"> I will be waiting for... </span>
+                    </div>
+                    &lt;!&ndash; /.contacts-list-info &ndash;&gt;
+                  </a>
+                </li>
+                &lt;!&ndash; End Contact Item &ndash;&gt;
+                <li>
+                  <a href="#">
+                    <img
+                      class="contacts-list-img"
+                      src="../../dist/assets/img/user3-128x128.jpg"
+                      alt="User Avatar"
+                    />
+                    <div class="contacts-list-info">
+                              <span class="contacts-list-name">
+                                Nadia Jolie
+                                <small class="contacts-list-date float-end"> 2/20/2023 </small>
+                              </span>
+                      <span class="contacts-list-msg"> I'll call you back at... </span>
+                    </div>
+                    &lt;!&ndash; /.contacts-list-info &ndash;&gt;
+                  </a>
+                </li>
+                &lt;!&ndash; End Contact Item &ndash;&gt;
+                <li>
+                  <a href="#">
+                    <img
+                      class="contacts-list-img"
+                      src="../../dist/assets/img/user5-128x128.jpg"
+                      alt="User Avatar"
+                    />
+                    <div class="contacts-list-info">
+                              <span class="contacts-list-name">
+                                Nora S. Vans
+                                <small class="contacts-list-date float-end"> 2/10/2023 </small>
+                              </span>
+                      <span class="contacts-list-msg"> Where is your new... </span>
+                    </div>
+                    &lt;!&ndash; /.contacts-list-info &ndash;&gt;
+                  </a>
+                </li>
+                &lt;!&ndash; End Contact Item &ndash;&gt;
+                <li>
+                  <a href="#">
+                    <img
+                      class="contacts-list-img"
+                      src="../../dist/assets/img/user6-128x128.jpg"
+                      alt="User Avatar"
+                    />
+                    <div class="contacts-list-info">
+                              <span class="contacts-list-name">
+                                John K.
+                                <small class="contacts-list-date float-end"> 1/27/2023 </small>
+                              </span>
+                      <span class="contacts-list-msg"> Can I take a look at... </span>
+                    </div>
+                    &lt;!&ndash; /.contacts-list-info &ndash;&gt;
+                  </a>
+                </li>
+                &lt;!&ndash; End Contact Item &ndash;&gt;
+                <li>
+                  <a href="#">
+                    <img
+                      class="contacts-list-img"
+                      src="../../dist/assets/img/user8-128x128.jpg"
+                      alt="User Avatar"
+                    />
+                    <div class="contacts-list-info">
+                              <span class="contacts-list-name">
+                                Kenneth M.
+                                <small class="contacts-list-date float-end"> 1/4/2023 </small>
+                              </span>
+                      <span class="contacts-list-msg"> Never mind I found... </span>
+                    </div>
+                    &lt;!&ndash; /.contacts-list-info &ndash;&gt;
+                  </a>
+                </li>
+                &lt;!&ndash; End Contact Item &ndash;&gt;
+              </ul>
+              &lt;!&ndash; /.contacts-list &ndash;&gt;
+            </div>
+            &lt;!&ndash; /.direct-chat-pane &ndash;&gt;
+          </div>
+          &lt;!&ndash; /.card-body &ndash;&gt;
+          <div class="card-footer">
+            <form action="#" method="post">
+              <div class="input-group">
+                <input
+                  type="text"
+                  name="message"
+                  placeholder="Type Message ..."
+                  class="form-control"
+                />
+                <span class="input-group-append">
+                          <button type="button" class="btn btn-primary">Send</button>
+                        </span>
+              </div>
+            </form>
+          </div>
+          &lt;!&ndash; /.card-footer&ndash;&gt;
+        </div>
+-->
+        <!-- /.direct-chat -->
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-header"><h3 class="card-title">Status of Order Items in last 30 days</h3></div>
+          <div class="card-body" style="height: 313px;">
+            <div id="orderStatusPieChart">
+              <apx-chart
+                [series]="orderItemStatusPieChartOptions.series!"
+                [chart]="orderItemStatusPieChartOptions.chart!"
+                [labels]="orderItemStatusPieChartOptions.labels!"
+                [fill]="orderItemStatusPieChartOptions.fill!"
+                [dataLabels]="orderItemStatusPieChartOptions.dataLabels!"
+                [responsive]="orderItemStatusPieChartOptions.responsive!"
+                [plotOptions]="orderItemStatusPieChartOptions.plotOptions!"
+              ></apx-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /.row (main row) -->
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::App Content-->
+</div>

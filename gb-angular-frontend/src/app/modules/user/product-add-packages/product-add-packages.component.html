@@ -1,0 +1,414 @@
+
+
+
+<div  cdkDropListGroup>
+  <div class="row">
+    <div class="col-xl-2 border rounded-1" style="width: 430px;padding: 12px 12px" >
+      <div class="card">
+      <div class="row">
+        <div class="col" style="padding-top: 10px; padding-left: 20px; padding-right: 20px">
+
+          <div class="example-container rounded-0" >
+            <div class="row">
+              <div class="col">
+                <h4>Product Items</h4>
+              </div>
+              <div class="col" style="text-align: right;padding-right: 20px;padding-top: 10px">
+                Available Item(s): {{availProductItems.length}}
+              </div>
+            </div>
+<!--            <h4>Product Items </h4>-->
+            <div style="height: auto; max-height: 600px; overflow-y: scroll;">
+              <div
+                cdkDropList
+                [cdkDropListData]="availProductItems"
+                class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                @for (item of availProductItems; track item) {
+<!--
+                  <div class="example-box" cdkDrag>
+                    <img [src]="item.image" width="60px" height="60px">
+                    {{item.item}}
+                    <img *cdkDragPreview [src]="item.image" [alt]="item.item" width="300px" height="300px">
+                  </div>
+-->
+                  <div class="example-box" cdkDrag style="padding-top: 8px;padding-bottom: 8px;">
+                    <img [src]="item.item_image" width="60px" height="60px">
+
+<!--                    {{item.item_name}} X {{item.quantity}}-->
+                  <div class="row">
+<!--                    {{item.item_name}} X {{item.quantity}}-->
+                    <div class="col-xxl-2" style="width: 200px;">
+                      <p style="text-align: left; margin-left: -10px;">{{item.item_name}}</p>
+                    </div>
+                    <div class="col-xxl-1" style="width: 80px;">
+                      <p style="margin-left: -10px;">Qty : {{item.quantity}}</p>
+                    </div>
+                  </div>
+
+
+                    <img *cdkDragPreview [src]="item.item_image" [alt]="item.item_name" width="300px" height="300px">
+                  </div>
+
+<!--                  <div class="example-box" cdkDrag>
+                    <div class="row">
+                      <div class="col-xxl-1">
+                        <img [src]="item.item_image" width="60px" height="60px">
+                        <img *cdkDragPreview [src]="item.item_image" [alt]="item.item_name" width="300px" height="300px">
+                      </div>
+                      <div class="col-xxl-2">
+                        <p style="text-align: left;">{{item.item_name}}</p>
+                      </div>
+                      <div class="col-xxl-1">
+                        <p>Qty:{{item.quantity}}</p>
+                      </div>
+                    </div>
+                  </div>-->
+
+
+                }
+              </div>
+            </div>
+            <div>
+<!--              Available Item(s): {{productItems.length}}-->
+              <div class="btn-group" role="group" style="padding-top: 10px">
+                <button class="mat-raised-button mr-4" type="button" (click)="resetProductItemList()" >
+                  <span class="mat-button-wrapper">
+                  <mat-icon class="mat-icon material-icons">replay</mat-icon>
+                  </span>
+                  Reset
+                </button>
+                <button class="mat-raised-button mr-4" type="button" (click)="addAvailToOnePack()" >
+                  <span class="mat-button-wrapper">
+                  <mat-icon class="mat-icon material-icons">select_all</mat-icon>
+                  </span>
+                  One Pack
+                </button>
+                <button class="mat-raised-button mr-4" type="button" (click)="addAvailToSeparatePacks()" >
+                  <span class="mat-button-wrapper">
+                  <mat-icon class="mat-icon material-icons">zoom_out_map</mat-icon>
+                  </span>
+                  Sep. Packs
+                </button>
+              </div>
+<!--
+
+              <div class="btn-group" role="group">
+                <button class="btn btn-primary" type="button" (click)="resetProductItemList()">
+                  <span class="mat-button-wrapper">
+                  <mat-icon class="mat-icon material-icons">replay</mat-icon>
+                  </span>
+                  Reset
+                </button>
+                <button class="btn btn-primary" type="button" (click)="addAvailToOnePack()">One Pack</button>
+                <button class="btn btn-primary" type="button" (click)="addAvailToSeparatePacks()">Separate Packs</button>
+              </div>
+-->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="col border rounded-1" style="padding-top: 12px; padding-bottom: 12px; padding-left: 12px; padding-right: 12px;" >
+      <div class="row">
+        <div class="col">
+
+          <div class="card" style="padding: 15px;">
+            <form [formGroup]="packageGroupForm">
+            <div class="row"  >
+<!--              <form [formGroup]="packageGroupForm">-->
+              <div class="col-md-12 col-xxl-4" style="width:360px;"><label class="form-label" style="font-size: 23px; margin-top: -20px; margin-bottom: 3px;">Package Group</label>
+                <input type="text" [formControl]="packageGroupForm.controls.package_grp_name" class="form-control rounded-1" style="width:350px; margin: -3px; opacity: 0.7 ;" name="packageGroupName;" placeholder="Enter Group Name">
+              </div>
+              <div class="col-xxl-1" style="width:90px;"><label class="form-label" style="margin-bottom: 3px;" >Quantity</label>
+                <input type="number" class="form-control rounded-1" name="quantity" style="width: 80px;" [formControl]="packageGroupForm.controls.quantity">
+              </div>
+              <div class="col-xxl-1" style="width:90px; "><label class="form-label" style="margin-bottom: 3px;">Min.Thold</label>
+                <input type="number" class="form-control rounded-1" name="minThreshold" style="width: 80px;" [formControl]="packageGroupForm.controls.min_threshold">
+              </div>
+              <div class="col-xxl-3" style="width:270px; "><label class="form-label" style="margin-bottom: 3px;">Group Buying Start</label>
+                <input class="form-control rounded-1" type="datetime-local" style="width: 260px; " [formControl]="packageGroupForm.controls.grpbuy_start" [ngModel] = "localDefCurrentDateTime" placeholder="yyyy-MM-ddTHH:mm:ss">
+              </div>
+              <div class="col-xxl-3" style="width:270px;"><label class="form-label" style="margin-bottom: 3px;">Group Buying End</label>
+                <input class="form-control rounded-1" type="datetime-local" style="width: 260px;" [formControl]="packageGroupForm.controls.grpbuy_end" [ngModel] = "localDefCurrentDateTime" placeholder="yyyy-MM-ddTHH:mm:ss">
+              </div>
+              <div class="col-xxl-1" style="width: 120px;">
+                <label class="form-label" style="margin-bottom: 3px;">Status</label>
+<!--                <input type="number" class="form-control rounded-1" name="status" style="width: 80px;" [formControl]="packageGroupForm.controls.quantity">-->
+                <select [formControl]="packageGroupForm.controls.status" class="form-select" style="width: 110px; border-radius: 3px">
+                  <option>Active</option>
+                  <option>Inactive</option>
+                  <option>Pending</option>
+                </select>
+              </div>
+<!--              </form>-->
+            </div>
+          </form>
+          </div>
+
+          <div class="card" style="margin-top: 10px">
+
+
+          <div class="row">
+            <div class="col" style="padding: 15px; padding-left: 25px;min-height: 63px;">
+
+              <!-- ===============================================================  -->
+              <div class="package-container border rounded-1" *ngFor="let pkg of packageList; let i = index;" style="padding: 6px 6px">
+                <div *ngIf="pkg.length==0">
+                  <h4>New Package</h4>
+                </div>
+                <div *ngIf="pkg.length>0">
+                  <div class="row">
+                    <div class="col">
+                      <h4>Package {{i+1}}</h4>
+                    </div>
+                    <div class="col" style="text-align: right;padding-right: 20px;padding-top: 10px">
+                      Bundled Item(s): {{pkg.length}}
+                    </div>
+                  </div>
+<!--                  <h4>Package {{i+1}}</h4>-->
+                </div>
+
+                <div style="height: auto; max-height: 300px; overflow-y: scroll;">
+                  <div
+                    cdkDropList
+                    [cdkDropListData]="pkg"
+                    class="example-list"
+                    (cdkDropListDropped)="drop($event)">
+                    @for (item of pkg; track item) {
+
+<!--                      <div class="example-box" cdkDrag>
+&lt;!&ndash;
+                        <img [src]="item.image" width="60px" height="60px">
+                        {{item.item}}
+                        <img *cdkDragPreview [src]="item.image" [alt]="item.item" width="300px" height="300px">
+&ndash;&gt;
+                        <img [src]="item.item_image" width="60px" height="60px">
+                        {{item.item_name}} X {{item.quantity}}
+                        <img *cdkDragPreview [src]="item.item_image" [alt]="item.item_name" width="300px" height="300px">
+                      </div>-->
+
+
+                      <div class="example-box" cdkDrag style="padding-top: 8px;padding-bottom: 8px;">
+                        <img [src]="item.item_image" width="60px" height="60px">
+
+                        <!--                    {{item.item_name}} X {{item.quantity}}-->
+                        <div class="row">
+                          <!--                    {{item.item_name}} X {{item.quantity}}-->
+                          <div class="col-xxl-2" style="width: 200px;">
+                            <p style="text-align: left; margin-left: -10px;">{{item.item_name}}</p>
+                          </div>
+                          <div class="col-xxl-1" style="width: 80px;">
+                            <p style="margin-left: -10px;">Qty : {{item.quantity}}</p>
+                          </div>
+                        </div>
+
+
+                        <img *cdkDragPreview [src]="item.item_image" [alt]="item.item_name" width="300px" height="300px">
+                      </div>
+
+
+                    }
+                    <div *ngIf="pkg.length==0" class="example-box" style="text-align: center; padding: 8px 20px; opacity: 0.5; background-color:lightgrey;">
+                      <img src="assets/smartgroup/img/desktop_landscape_add.svg" alt="" width="50" height="50">
+<!--                      <span class="mat-button-wrapper">
+&lt;!&ndash;                        <span >&ndash;&gt;
+                        <mat-icon class="material-symbols-outlined" style="font-size: 35px; height: 35px; width: 35px">desktop_landscape_add</mat-icon>
+                      </span>-->
+                      <h6>&nbsp;&nbsp;Drag and Drop the product item into the box to create bundle package.</h6>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="pkg.length>0">
+<!--                  Bundled Item(s): {{pkg.length}}-->
+                  <div class="row" style="padding-top: 5px">
+                    <div class="col">
+                      <label class="form-label">Pack Name: </label>
+                      <input type="text" class="rounded-1" style="width:288px; opacity: 0.7" placeholder="Enter package name" [formControl]="getControl(i,'description')"/>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <label class="form-label">Reg.   Price: </label>
+                      <input type="number" class="rounded-1" style="width:88px" placeholder="00.00" [formControl]="getControl(i,'regular_price')"/>
+                    </div>
+                    <div class="col">
+                      <label class="form-label">Sale Price: </label>
+                      <input type="number" class="rounded-1" style="width:88px" placeholder="00.00" [formControl]="getControl(i,'sale_price')"/>
+                    </div>
+                  </div>
+
+
+<!--
+                  <div class="col-md-6"><label class="form-label" for="inputRegularPrice">Regular Price</label><input
+                    class="border rounded-0 form-control form-control ng-untouched ng-pristine ng-valid" style="width: 100px;" type="number"
+                    id="inputRegularPrice" name="regularPrice" placeholder="00.00" ngModel></div>
+                  <div class="col-md-6"><label class="form-label" for="inputSalePrice">Sale Price</label><input
+                    class="border rounded-0 form-control form-control ng-untouched ng-pristine ng-valid" type="number"
+                    id="inputSalePrice" name="salePrice" placeholder="00.00" ngModel></div>
+-->
+
+
+                </div>
+              </div>
+
+ <!-- ===============================================================  -->
+<!--
+
+              <div class="example-container" >
+                <h4>Package 1</h4>
+
+                <div style="height: auto; max-height: 300px; overflow-y: scroll;">
+                <div
+                  cdkDropList
+                  [cdkDropListData]="package1"
+                  class="example-list"
+                  (cdkDropListDropped)="drop($event)">
+                  @for (item of package1; track item) {
+                    <div class="example-box" cdkDrag>
+                      <img [src]="item.image" width="60px" height="60px">
+                      {{item.item}}
+                      <img *cdkDragPreview [src]="item.image" [alt]="item.item" width="300px" height="300px">
+                    </div>
+                  }
+                </div>
+                </div>
+                <div>
+                  Pack item: 5
+                </div>
+              </div>
+
+              <div class="example-container">
+                <h4>Package 2</h4>
+
+                <div
+                  cdkDropList
+                  [cdkDropListData]="package2"
+                  class="example-list"
+                  (cdkDropListDropped)="drop($event)">
+                  @for (item of package2; track item) {
+                    <div class="example-box" cdkDrag>
+                      <img [src]="item.image" width="60px" height="60px">
+                      {{item.item}}
+                      <img *cdkDragPreview [src]="item.image" [alt]="item.item" width="300px" height="300px">
+                    </div>
+                  }
+                </div>
+              </div>
+
+              <div class="example-container">
+                <h4>Package 3</h4>
+
+                <div
+                  cdkDropList
+                  [cdkDropListData]="package3"
+                  class="example-list"
+                  (cdkDropListDropped)="drop($event)">
+                  @for (item of package3; track item) {
+                    <div class="example-box" cdkDrag>
+                      <img [src]="item.image" width="60px" height="60px">
+                      {{item.item}}
+                      <img *cdkDragPreview [src]="item.image" [alt]="item.item" width="300px" height="300px">
+                    </div>
+                  }
+                </div>
+              </div>
+-->
+
+<!-- ===============================================================  -->
+
+
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!--
+
+<div cdkDropListGroup>
+  <div class="example-container">
+    <h2>Product Items </h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="todo"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      @for (item of todo; track item) {
+        <div class="example-box" cdkDrag>
+          <img [src]="item.image" width="60px" height="60px">
+          {{item.item}}
+          <img *cdkDragPreview [src]="item.image" [alt]="item.item" width="300px" height="300px">
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Package 1</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="done"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      @for (item of done; track item) {
+        <div class="example-box" cdkDrag>
+          <img [src]="item.image" width="60px" height="60px">
+          {{item.item}}
+          <img *cdkDragPreview [src]="item.image" [alt]="item.item" width="300px" height="300px">
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Package 2</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="done2"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      @for (item of done2; track item) {
+        <div class="example-box" cdkDrag>
+          <img [src]="item.image" width="60px" height="60px">
+          {{item.item}}
+          <img *cdkDragPreview [src]="item.image" [alt]="item.item" width="300px" height="300px">
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Package 3</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="done3"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      @for (item of done3; track item) {
+        <div class="example-box" cdkDrag>
+          <img [src]="item.image" width="60px" height="60px">
+          {{item.item}}
+          <img *cdkDragPreview [src]="item.image" [alt]="item.item" width="300px" height="300px">
+        </div>
+      }
+    </div>
+  </div>
+
+</div>
+-->
+
+
