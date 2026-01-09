@@ -1,13 +1,13 @@
 # FYP-EGroupBuy
-SmartGroup – Collaborative Group Buying Web Platform
+**SmartGroup – Collaborative Group Buying Web Platform**
 
 SmartGroup is a web-based C2C group buying platform designed to support direct buying, group buying, and bundle-based group packages.
 The system focuses on improving coordination, transparency, and fairness in group buying by automating group management, order tracking, and refund handling.
 
 This project was developed as a final-year software engineering project, informed by user questionnaires, interviews, and iterative design.
 
-🚀 Features
-Buyer Features
+🚀 **Features**
+**Buyer Features**
 
 Browse products by Direct Buy, Group Buy, and Group Package
 
@@ -19,7 +19,7 @@ Add products to cart or wishlist
 
 Track order status and history
 
-Seller Features
+**Seller Features**
 
 Create products with multiple sell types
 
@@ -31,7 +31,7 @@ Update order statuses (processing, shipped, cancelled)
 
 Request withdrawals and view withdrawal history
 
-Admin Features
+**Admin Features**
 
 Manage users, products, and categories
 
@@ -54,7 +54,7 @@ Fair allocation logic for group packages
 (Payment is simulated only. No real payment gateway is integrated.)
 
 
-🧱 System Architecture
+🧱 **System Architecture**
 
 Frontend: Angular
 
